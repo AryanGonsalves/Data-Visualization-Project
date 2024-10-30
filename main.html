@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollytelling Outline</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+</head>
+<body>
+
+    <!-- 1 image for all sections but moves as you scroll-->
+    <img src="/temp_image.jpg" id="fixed-image" width="533" height="400" class="fixed-image" />
+
+
+    <div class="scrolly-container">
+        <div class="text">
+            <div class="step intro" data-step="1">Intro
+                <svg id="visualization-intro" width="800" height="600"></svg>
+            </div>
+
+            <div class="step safety" data-step="2">Safety
+                <svg id="visualization-safety" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+            <div class="step health" data-step="3">Health
+                <svg id="visualization-health" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+            <div class="step economy" data-step="4">Economy
+                <svg id="visualization-economy" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+            <div class="step quality-of-life" data-step="5">Quality of Life
+                <svg id="visualization-quality-of-life" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+            <div class="step education" data-step="6">Education
+                <svg id="visualization-education" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+            <div class="step outro" data-step="7">Outro
+                <svg id="visualization-outro" width="800" height="600" style="display: none;"></svg>
+            </div>
+
+        </div>        
+        
+    </div>
+
+    <!-- import your separate JS files for each section -->
+    <script src="intro.js"></script>
+    <script src="safety.js"></script>
+    <script src="health.js"></script>
+    <script src="economy.js"></script>
+    <script src="qualityoflife.js"></script>
+    <script src="education.js"></script>
+    <script src="outro.js"></script>
+    <script src="main.js"></script> <!-- controls scroll interactions -->
+</body>
+</html>

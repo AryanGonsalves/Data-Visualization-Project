@@ -1,0 +1,36 @@
+/* styling for the body */
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif; /* Add a default font */
+}
+
+/* styling for each subsection */
+
+.step {
+    min-height: 800px; 
+    padding: 20px;
+    margin: 50px 0;
+    font-size: 1.5em;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+/* styling for the the entire container */
+.scrolly-container {
+    position: relative; 
+}
+.text {
+    position: relative;
+    z-index: 1; /* keep the text above the image */
+}
+
+/* styling for the image */
+.fixed-image {
+    top: 50%;
+    left: 50%;
+    position: fixed; /* Keeps the image fixed on the viewport */
+    transition: width 0.2s ease, height 0.2s ease; /* Smooth size transitions */
+    z-index: 10; /* Ensures the image stays above other content */
+}
