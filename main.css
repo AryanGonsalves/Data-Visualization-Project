@@ -1,16 +1,20 @@
-/* styling for the body */
+/* styling for the body  F2E8DC*/
 body {
     margin: 0;
     overflow-x: hidden;
-    font-family: Arial, sans-serif; /* Add a default font */
+    font-family: "Roboto";
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5em;
+    background-color: #f9f9f9;
+    color: #01080D;
 }
 
 /* styling for each subsection */
-
 .step {
     min-height: 800px; 
     padding: 20px;
-    margin: 50px 0;
+    margin: 50px;
     font-size: 1.5em;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
@@ -27,10 +31,18 @@ body {
 }
 
 /* styling for the image */
-.fixed-image {
-    top: 50%;
-    left: 50%;
-    position: fixed; /* Keeps the image fixed on the viewport */
-    transition: width 0.2s ease, height 0.2s ease; /* Smooth size transitions */
-    z-index: 10; /* Ensures the image stays above other content */
+#fixed-image {
+    position: fixed; /* Keep image fixed */
+    transition: width 1s ease, height 1s ease, top 1s ease, left 1s ease;
+    z-index: 10; /* Keep image in front */
+    pointer-events: none; /* Prevent the image from blocking interactions */
+}
+
+/* styling for headers */
+h2 {
+    position: fixed;
+    transition: top 1s ease, left 1s ease; /* Smooth transitions */
+    font-size: 36px;
+    color: #333; 
+    z-index: 10;
 }

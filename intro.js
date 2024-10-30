@@ -12,7 +12,7 @@ function drawIntro() {
         .attr("y", height / 2) 
         .attr("text-anchor", "middle")
         .attr("dy", "0.35em")
-        .text("Welcome to the Story!")
+        .text("Welcome to the Story!") //this is a temporary text, just to show how each section is divided, we will remove this when done
         .attr("font-size", "24px")
         .attr("fill", "steelblue");
 }
