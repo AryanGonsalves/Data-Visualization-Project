@@ -37,6 +37,14 @@ body {
     z-index: 10; /* Keep image in front */
     pointer-events: none; /* Prevent the image from blocking interactions */
 }
+.overlay-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    transition: opacity 0.3s ease;
+    opacity: 0; 
+}
 
 /* styling for headers */
 h2 {

@@ -1,24 +1,13 @@
 const scroller = scrollama();
 const fixedImage = document.getElementById('fixed-image');
-
-// Function to calculate total scroll height
-function calculateTotalScrollHeight() {
-    const steps = document.querySelectorAll('.step');
-    let totalHeight = 0;
-
-    steps.forEach(step => {
-        totalHeight += step.offsetHeight;
-    });
-
-    return totalHeight;
-}
+const overlayImage = document.getElementById('overlay-image');
 
 let totalScrollHeight = calculateTotalScrollHeight(); // Calculate total scroll height
 
 function setInitialImagePosition() {
     fixedImage.style.top = '50%';
     fixedImage.style.left = '50%';
-    fixedImage.style.transform = 'translate(-50%, -50%)'; // Centering
+    fixedImage.style.transform = 'translate(-50%, -50%)';
 }
 
 // Handle when a step enters the viewport
@@ -30,7 +19,7 @@ function handleStepEnter(response) {
     });
     const currentHeader = response.element.querySelector("h2");
     if (currentHeader) {
-        currentHeader.style.display = 'block'; // Show the current header
+        currentHeader.style.display = 'block';
         updateHeaderPosition(currentHeader);
     }
 
@@ -38,10 +27,16 @@ function handleStepEnter(response) {
         case "1":
             drawIntro();
             setImagePosition('50%', '50%', 0.7); // Center for intro
+            overlayImage.style.display = 'block'; // Show overlay image
+            overlayImage.style.opacity = '1';
             break;
         case "2":
             drawSafety();
             setImagePosition('70%', '20%', 0.5); // Move for safety section
+            overlayImage.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+                overlayImage.style.display = 'none';
+            }, 300);
             break;
         case "3":
             drawHealth();
@@ -89,6 +84,21 @@ function setImagePosition(top, left, size=null) {
         fixedImage.style.width = `${originalWidth * size}px`; 
     }
 }
+
+
+// Function to calculate total scroll height
+function calculateTotalScrollHeight() {
+    const steps = document.querySelectorAll('.step');
+    let totalHeight = 0;
+
+    steps.forEach(step => {
+        totalHeight += step.offsetHeight;
+    });
+
+    return totalHeight;
+}
+
+
 
 scroller.setup({
     step: ".step",
