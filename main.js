@@ -23,6 +23,7 @@ function handleStepEnter(response) {
         updateHeaderPosition(currentHeader);
     }
 
+    // Depending on the section scrolled at, will move the image accordingly
     switch (step) {
         case "1":
             drawIntro();
