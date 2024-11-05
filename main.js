@@ -1,3 +1,4 @@
+
 const scroller = scrollama();
 const fixedImage = document.getElementById('fixed-image');
 const overlayImage = document.getElementById('overlay-image');
@@ -99,7 +100,7 @@ function calculateTotalScrollHeight() {
     return totalHeight;
 }
 
-
+loadCall();
 
 scroller.setup({
     step: ".step",
