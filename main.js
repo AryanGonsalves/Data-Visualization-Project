@@ -1,14 +1,16 @@
 const scroller = scrollama();
-const fixedImage = document.getElementById('fixed-image');
-const overlayImage = document.getElementById('overlay-image');
-
 let totalScrollHeight = calculateTotalScrollHeight(); // Calculate total scroll height
+// Recalculate total scroll height on window resize
+window.addEventListener("resize", () => {
+    totalScrollHeight = calculateTotalScrollHeight();
+});
 
-function setInitialImagePosition() {
-    fixedImage.style.top = '50%';
-    fixedImage.style.left = '50%';
-    fixedImage.style.transform = 'translate(-50%, -50%)';
-}
+scroller.setup({
+    step: ".step",
+    offset: 0.5,
+}).onStepEnter(handleStepEnter);
+
+
 
 // Handle when a step enters the viewport
 function handleStepEnter(response) {
@@ -27,37 +29,24 @@ function handleStepEnter(response) {
     switch (step) {
         case "1":
             drawIntro();
-            setImagePosition('50%', '50%', 0.7); // Center for intro
-            overlayImage.style.display = 'block'; // Show overlay image
-            overlayImage.style.opacity = '1';
             break;
         case "2":
             drawSafety();
-            setImagePosition('70%', '20%', 0.5); // Move for safety section
-            overlayImage.style.opacity = '0'; // Fade out
-            setTimeout(() => {
-                overlayImage.style.display = 'none';
-            }, 300);
             break;
         case "3":
             drawHealth();
-            setImagePosition('70%', '80%'); // Move for health section
             break;
         case "4":
             drawEconomy();
-            setImagePosition('70%', '50%'); // Move for economy section
             break;
         case "5":
             drawQualityOfLife();
-            setImagePosition('70%', '20%'); // Move for quality of life section
             break;
         case "6":
             drawEducation();
-            setImagePosition('70%', '80%'); // Move for education section
             break;
         case "7":
             drawOutro();
-            setImagePosition('60%', '50%', 0.6); // Move for outro section
             break;
     }
 }
@@ -74,19 +63,6 @@ function updateHeaderPosition(header) {
     header.style.transform = 'translateX(-50%)'; // Adjust for center alignment
 }
 
-function setImagePosition(top, left, size=null) {
-    fixedImage.style.top = top;
-    fixedImage.style.left = left;
-    if (size != null) {
-        const originalHeight = fixedImage.naturalHeight; 
-        const originalWidth = fixedImage.naturalWidth;
-        
-        fixedImage.style.height = `${originalHeight * size}px`; 
-        fixedImage.style.width = `${originalWidth * size}px`; 
-    }
-}
-
-
 // Function to calculate total scroll height
 function calculateTotalScrollHeight() {
     const steps = document.querySelectorAll('.step');
@@ -101,15 +77,3 @@ function calculateTotalScrollHeight() {
 
 
 
-scroller.setup({
-    step: ".step",
-    offset: 0.5,
-}).onStepEnter(handleStepEnter);
-
-// Recalculate total scroll height on window resize
-window.addEventListener("resize", () => {
-    totalScrollHeight = calculateTotalScrollHeight();
-});
-
-// Set initial position on load
-setInitialImagePosition();
