@@ -10,7 +10,13 @@ scroller.setup({
     offset: 0.5,
 }).onStepEnter(handleStepEnter);
 
-
+drawIntro();
+drawSafety();
+drawHealth();
+drawEconomy();
+drawQualityOfLife();
+drawEducation();
+drawOutro();
 
 // Handle when a step enters the viewport
 function handleStepEnter(response) {
@@ -24,39 +30,6 @@ function handleStepEnter(response) {
         currentHeader.style.display = 'block';
         updateHeaderPosition(currentHeader);
     }
-
-    drawIntro();
-    drawSafety();
-    drawHealth();
-    drawEconomy();
-    drawQualityOfLife();
-    drawEducation();
-    drawOutro();
-
-    // Depending on the section scrolled at, will move the image accordingly
-    // switch (step) {
-    //     case "1":
-    //         drawIntro();
-    //         break;
-    //     case "2":
-    //         drawSafety();
-    //         break;
-    //     case "3":
-    //         drawHealth();
-    //         break;
-    //     case "4":
-    //         drawEconomy();
-    //         break;
-    //     case "5":
-    //         drawQualityOfLife();
-    //         break;
-    //     case "6":
-    //         drawEducation();
-    //         break;
-    //     case "7":
-    //         drawOutro();
-    //         break;
-    // }
 }
 
 function updateHeaderPosition(header) {

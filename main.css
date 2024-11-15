@@ -9,53 +9,43 @@ body {
     color: #01080D;
 }
 
-/* styling for each subsection */
 .step {
-    min-height: 800px; 
+    min-height: 800px;
     padding: 20px;
     margin: 50px;
     font-size: 1.5em;
-    border: 1px solid #ccc;
     background-color: #f9f9f9;
-    position: relative;
+    border: 1px solid #ccc;
 }
 
-/* styling for the entire container */
 .scrolly-container {
     position: relative;
 }
 
-.text {
-    position: relative;
-    z-index: 1;
-}
-
-/* styling for headers */
 h2 {
     position: fixed;
-    transition: top 1s ease, left 1s ease;
     font-size: 36px;
-    color: #333; 
+    color: #333;
     z-index: 10;
 }
 
-#intro-image, #safety-image, #health-image, #economy-image, #quality-image, #education-image, #outro-image {
+.image {
     display: block;
     margin: auto;
-    height: auto;
     max-width: 100%;
+    height: auto;
 }
 
 #overlay-image {
     position: absolute;
-    top: 5%;  
-    left: 60%; 
-    z-index: 10; 
-    width: 250px; 
-    height: 140px;  
+    top: 5%;
+    left: 60%;
+    z-index: 10;
+    width: 250px;
+    height: 140px;
 }
 
 svg {
-    position: relative; 
+    position: relative;
     z-index: 1;
 }
