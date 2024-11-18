@@ -10,13 +10,48 @@ scroller.setup({
     offset: 0.5,
 }).onStepEnter(handleStepEnter);
 
-drawIntro();
-drawSafety();
-drawHealth();
-drawEconomy();
-drawQualityOfLife();
-drawEducation();
-drawOutro();
+try {
+    drawIntro();
+} catch (error) {
+    console.error("Error in drawIntro:", error);
+}
+
+try {
+    drawSafety();
+} catch (error) {
+    console.error("Error in drawSafety:", error);
+}
+
+try {
+    drawHealth();
+} catch (error) {
+    console.error("Error in drawHealth:", error);
+}
+
+try {
+    drawEconomy();
+} catch (error) {
+    console.error("Error in drawEconomy:", error);
+}
+
+try {
+    drawQualityOfLife();
+} catch (error) {
+    console.error("Error in drawQualityOfLife:", error);
+}
+
+try {
+    drawEducation();
+} catch (error) {
+    console.error("Error in drawEducation:", error);
+}
+
+try {
+    drawOutro();
+} catch (error) {
+    console.error("Error in drawOutro:", error);
+}
+
 
 // Handle when a step enters the viewport
 function handleStepEnter(response) {
