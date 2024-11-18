@@ -1,4 +1,3 @@
-/* styling for the body  F2E8DC*/
 body {
     margin: 0;
     overflow-x: hidden;
@@ -10,47 +9,43 @@ body {
     color: #01080D;
 }
 
-/* styling for each subsection */
 .step {
-    min-height: 800px; 
+    min-height: 800px;
     padding: 20px;
     margin: 50px;
     font-size: 1.5em;
-    border: 1px solid #ccc;
     background-color: #f9f9f9;
-    position: relative;
+    border: 1px solid #ccc;
 }
 
-/* styling for the the entire container */
 .scrolly-container {
-    position: relative; 
-}
-.text {
     position: relative;
-    z-index: 1; /* keep the text above the image */
 }
 
-/* styling for the image */
-#fixed-image {
-    position: fixed; /* Keep image fixed */
-    transition: width 1s ease, height 1s ease, top 1s ease, left 1s ease;
-    z-index: 10; /* Keep image in front */
-    pointer-events: none; /* Prevent the image from blocking interactions */
-}
-.overlay-image {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    transition: opacity 0.3s ease;
-    opacity: 0; 
-}
-
-/* styling for headers */
 h2 {
     position: fixed;
-    transition: top 1s ease, left 1s ease; /* Smooth transitions */
     font-size: 36px;
-    color: #333; 
+    color: #333;
     z-index: 10;
+}
+
+.image {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+#overlay-image {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    z-index: 10;
+    width: 250px;
+    height: 140px;
+}
+
+svg {
+    position: relative;
+    z-index: 1;
 }

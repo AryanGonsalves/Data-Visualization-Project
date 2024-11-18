@@ -10,42 +10,46 @@
 </head>
 <body>
 
-    <!-- 1 image for all sections but moves as you scroll-->
-    <img src="/images/temp_image.jpg" id="fixed-image" width="533" height="400" class="fixed-image" />
-    <!-- overlay - in the works -->
-    <img src="/images/breaking_news.png" id="overlay-image" width="533" height="400" class="overlay-image"/>
 
-
+    <!-- TODO: use sticky images -->
+    <!-- https://www.elperiodico.com/es/sociedad/musk-bezos-carrera-espacial-luna-sh/ -->
     <div class="scrolly-container">
         <div class="text">
-            <!-- these are div sections for each subsection just to get the scrolling to work, not sure if we're actually 
-             going to use the svg's here cuz i want them to transition/move/behave like the image-->
+            <!-- 7 different SVGs, one for each section. keep everything nice and separate -->
             <div class="step intro" data-step="1">
                 <h2>Intro</h2>
+                <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
+                <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
                 <svg id="visualization-intro" width="800" height="600"></svg>
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety</h2>
+                <img src="/images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
                 <svg id="visualization-safety" width="800" height="600" style="display: none;"></svg>
             </div>
             <div class="step health" data-step="3">
                 <h2>Health</h2>
+                <img src="/images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-health" width="800" height="600" style="display: none;"></svg>
             </div>
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
+                <img src="/images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="600" style="display: none;"></svg>
             </div>
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
+                <img src="/images/temp_image.jpg" id="quality-image" width="533" height="400" class="image" />
                 <svg id="visualization-quality-of-life" width="800" height="600" style="display: none;"></svg>
             </div>
             <div class="step education" data-step="6">
                 <h2>Education</h2>
+                <img src="/images/temp_image.jpg" id="education-image" width="533" height="400" class="image" />
                 <svg id="visualization-education" width="800" height="600" style="display: none;"></svg>
             </div>
             <div class="step outro" data-step="7">
                 <h2>Outro</h2>
+                <img src="/images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
                 <svg id="visualization-outro" width="800" height="600" style="display: none;"></svg>
             </div>
 

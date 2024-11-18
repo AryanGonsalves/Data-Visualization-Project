@@ -1,5 +1,5 @@
 function drawSafety() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("visualization-safety").style("display", "none");
 
     const svg = d3.select("#visualization-safety").style("display", "block");
     svg.selectAll("*").remove(); 
