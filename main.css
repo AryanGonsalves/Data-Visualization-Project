@@ -30,6 +30,7 @@ h2 {
 }
 
 .image {
+    position: absolute;
     display: block;
     margin: auto;
     max-width: 100%;
@@ -46,6 +47,65 @@ h2 {
 }
 
 svg {
+    display: block !important;
     position: relative;
-    z-index: 1;
+}
+
+
+
+
+/* education specific */
+#yearSlider {
+    width: 80%;
+    appearance: none;
+    height: 6px;
+    background-color: #888;
+    outline: none;
+    margin: 20px auto 10px;
+    display: block;
+}
+#yearLabel {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+#yearSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #4a4a4a;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#yearSlider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #4a4a4a;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.education-container {
+    display: flex; 
+    align-items: flex-end; /* Align items to the bottom */
+    align-items: center; 
+}
+.education-svg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* margin-left: 20px;  */
+    position: relative;
+}
+.text-center {
+    text-align: center;
+}
+#visualization-education {
+    width: 800px;
+    height: 600px;
+    position: relative;
+}
+#education-image {
+    margin-top: 80px;
 }

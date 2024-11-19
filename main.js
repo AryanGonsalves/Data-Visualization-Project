@@ -1,3 +1,4 @@
+
 const scroller = scrollama();
 let totalScrollHeight = calculateTotalScrollHeight(); // Calculate total scroll height
 // Recalculate total scroll height on window resize
@@ -91,5 +92,5 @@ function calculateTotalScrollHeight() {
     return totalHeight;
 }
 
-
+loadCall();
 
