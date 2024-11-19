@@ -22,13 +22,19 @@ const race_files = [
 let ageData = [];
 let raceData = [];
 
+function updateYearLabel(year) {
+    selectedYear = parseInt(year);
+    document.getElementById('yearLabel').textContent = year;
+}
+
+
 function loadCall(){
     loadCSVFiles(age_files, ageData, function() {
         // After age files are loaded, load race files
-        console.log("education - ageData loaded", ageData);
+        // console.log("education - ageData loaded", ageData);
         loadCSVFiles(race_files, raceData, function() {
             // After both datasets are loaded, draw the education visualization
-            console.log("education - raceData loaded", raceData);
+            // console.log("education - raceData loaded", raceData);
         });
     });
 }
@@ -82,15 +88,29 @@ function loadCSVFiles(files, dataObject, callback) {
     });
 }
 
+// Slider stuff
+var slider = '';
+var selectedYear = 0;
 
+// Web page interaction section
+document.addEventListener('DOMContentLoaded', function () {
+    slider = document.getElementById('yearLabel');
+    selectedYear = parseInt(slider.textContent);
+    
+    // loaded data already
+
+    // When slider changes, redraw 
+    slider.addEventListener('input', function () {
+        selectedYear = parseInt(slider.textContent);
+        yearLabel.textContent = selectedYear;
+        console.log("selectedYear",selectedYear);
+    });
+});
 
 
 function drawEducation() {
-    console.log("entered education section!");
-    d3.selectAll("svg").style("display", "none");
-
-    const svg = d3.select("#visualization-education").style("display", "block");
-    svg.selectAll("*").remove(); 
+    
+    const svg = d3.select("#visualization-education");
 
     const width = svg.attr("width");
     const height = svg.attr("height");

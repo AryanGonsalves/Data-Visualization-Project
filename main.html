@@ -20,37 +20,46 @@
                 <h2>Intro</h2>
                 <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
                 <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
-                <svg id="visualization-intro" width="800" height="600"></svg>
+                <svg id="visualization-intro" width="800" height="400"></svg>
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety</h2>
                 <img src="/images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
-                <svg id="visualization-safety" width="800" height="600" style="display: none;"></svg>
+                <svg id="visualization-safety" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step health" data-step="3">
                 <h2>Health</h2>
                 <img src="/images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
-                <svg id="visualization-health" width="800" height="600" style="display: none;"></svg>
+                <svg id="visualization-health" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
                 <img src="/images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
-                <svg id="visualization-economy" width="800" height="600" style="display: none;"></svg>
+                <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
                 <img src="/images/temp_image.jpg" id="quality-image" width="533" height="400" class="image" />
-                <svg id="visualization-quality-of-life" width="800" height="600" style="display: none;"></svg>
+                <svg id="visualization-quality-of-life" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step education" data-step="6">
                 <h2>Education</h2>
-                <img src="/images/temp_image.jpg" id="education-image" width="533" height="400" class="image" />
-                <svg id="visualization-education" width="800" height="600" style="display: none;"></svg>
-            </div>
+                <div class="education-container">
+                    <div class="education-image-text-container">
+                        <h3>Sample text</h3>
+                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />    
+                    </div>
+                    <div class="education-svg-container" style="transform: translateX(340px);">
+                        <svg id="visualization-education" width="800" height="600" ></svg>
+                        <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">    
+                        <span id="yearLabel">2016</span>    
+                    </div>
+                </div>
+            </div>         
             <div class="step outro" data-step="7">
                 <h2>Outro</h2>
                 <img src="/images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
-                <svg id="visualization-outro" width="800" height="600" style="display: none;"></svg>
+                <svg id="visualization-outro" width="800" height="400" style="display: none;"></svg>
             </div>
 
         </div>        
