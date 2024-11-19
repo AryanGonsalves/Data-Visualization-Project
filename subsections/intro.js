@@ -1,7 +1,7 @@
 function drawIntro() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("svg");
     
-    const svg = d3.select("#visualization-intro").style("display", "block"); 
+    const svg = d3.select("#visualization-intro");
     svg.selectAll("*").remove();
 
     const width = svg.attr("width");

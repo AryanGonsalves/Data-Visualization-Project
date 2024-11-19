@@ -1,7 +1,7 @@
 function drawHealth() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("svg");
 
-    const svg = d3.select("#visualization-health").style("display", "block");
+    const svg = d3.select("#visualization-health");
     svg.selectAll("*").remove(); 
 
     const width = svg.attr("width");

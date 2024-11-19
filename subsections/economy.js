@@ -1,7 +1,7 @@
 function drawEconomy() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("svg");
 
-    const svg = d3.select("#visualization-economy").style("display", "block");
+    const svg = d3.select("#visualization-economy");
     svg.selectAll("*").remove(); 
 
     const width = svg.attr("width");

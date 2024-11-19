@@ -1,7 +1,7 @@
 function drawSafety() {
-    d3.selectAll("visualization-safety").style("display", "none");
+    d3.selectAll("visualization-safety");
 
-    const svg = d3.select("#visualization-safety").style("display", "block");
+    const svg = d3.select("#visualization-safety");
     svg.selectAll("*").remove(); 
 
     const width = svg.attr("width");

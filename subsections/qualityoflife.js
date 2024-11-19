@@ -1,7 +1,7 @@
 function drawQualityOfLife() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("svg");
 
-    const svg = d3.select("#visualization-quality-of-life").style("display", "block");
+    const svg = d3.select("#visualization-quality-of-life");
     svg.selectAll("*").remove(); 
 
     const width = svg.attr("width");

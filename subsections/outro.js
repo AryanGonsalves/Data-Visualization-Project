@@ -1,7 +1,7 @@
 function drawOutro() {
-    d3.selectAll("svg").style("display", "none");
+    d3.selectAll("svg");
 
-    const svg = d3.select("#visualization-outro").style("display", "block");
+    const svg = d3.select("#visualization-outro");
     svg.selectAll("*").remove();
 
     const width = svg.attr("width");
