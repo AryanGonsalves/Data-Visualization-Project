@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrollytelling Outline</title>
     <link rel="stylesheet" href="main.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
-    <script scr="https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json"></script>
 </head>
 <body>
 
@@ -47,6 +46,7 @@
                 <h2>Education</h2>
                 <div class="education-container">
                     <div class="education-image-text-container">
+                        <!-- Dropdowns -->
                         <div class="dropdown-container">
                             <!-- Age Group Dropdown -->
                             <select id="ageGroupDropdown" onchange="updateAgeGroup(this.value)">
@@ -57,7 +57,6 @@
                                 <option value="45to64">45-64</option>
                                 <option value="65over">65 and Over</option>
                             </select>
-
                             <!-- Race Group Dropdown -->
                             <select id="raceGroupDropdown" onchange="updateRaceGroup(this.value)">
                                 <option value="AmericanIndianAlaskaNative">American Indian / Alaska Native</option>
@@ -75,11 +74,13 @@
                         <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
                     </div>
                     <div class="education-svg-container">
-                        <svg id="visualization-education" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+                        <!-- Slider -->
                         <div class="slider-container">
                             <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">
                             <span id="yearLabel">2016</span>
                         </div>
+                        <!-- Buttons -->
                         <div class="button-container">
                             <div class="column">
                                 <button id="ageButton" class="education-button" onclick="drawAge()">Age</button>

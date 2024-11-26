@@ -464,8 +464,7 @@ function filterData(){
     return data;
 }
 
-
-async function drawMapChart(){
+function drawMapChart(){
     console.log("Drawing Map Chart");
 
     var data = filterData();
@@ -476,105 +475,29 @@ async function drawMapChart(){
     const width = svg.attr("viewBox").split(" ")[2]; // Get the width from viewBox
     const height = svg.attr("viewBox").split(" ")[3]; // Get the height from viewBox
 
-    const mapDataset = await d3.json(
-    "https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json"
-    );
 
-    // Set up chart dimensions and padding
-    const padding = { top: 32, right: 32, bottom: 160, left: 160 };
-    const innerHeight = 1000 - padding.top - padding.bottom;
-    const innerWidth = 1000 - padding.left - padding.right;
+    // Set up the projection and path
+    const projection = d3.geoAlbersUsa()
+        .scale(width * 1.2)  // Adjust the scale to fit the map
+        .translate([width / 2, height / 2]);  // Center the map in the SVG container
+
+    const path = d3.geoPath().projection(projection);
+
+    // Load US states GeoJSON data
+    d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(function (us) {
+    console.log(us);  // Check if the data is loaded correctly
+
+    // Draw the US map using the states data
+    svg.append("g")
+        .selectAll(".state")
+        .data(topojson.feature(us, us.objects.states).features)
+        .enter().append("path")
+        .attr("class", "state")
+        .attr("d", path);
+    });
+    
 
 
-
-    // Tooltip setup
-    const tooltip = d3
-        .select("main")
-        .append("div")
-        .attr("class", "dataTip")
-        .attr("id", "tooltip");
-
-    const path = d3.geoPath();
-
-    // // Define color scale based on education level (can be adjusted per dataset type)
-    // const bachelorDegree = data.Percent;
-    // const maxPercent = d3.max(bachelorDegree) / 100;
-    // const minPercent = d3.min(bachelorDegree) / 100;
-    // const color = d3
-    //     .scaleSequential()
-    //     .interpolator(d3.interpolateViridis)
-    //     .domain([minPercent, maxPercent]);
-
-    // Draw counties based on GeoJSON data and educational data
-    // svg
-    //     .append("g")
-    //     .selectAll("path")
-    //     .data(topojson.feature(mapDataset, mapDataset.objects.counties).features)
-    //     .enter()
-    //     .append("path")
-    //     .attr("d", path)
-    //     .attr("class", "county")
-    //     .attr("data-fips", (d) => d.id)
-    //     .attr("data-education", (d) => data.filter((e) => e.fips == d.id)[0].bachelorsOrHigher)
-    //     .attr("fill", (d) => color(data.filter((e) => e.fips == d.id)[0].bachelorsOrHigher))
-    //     .on("mouseover", function (d) {
-    //     tooltip.transition().style("opacity", 1);
-    //     tooltip
-    //         .html(
-    //         `State: ${educationDataset.filter((e) => e.fips == d.id)[0].state}<br>
-    //         County: ${educationDataset.filter((e) => e.fips == d.id)[0].area_name}<br>
-    //         % with Bachelor's Degree or Higher: ${educationDataset.filter((e) => e.fips == d.id)[0].bachelorsOrHigher}`
-    //         )
-    //         .style("left", `${d3.event.pageX}px`)
-    //         .style("top", `${d3.event.pageY}px`)
-    //         .attr("data-education", educationDataset.filter((e) => e.fips == d.id)[0].bachelorsOrHigher);
-    //     d3.select(this).style("opacity", 0.5);
-    //     })
-    //     .on("mouseout", function () {
-    //     tooltip.transition().style("opacity", 0);
-    //     d3.select(this).style("opacity", 1);
-    //     });
-
-    // // Draw state borders
-    // svg
-    //     .append("path")
-    //     .datum(
-    //     topojson.mesh(mapDataset, mapDataset.objects.states, (a, b) => a !== b)
-    //     )
-    //     .attr("class", "states")
-    //     .attr("d", path);
-
-    // // Add legend for color scale
-    // let legend = svg
-    //     .selectAll(".legend")
-    //     .data(color.domain())
-    //     .enter()
-    //     .append("g")
-    //     .attr("id", "legend")
-    //     .attr("transform", (d, i) => `translate(${padding.left / 2}, ${innerHeight - padding.top - i * 2})`);
-
-    // legend
-    //     .selectAll()
-    //     .data(bachelorDegree)
-    //     .enter()
-    //     .append("rect")
-    //     .attr("x", (d, i) => i * 2)
-    //     .attr("y", 0)
-    //     .attr("width", 2)
-    //     .attr("height", 20)
-    //     .style("fill", (d) => color(d))
-    //     .on("mouseover", function (d) {
-    //     tooltip.transition().style("opacity", 1);
-    //     tooltip
-    //         .html(`% Bachelor's Degrees: ${d}`)
-    //         .style("left", `${d3.event.pageX}px`)
-    //         .style("top", `${d3.event.pageY}px`);
-    //     d3.select(this).style("opacity", 0.5);
-    //     })
-    //     .on("mouseout", function () {
-    //     tooltip.transition().style("opacity", 0);
-    //     d3.select(this).style("opacity", 1);
-    //     });
     
     
 }

@@ -1,3 +1,9 @@
+svg {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ccc; /* Optional, for debugging */
+}
+
 body {
     margin: 0;
     overflow-x: hidden;
@@ -99,19 +105,8 @@ input#yearSlider {
     align-items: center;
     max-width: 100%;
 }
-.text-center {
-    text-align: center;
-}
-#visualization-education {
-    max-width: 100%;
-    height: auto;
-    position: relative;
-}
-#education-image {
-    margin-top: 100px;
-}
 .education-image-text-container {
-    flex: 1;
+    flex: 0 0 40%;
     max-width: 50%;
     display: flex;
     flex-direction: column;
@@ -119,6 +114,14 @@ input#yearSlider {
     text-align: center;
     margin-bottom: 15px;
 }
+
+.text-center {
+    text-align: center;
+}
+#education-image {
+    margin-top: 100px;
+}
+
 .education-image-text-container h3 {
     margin-bottom: 15px;
 }
@@ -144,4 +147,9 @@ input#yearSlider {
     background-color: #114474; /* Darker blue or another shade */
     border: 2px solid #114474; /* Border to highlight selected state */
     color: white; /* Ensuring text is visible */
+}
+.state {
+    fill: #ccc;  /* Default color for states */
+    stroke: #333;  /* Outline color for states */
+    stroke-width: 0.5;
 }
