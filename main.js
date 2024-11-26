@@ -1,15 +1,15 @@
 
-const scroller = scrollama();
+// const scroller = scrollama();
 let totalScrollHeight = calculateTotalScrollHeight(); // Calculate total scroll height
 // Recalculate total scroll height on window resize
 window.addEventListener("resize", () => {
     totalScrollHeight = calculateTotalScrollHeight();
 });
 
-scroller.setup({
-    step: ".step",
-    offset: 0.5,
-}).onStepEnter(handleStepEnter);
+// scroller.setup({
+//     step: ".step",
+//     offset: 0.5,
+// }).onStepEnter(handleStepEnter);
 
 try {
     drawIntro();

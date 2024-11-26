@@ -6,8 +6,8 @@
     <title>Scrollytelling Outline</title>
     <link rel="stylesheet" href="main.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="https://d3-geomap.github.io/d3-geomap/dist/d3-geomap.min.js"></script>
-    <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script scr="https://raw.githubusercontent.com/janasayantan/datageojson/master/world.json"></script>
 </head>
 <body>
 
@@ -47,6 +47,30 @@
                 <h2>Education</h2>
                 <div class="education-container">
                     <div class="education-image-text-container">
+                        <div class="dropdown-container">
+                            <!-- Age Group Dropdown -->
+                            <select id="ageGroupDropdown" onchange="updateAgeGroup(this.value)">
+                                <option value="18to24">18-24</option>
+                                <option value="25over">25 and Over</option>
+                                <option value="25to34">25-34</option>
+                                <option value="35to44">35-44</option>
+                                <option value="45to64">45-64</option>
+                                <option value="65over">65 and Over</option>
+                            </select>
+
+                            <!-- Race Group Dropdown -->
+                            <select id="raceGroupDropdown" onchange="updateRaceGroup(this.value)">
+                                <option value="AmericanIndianAlaskaNative">American Indian / Alaska Native</option>
+                                <option value="Asian">Asian</option>
+                                <option value="Black">Black</option>
+                                <option value="HispanicLatino">Hispanic / Latino</option>
+                                <option value="NativeHwaiianOtherPacficIslander">Native Hawaiian / Other Pacific Islander</option>
+                                <option value="OtherRace">Other Race</option>
+                                <option value="TwoorMoreRace">Two or More Races</option>
+                                <option value="WhiteNotHispanicLatino">White (Not Hispanic / Latino)</option>
+                                <option value="White">White</option>
+                            </select>
+                        </div>
                         <h3>Sample text</h3>
                         <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
                     </div>
@@ -58,17 +82,17 @@
                         </div>
                         <div class="button-container">
                             <div class="column">
-                                <button id="age" class="education-button" onclick="drawAge()">Age</button>
-                                <button id="race" class="education-button" onclick="drawRace()">Race</button>
+                                <button id="ageButton" class="education-button" onclick="drawAge()">Age</button>
+                                <button id="raceButton" class="education-button" onclick="drawRace()">Race</button>
                             </div>
                             <div class="column">
-                                <button id="map" class="education-button" onclick="drawMap()">US Map</button>
-                                <button id="bar" class="education-button" onclick="drawBarChart()">Bar Chart</button>
+                                <button id="mapButton" class="education-button" onclick="drawMapChart()">US Map</button>
+                                <button id="barButton" class="education-button" onclick="drawBarChart()">Bar Chart</button>
                             </div>
                             <div class="column">
-                                <button id="hs" class="education-button" onclick="drawHS()">High School Graduate or Higher</button>
-                                <button id="bach" class="education-button" onclick="drawBach()">Bachelors Degree or Higher</button>
-                                <button id="total" class="education-button" onclick="drawTotal()">All Education Types</button>
+                                <button id="hsButton" class="education-button" onclick="drawHS()">High School Graduate or Higher</button>
+                                <button id="bachButton" class="education-button" onclick="drawBach()">Bachelors Degree or Higher</button>
+                                <button id="totalButton" class="education-button" onclick="drawTotal()">All Education Types</button>
                             </div>
                         </div>
                     </div>

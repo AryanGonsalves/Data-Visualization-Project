@@ -108,7 +108,7 @@ input#yearSlider {
     position: relative;
 }
 #education-image {
-    margin-top: 80px;
+    margin-top: 100px;
 }
 .education-image-text-container {
     flex: 1;
@@ -139,4 +139,9 @@ input#yearSlider {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+.education-button.selected {
+    background-color: #114474; /* Darker blue or another shade */
+    border: 2px solid #114474; /* Border to highlight selected state */
+    color: white; /* Ensuring text is visible */
 }
