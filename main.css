@@ -49,12 +49,15 @@ h2 {
 svg {
     display: block !important;
     position: relative;
+    width: 100%;
+    height: auto;
 }
 
 
 
 
 /* education specific */
+/* Slider stuff */
 #yearSlider {
     width: 80%;
     appearance: none;
@@ -70,42 +73,70 @@ svg {
     margin-top: 10px;
     font-size: 1.2em;
 }
-#yearSlider::-webkit-slider-thumb {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    background: #4a4a4a;
-    border-radius: 50%;
-    cursor: pointer;
+.slider-container {
+    margin-top: 15px;
 }
-#yearSlider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    background: #4a4a4a;
-    border-radius: 50%;
-    cursor: pointer;
+input#yearSlider {
+    width: 600px;
+    appearance: none;
+    height: 6px;
+    background-color: #888;
+    outline: none;
+    margin: 20px auto 10px;
+    display: block;
 }
 
 .education-container {
     display: flex; 
-    align-items: flex-end; /* Align items to the bottom */
     align-items: center; 
+    gap: 20px;
 }
 .education-svg-container {
+    flex: 1;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    /* margin-left: 20px;  */
-    position: relative;
+    align-items: center;
+    max-width: 100%;
 }
 .text-center {
     text-align: center;
 }
 #visualization-education {
-    width: 800px;
-    height: 600px;
+    max-width: 100%;
+    height: auto;
     position: relative;
 }
 #education-image {
     margin-top: 80px;
+}
+.education-image-text-container {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.education-image-text-container h3 {
+    margin-bottom: 15px;
+}
+
+/* buttons */
+.education-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.education-button:hover {
+    background-color: #2980b9;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
 }

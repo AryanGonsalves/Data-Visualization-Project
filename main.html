@@ -6,6 +6,7 @@
     <title>Scrollytelling Outline</title>
     <link rel="stylesheet" href="main.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3-geomap.github.io/d3-geomap/dist/d3-geomap.min.js"></script>
     <script src="https://unpkg.com/scrollama"></script>
 </head>
 <body>
@@ -47,15 +48,32 @@
                 <div class="education-container">
                     <div class="education-image-text-container">
                         <h3>Sample text</h3>
-                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />    
+                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
                     </div>
-                    <div class="education-svg-container" style="transform: translateX(340px);">
-                        <svg id="visualization-education" width="800" height="600" ></svg>
-                        <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">    
-                        <span id="yearLabel">2016</span>    
+                    <div class="education-svg-container">
+                        <svg id="visualization-education" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet"></svg>
+                        <div class="slider-container">
+                            <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">
+                            <span id="yearLabel">2016</span>
+                        </div>
+                        <div class="button-container">
+                            <div class="column">
+                                <button id="age" class="education-button" onclick="drawAge()">Age</button>
+                                <button id="race" class="education-button" onclick="drawRace()">Race</button>
+                            </div>
+                            <div class="column">
+                                <button id="map" class="education-button" onclick="drawMap()">US Map</button>
+                                <button id="bar" class="education-button" onclick="drawBarChart()">Bar Chart</button>
+                            </div>
+                            <div class="column">
+                                <button id="hs" class="education-button" onclick="drawHS()">High School Graduate or Higher</button>
+                                <button id="bach" class="education-button" onclick="drawBach()">Bachelors Degree or Higher</button>
+                                <button id="total" class="education-button" onclick="drawTotal()">All Education Types</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>         
+            </div>      
             <div class="step outro" data-step="7">
                 <h2>Outro</h2>
                 <img src="/images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />

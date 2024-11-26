@@ -92,5 +92,5 @@ function calculateTotalScrollHeight() {
     return totalHeight;
 }
 
-loadCall();
+
 
