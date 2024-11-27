@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scrollytelling Outline</title>
     <link rel="stylesheet" href="main.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-    <script src="https://unpkg.com/scrollama"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
 </head>
 <body>
 
@@ -18,9 +18,10 @@
             <!-- 7 different SVGs, one for each section. keep everything nice and separate -->
             <div class="step intro" data-step="1">
                 <h2>Intro</h2>
-                <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
-                <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
-                <svg id="visualization-intro" width="800" height="400"></svg>
+                <div class="intro-container">
+                    <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
+                    <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
+                </div>
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety</h2>
@@ -46,16 +47,61 @@
                 <h2>Education</h2>
                 <div class="education-container">
                     <div class="education-image-text-container">
-                        <h3>Sample text</h3>
-                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />    
+                        <h3>This chart lets you explore educational data by age or race. You can select a specific education type for each group and switch between a map or bar chart to view the information.</h3>
+                        <!-- Dropdowns -->
+                        <div class="education-dropdown-container">
+                            <div>
+                                <button id="ageButton" class="education-button" onclick="drawAge()">Age</button>
+                                <button id="raceButton" class="education-button" onclick="drawRace()">Race</button>
+                            </div>
+                            <!-- Age Group Dropdown -->
+                            <select id="ageGroupDropdown" onchange="updateAgeGroup(this.value)">
+                                <option value="18to24">18-24</option>
+                                <!-- this doesnt have values for some reason -->
+                                <!-- <option value="25Over">25 and Over</option> -->
+                                <option value="25to34">25-34</option>
+                                <option value="35to44">35-44</option>
+                                <option value="45to64">45-64</option>
+                                <option value="65Over">65 and Over</option>
+                            </select>
+                            <!-- Race Group Dropdown -->
+                            <select id="raceGroupDropdown" onchange="updateRaceGroup(this.value)">
+                                <option value="AmericanIndianAlaskaNative_">American Indian / Alaska Native</option>
+                                <option value="Asian_">Asian</option>
+                                <option value="Black_">Black</option>
+                                <option value="HispanicLatino_">Hispanic / Latino</option>
+                                <option value="NativeHawaiianOtherPacificIslander_">Native Hawaiian / Other Pacific Islander</option>
+                                <option value="OtherRace_">Other Race</option>
+                                <option value="TwoOrMoreRace_">Two or More Races</option>
+                                <option value="WhiteNotHispanicLatino_">White (Not Hispanic / Latino)</option>
+                                <option value="White_">White</option>
+                            </select>
+                        </div>
+                        <br>
+                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
                     </div>
-                    <div class="education-svg-container" style="transform: translateX(340px);">
-                        <svg id="visualization-education" width="800" height="600" ></svg>
-                        <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">    
-                        <span id="yearLabel">2016</span>    
+                    <div class="education-svg-container">
+                        <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+                        <!-- Slider -->
+                        <div class="slider-container">
+                            <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="updateYearLabel(this.value)" list="tickmarks">
+                            <span id="yearLabel">2016</span>
+                        </div>
+                        <!-- Buttons -->
+                        <div class="button-container">
+                            <div class="column">
+                                <button id="mapButton" class="education-button" onclick="drawMapChart()">US Map</button>
+                                <button id="barButton" class="education-button" onclick="drawBarChart()">Bar Chart</button>
+                            </div>
+                            <div class="column">
+                                <button id="hsButton" class="education-button" onclick="drawHS()">High School Graduate or Higher</button>
+                                <button id="bachButton" class="education-button" onclick="drawBach()">Bachelors Degree or Higher</button>
+                                <button id="totalButton" class="education-button" onclick="drawTotal()">All Education Types</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>         
+            </div>      
             <div class="step outro" data-step="7">
                 <h2>Outro</h2>
                 <img src="/images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
