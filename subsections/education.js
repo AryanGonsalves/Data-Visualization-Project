@@ -650,7 +650,7 @@ function drawMapChart(){
     
 }
 
-const yAxisLabels = [
+const xAxisLabels = [
     { value: "18to24", label: "18-24" },
     { value: "25Over", label: "25 and Over" },
     { value: "25to34", label: "25-34" },
@@ -689,7 +689,13 @@ function drawBarChart(){
     var data = filterDataBarChartAge();
 
     const chartData = Object.keys(data).map(key => {
-        const match = yAxisLabels.find(item => key.startsWith(item.value));
+        let match = '';
+        if (isAgeData){
+            match = xAxisLabels.find(item => key.includes(item.value));
+        }
+        else{
+            match = xAxisLabels.find(item => key.startsWith(item.value));
+        }
         return {
             group: match ? match.label : key,
             population: parseInt(data[key].Estimate.replace(/,/g, ''), 10)
