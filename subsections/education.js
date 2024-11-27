@@ -49,7 +49,7 @@ var selectedRaceGroup = "AmericanIndianAlaskaNative";
 
 // Slider stuff
 var slider = '';
-var selectedYear = 0;
+var selectedYear = 2016;
 
 var ageDropDown = "";
 var raceDropDown = "";
@@ -80,7 +80,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Default settings to have these on
     mapButton.classList.add('selected');
     ageButton.classList.add('selected');
-    hsButton.classList.add('selected');
+    totalButton.classList.add('selected');
+    raceDropDown.disabled = true;
 
     // Load data and draw
     loadData().then(function() {
@@ -125,14 +126,28 @@ document.addEventListener('DOMContentLoaded', function () {
     hsButton.addEventListener('click', () => toggleSelected([hsButton, bachButton, totalButton]));
     bachButton.addEventListener('click', () => toggleSelected([hsButton, bachButton, totalButton]));
     totalButton.addEventListener('click', () => toggleSelected([hsButton, bachButton, totalButton]));
-    ageButton.addEventListener('click', () => toggleSelected([ageButton, raceButton]));
-    raceButton.addEventListener('click', () => toggleSelected([ageButton, raceButton]));
+    ageButton.addEventListener('click', function() {
+        toggleSelected([ageButton, raceButton]);
+        raceDropDown.disabled = true;
+        ageDropDown.disabled = false;
+    });
+    raceButton.addEventListener('click', function() {
+        toggleSelected([ageButton, raceButton]);
+        ageDropDown.disabled = true;
+        raceDropDown.disabled = false;
+    });
 });
 // Called by HTML - when slider changes, redraw 
 function updateYearLabel(year) {
     selectedYear = parseInt(year);
-    console.log("selectedYear", selectedYear);
     document.getElementById('yearLabel').textContent = year;
+    console.log("selectedYear",selectedYear);
+    if (isMapChart){
+        drawMapChart();
+    }
+    else {
+        drawBarChart();
+    }
 }
 // Update Age Group based on dropdown selection
 function updateAgeGroup(input) {
@@ -147,6 +162,7 @@ function toggleSelected(group) {
     group.forEach(button => button.classList.remove('selected')); 
     event.target.classList.add('selected');
 }
+
 
 // Load data helper functions
 function loadData() {
@@ -358,7 +374,11 @@ function getAgeGroupData(data) {
         ageGroupData[type] = {};
         Object.keys(data[type]).forEach(property => {
             if (property.includes(selectedAgeGroup)) {
-                ageGroupData[type][property] = data[type][property];
+                let value = data[type][property];
+                if (value === 'N') {
+                    value = 1; // Set to 0 if the value is 'N'
+                }
+                ageGroupData[type][property] = value;
             }
         });
     });
@@ -369,14 +389,27 @@ function getRaceGroupData(data) {
     Object.keys(data).forEach(type => {
         raceGroupData[type] = {};
         Object.keys(data[type]).forEach(property => {
-            if (property.includes(selectedRaceGroup)) {
-                raceGroupData[type][property] = data[type][property];
+            if (property.startsWith(selectedRaceGroup)) {
+                let value = data[type][property];
+                if (value === 'N') {
+                    value = 1;
+                }
+                raceGroupData[type][property] = value;
             }
         });
     });
     return raceGroupData;
 }
 
+function getSelectedYearData(data){
+    var yearData = [];
+    Object.keys(data).forEach(year => {
+        if (year == selectedYear) {
+            yearData = data[year];
+        }
+    });
+    return yearData;
+}
 
 function drawHS(){
     console.log("High School button selected");
@@ -437,66 +470,123 @@ function filterData(){
         if (isHSData){
             console.log("Data: Age, HS");
             data = getAgeGroupData(ageHighSchoolData);
+            data = getSelectedYearData(data);
         }
         else if (isBachData){
             console.log("Data: Age, Bach");
             data = getAgeGroupData(ageBachelorData);
+            data = getSelectedYearData(data);
         }
         else{
             console.log("Data: Age, Total");
             data = getAgeGroupData(ageTotalData);
+            data = getSelectedYearData(data);
         }
     }
     else {  // race data
         if (isHSData){
             console.log("Data: Race, HS");
             data = getRaceGroupData(raceHighSchoolData);
+            data = getSelectedYearData(data);
         }
         else if (isBachData){
             console.log("Data: Race, Bach");
             data = getRaceGroupData(raceBachelorData);
+            data = getSelectedYearData(data);
         }
         else{
             console.log("Data: Race, Total");
             data = getRaceGroupData(raceTotalData);
+            data = getSelectedYearData(data);
         }
     }
-    return data;
+    var returnData = [];
+    Object.keys(data).forEach(property => { 
+        returnData = data[property]
+    });
+    return returnData;
 }
 
 function drawMapChart(){
     console.log("Drawing Map Chart");
-
     var data = filterData();
     console.log("Map Data: ", data);
 
     const svg = d3.select("#visualization-education");
-
     const width = svg.attr("viewBox").split(" ")[2]; // Get the width from viewBox
     const height = svg.attr("viewBox").split(" ")[3]; // Get the height from viewBox
 
 
+    // var controlData = [];
+    // if (isAgeData){
+    //     controlData = ageData;
+    // }
+    // else{
+    //     controlData = raceData;
+    // }
+
+    // const maxEstimate = d3.max(Object.values(controlData), d => d.Estimate);
+    // const minEstimate = d3.min(Object.values(controlData), d => d.Estimate);
+    // const normalizedValue = (stateData.Estimate - minEstimate) / (maxEstimate - minEstimate);
+
+
+
     // Set up the projection and path
     const projection = d3.geoAlbersUsa()
-        .scale(width * 1.2)  // Adjust the scale to fit the map
-        .translate([width / 2, height / 2]);  // Center the map in the SVG container
-
+        .scale(width * 1.2) 
+        .translate([width / 2, height / 2]);  
     const path = d3.geoPath().projection(projection);
-
-    // Load US states GeoJSON data
+    const scaleFactor = 70000;
+    // Load US states GeoJSON
     d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(function (us) {
-    console.log(us);  // Check if the data is loaded correctly
+        svg.selectAll(".state")
+            .data(topojson.feature(us, us.objects.states).features)
+            .enter().append("path")
+            .attr("class", "state")
+            .attr("d", path);
 
-    // Draw the US map using the states data
-    svg.append("g")
-        .selectAll(".state")
-        .data(topojson.feature(us, us.objects.states).features)
-        .enter().append("path")
-        .attr("class", "state")
-        .attr("d", path);
+        svg.selectAll(".state-circle")
+            .data(topojson.feature(us, us.objects.states).features)
+            .join(
+                enter => enter.append("circle")
+                    .attr("class", "state-circle")
+                    .attr("cx", function(d) {
+                        const centroid = projection(d3.geoCentroid(d));
+                        return centroid ? centroid[0] : null; 
+                    })
+                    .attr("cy", function(d) {
+                        const centroid = projection(d3.geoCentroid(d));
+                        return centroid ? centroid[1] : null;
+                    })
+                    .attr("r", 0) 
+                    .style("fill", "rgba(143, 188, 143, 0.6)")
+                    .style("stroke", "black")
+                    .style("stroke-width", 0.5)
+                    .transition().duration(1000)
+                        .attr("r", function(d) {
+                            const stateData = data[d.properties.name];
+                            if (stateData && stateData.Estimate) {
+                                return Math.sqrt(parseInt(stateData.Estimate)); // Amplify the difference
+                            }
+                            return 0;
+                        }),
+
+                update => update
+                    .transition()
+                    .duration(500)
+                    .attr("r", function(d) {
+                        const stateData = data[d.properties.name];
+                        if (stateData && stateData.Estimate) {
+                            return Math.sqrt(parseInt(stateData.Estimate));
+                        }
+                        return 0;
+                    }),
+
+                exit => exit.remove() // Remove any circles that no longer exist
+            );
+    }).catch(function(error) {
+        console.error("Error loading GeoJSON data: ", error);
     });
-    
-
 
     
     

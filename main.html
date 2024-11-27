@@ -18,9 +18,10 @@
             <!-- 7 different SVGs, one for each section. keep everything nice and separate -->
             <div class="step intro" data-step="1">
                 <h2>Intro</h2>
-                <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
-                <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
-                <svg id="visualization-intro" width="800" height="400"></svg>
+                <div class="intro-container">
+                    <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
+                    <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
+                </div>
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety</h2>
@@ -46,31 +47,37 @@
                 <h2>Education</h2>
                 <div class="education-container">
                     <div class="education-image-text-container">
+                        <h3>This chart lets you explore educational data by age or race. You can select a specific education type for each group and switch between a map or bar chart to view the information.</h3>
                         <!-- Dropdowns -->
-                        <div class="dropdown-container">
+                        <div class="education-dropdown-container">
+                            <div>
+                                <button id="ageButton" class="education-button" onclick="drawAge()">Age</button>
+                                <button id="raceButton" class="education-button" onclick="drawRace()">Race</button>
+                            </div>
                             <!-- Age Group Dropdown -->
                             <select id="ageGroupDropdown" onchange="updateAgeGroup(this.value)">
                                 <option value="18to24">18-24</option>
-                                <option value="25over">25 and Over</option>
+                                <!-- this doesnt have values for some reason -->
+                                <!-- <option value="25Over">25 and Over</option> -->
                                 <option value="25to34">25-34</option>
                                 <option value="35to44">35-44</option>
                                 <option value="45to64">45-64</option>
-                                <option value="65over">65 and Over</option>
+                                <option value="65Over">65 and Over</option>
                             </select>
                             <!-- Race Group Dropdown -->
                             <select id="raceGroupDropdown" onchange="updateRaceGroup(this.value)">
-                                <option value="AmericanIndianAlaskaNative">American Indian / Alaska Native</option>
-                                <option value="Asian">Asian</option>
-                                <option value="Black">Black</option>
-                                <option value="HispanicLatino">Hispanic / Latino</option>
-                                <option value="NativeHwaiianOtherPacficIslander">Native Hawaiian / Other Pacific Islander</option>
-                                <option value="OtherRace">Other Race</option>
-                                <option value="TwoorMoreRace">Two or More Races</option>
-                                <option value="WhiteNotHispanicLatino">White (Not Hispanic / Latino)</option>
-                                <option value="White">White</option>
+                                <option value="AmericanIndianAlaskaNative_">American Indian / Alaska Native</option>
+                                <option value="Asian_">Asian</option>
+                                <option value="Black_">Black</option>
+                                <option value="HispanicLatino_">Hispanic / Latino</option>
+                                <option value="NativeHawaiianOtherPacificIslander_">Native Hawaiian / Other Pacific Islander</option>
+                                <option value="OtherRace_">Other Race</option>
+                                <option value="TwoOrMoreRace_">Two or More Races</option>
+                                <option value="WhiteNotHispanicLatino_">White (Not Hispanic / Latino)</option>
+                                <option value="White_">White</option>
                             </select>
                         </div>
-                        <h3>Sample text</h3>
+                        <br>
                         <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
                     </div>
                     <div class="education-svg-container">
@@ -82,10 +89,6 @@
                         </div>
                         <!-- Buttons -->
                         <div class="button-container">
-                            <div class="column">
-                                <button id="ageButton" class="education-button" onclick="drawAge()">Age</button>
-                                <button id="raceButton" class="education-button" onclick="drawRace()">Race</button>
-                            </div>
                             <div class="column">
                                 <button id="mapButton" class="education-button" onclick="drawMapChart()">US Map</button>
                                 <button id="barButton" class="education-button" onclick="drawBarChart()">Bar Chart</button>
