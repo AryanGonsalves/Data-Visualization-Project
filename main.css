@@ -145,6 +145,7 @@ input#yearSlider {
 .button-container {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
 }
 .education-button.selected {
     background-color: #114474; /* Darker blue or another shade */
@@ -155,4 +156,9 @@ input#yearSlider {
     fill: #ccc;  /* Default color for states */
     stroke: #333;  /* Outline color for states */
     stroke-width: 0.5;
+}
+.education-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #666;
 }
