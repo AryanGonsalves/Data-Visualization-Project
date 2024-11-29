@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>US Inflation Choropleth Map</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson@3"></script>
+  <style>
+    .tooltip {
+      position: absolute;
+      background-color: white;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      pointer-events: none;
+      font-size: 12px;
+    }
+    path {
+      stroke: #fff;
+      stroke-width: 0.5px;
+    }
+    .legend {
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <svg width="960" height="600"></svg>
+  <div class="tooltip" style="opacity: 0;"></div>
+
+  <script>
+    const width = 960;
+    const height = 600;
+
+    const svg = d3.select("svg");
+    const tooltip = d3.select(".tooltip");
+
+    // Path generator
+    const path = d3.geoPath();
+
+    // Color scale
+    const colorScale = d3.scaleQuantize()
+      .domain([150, 300]) // Adjust the domain based on your dataset
+      .range(d3.schemeBlues[9]);
+
+    // Load GeoJSON and data
+    Promise.all([
+      d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // US GeoJSON
+      d3.csv("inflation.csv") // Replace with your data file path
+    ]).then(([us, data]) => {
+      // Process data: Create a map of state IDs to inflation values
+      const inflationData = new Map(data.map(d => [d.Id, +d.rate]));
+
+      // Bind data to the map
+      svg.append("g")
+        .selectAll("path")
+        .data(topojson.feature(us, us.objects.states).features)
+        .join("path")
+        .attr("fill", d => {
+          const value = inflationData.get(d.id);
+          return value != null ? colorScale(value) : "#ccc"; // Default color for missing data
+        })
+        .attr("d", path)
+        .on("mouseover", (event, d) => {
+          const value = inflationData.get(d.id);
+          tooltip.transition().duration(200).style("opacity", 0.9);
+          tooltip.html(`State ID: ${d.id}<br>Inflation: ${value || "N/A"}`)
+            .style("left", (event.pageX + 10) + "px")
+            .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+
+      // Add a legend
+      const legend = svg.append("g")
+        .attr("transform", `translate(20, ${height - 200})`);
+
+      const legendScale = d3.scaleLinear()
+        .domain(colorScale.domain())
+        .range([0, 200]);
+
+      const legendAxis = d3.axisBottom(legendScale)
+        .ticks(6);
+
+      legend.selectAll("rect")
+        .data(colorScale.range().map(d => colorScale.invertExtent(d)))
+        .join("rect")
+        .attr("x", d => legendScale(d[0]))
+        .attr("y", -10)
+        .attr("width", d => legendScale(d[1]) - legendScale(d[0]))
+        .attr("height", 10)
+        .attr("fill", d => colorScale(d[0]));
+
+      legend.call(legendAxis);
+    }).catch(error => {
+      console.error("Error loading data:", error);
+    });
+  </script>
+</body>
+</html>
