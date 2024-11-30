@@ -1,23 +1,23 @@
 
 const age_files = [
-    "/data/education/attainment/age/2016.csv",
-    "/data/education/attainment/age/2017.csv",
-    "/data/education/attainment/age/2018.csv",
-    "/data/education/attainment/age/2019.csv",
-    "/data/education/attainment/age/2020.csv",
-    "/data/education/attainment/age/2021.csv",
-    "/data/education/attainment/age/2022.csv",
-    "/data/education/attainment/age/2023.csv"
+    "data/education/attainment/age/2016.csv",
+    "data/education/attainment/age/2017.csv",
+    "data/education/attainment/age/2018.csv",
+    "data/education/attainment/age/2019.csv",
+    "data/education/attainment/age/2020.csv",
+    "data/education/attainment/age/2021.csv",
+    "data/education/attainment/age/2022.csv",
+    "data/education/attainment/age/2023.csv"
 ];
 const race_files = [
-    "/data/education/attainment/race/2016.csv",
-    "/data/education/attainment/race/2017.csv",
-    "/data/education/attainment/race/2018.csv",
-    "/data/education/attainment/race/2019.csv",
-    "/data/education/attainment/race/2020.csv",
-    "/data/education/attainment/race/2021.csv",
-    "/data/education/attainment/race/2022.csv",
-    "/data/education/attainment/race/2023.csv"
+    "data/education/attainment/race/2016.csv",
+    "data/education/attainment/race/2017.csv",
+    "data/education/attainment/race/2018.csv",
+    "data/education/attainment/race/2019.csv",
+    "data/education/attainment/race/2020.csv",
+    "data/education/attainment/race/2021.csv",
+    "data/education/attainment/race/2022.csv",
+    "data/education/attainment/race/2023.csv"
 ];
 
 let ageData = [];
