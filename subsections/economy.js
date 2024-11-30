@@ -2,7 +2,7 @@ const width = 960;
         const height = 600;
 
         // Create SVG
-        const svg = d3.select("#map")
+        const svg = d3.select("#visualization-economy")
             .append("svg")
             .attr("width", width)
             .attr("height", height);
