@@ -23,10 +23,10 @@ const width = 960;
         // Load Data
         Promise.all([
             d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // GeoJSON for US states
-            d3.csv("/data/Economy/unemployment_data.csv"), // Unemployment Data
-            d3.csv("/data/Economy/inflation_data.csv"), // Inflation Data
-            d3.csv("/data/Economy/job_placement_data.csv"), // Job Placement Data
-            d3.csv("/data/Economy/usa_gdp_per_capita.csv") // GDP Data
+            d3.csv("data/Economy/unemployment_data.csv"), // Unemployment Data
+            d3.csv("data/Economy/inflation_data.csv"), // Inflation Data
+            d3.csv("data/Economy/job_placement_data.csv"), // Job Placement Data
+            d3.csv("data/Economy/usa_gdp_per_capita.csv") // GDP Data
         ]).then(([us, unemployment, inflation, jobPlacement, gdp]) => {
             // Process data
             const unemploymentData = {};
