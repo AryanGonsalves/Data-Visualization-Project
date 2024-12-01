@@ -65,7 +65,7 @@ var bachButton = '';
 var totalButton = '';
 
 // Web page interaction section
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {   
     ageDropDown = document.getElementById('ageGroupDropdown');
     raceDropDown = document.getElementById('raceGroupDropdown');
 
