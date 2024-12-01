@@ -22,13 +22,15 @@ body {
     font-size: 1.5em;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    visibility: visible;
 }
-/* .step * {
-    position: sticky;
-    transition: opacity 1s ease-out; 
-    top: 10%;
-    z-index: 10;
-} */
+.step.faded {
+    opacity: 0;
+    visibility: hidden; /* Completely hide content */
+}
 
 .scrolly-container {
     position: relative;

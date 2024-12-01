@@ -1,4 +1,4 @@
-export function drawQualityOfLife() {
+function drawQualityOfLife() {
     d3.selectAll("svg");
 
     const svg = d3.select("#visualization-quality-of-life");

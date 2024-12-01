@@ -1,4 +1,4 @@
-export function drawOutro() {
+function drawOutro() {
     d3.selectAll("svg");
 
     const svg = d3.select("#visualization-outro");
