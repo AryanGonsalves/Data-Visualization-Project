@@ -1,5 +1,5 @@
 
-const age_files = [
+const education_age_files = [
     "data/education/attainment/age/2016.csv",
     "data/education/attainment/age/2017.csv",
     "data/education/attainment/age/2018.csv",
@@ -9,7 +9,7 @@ const age_files = [
     "data/education/attainment/age/2022.csv",
     "data/education/attainment/age/2023.csv"
 ];
-const race_files = [
+const education_race_files = [
     "data/education/attainment/race/2016.csv",
     "data/education/attainment/race/2017.csv",
     "data/education/attainment/race/2018.csv",
@@ -20,191 +20,191 @@ const race_files = [
     "data/education/attainment/race/2023.csv"
 ];
 
-let ageData = [];
-let raceData = [];
+let education_ageData = [];
+let education_raceData = [];
 
-let ageHighSchoolData = [];
-let raceHighSchoolData = [];
+let education_ageHighSchoolData = [];
+let education_raceHighSchoolData = [];
 
-let ageBachelorData = [];
-let raceBachelorData = [];
+let education_ageBachelorData = [];
+let education_raceBachelorData = [];
 
-let ageTotalData = [];
-let raceTotalData = [];
+let education_ageTotalData = [];
+let education_raceTotalData = [];
 
 
 // State management
-var isMapChart = false;
-var isBarChart = false;
+var education_isMapChart = false;
+var education_isBarChart = false;
 
-var isAgeData = false;
-var isRaceData = false;
+var education_isAgeData = false;
+var education_isRaceData = false;
 
-var isHSData = false;
-var isBachData = false;
-var isTotalData = false;
+var education_isHSData = false;
+var education_isBachData = false;
+var education_isTotalData = false;
 
-var selectedAgeGroup = "18to24";
-var selectedRaceGroup = "AmericanIndianAlaskaNative";
+var education_selectedAgeGroup = "18to24";
+var education_selectedRaceGroup = "AmericanIndianAlaskaNative";
 
 // Slider stuff
-var slider = '';
-var selectedYear = 2016;
+var education_slider = '';
+var education_selectedYear = 2016;
 
-var ageDropDown = "";
-var raceDropDown = "";
+var education_ageDropDown = "";
+var education_raceDropDown = "";
 
 
 // Button stuff
-var ageButton = '';
-var raceButton = '';
-var mapButton = '';
-var barButton = '';
-var hsButton = '';
-var bachButton = '';
-var totalButton = '';
+var education_ageButton = '';
+var raeducation_ceButton = '';
+var education_mapButton = '';
+var education_barButton = '';
+var education_hsButton = '';
+var education_bachButton = '';
+var education_totalButton = '';
 
 // Web page interaction section
 document.addEventListener('DOMContentLoaded', function () {   
-    ageDropDown = document.getElementById('ageGroupDropdown');
-    raceDropDown = document.getElementById('raceGroupDropdown');
+    education_ageDropDown = document.getElementById('ageGroupDropdown');
+    education_raceDropDown = document.getElementById('raceGroupDropdown');
 
-    ageButton = document.getElementById('ageButton');
-    raceButton = document.getElementById('raceButton');
-    mapButton = document.getElementById('mapButton');
-    barButton = document.getElementById('barButton');
-    hsButton = document.getElementById('hsButton');
-    bachButton = document.getElementById('bachButton');
-    totalButton = document.getElementById('totalButton');
+    education_ageButton = document.getElementById('ageButton');
+    raeducation_ceButton = document.getElementById('raceButton');
+    education_mapButton = document.getElementById('mapButton');
+    education_barButton = document.getElementById('barButton');
+    education_hsButton = document.getElementById('hsButton');
+    education_bachButton = document.getElementById('bachButton');
+    education_totalButton = document.getElementById('totalButton');
 
     // Default settings to have these on
-    mapButton.classList.add('selected');
-    ageButton.classList.add('selected');
-    totalButton.classList.add('selected');
-    raceDropDown.disabled = true;
+    education_mapButton.classList.add('selected');
+    education_ageButton.classList.add('selected');
+    education_totalButton.classList.add('selected');
+    education_raceDropDown.disabled = true;
 
     // Load data and draw
-    loadData().then(function() {
-        getHighSchoolAgeData();
-        getHighSchoolRaceData();
-        getBachelorAgeData();
-        getBachelorRaceData();
-        getTotalEducationAgeData();
-        getTotalEducationRaceData();
-        drawMapChart(); // Call drawMapChart only after data is loaded
+    education_loadData().then(function() {
+        education_getHighSchoolAgeData();
+        education_getHighSchoolRaceData();
+        education_getBachelorAgeData();
+        education_getBachelorRaceData();
+        education_getTotalEducationAgeData();
+        education_getTotalEducationRaceData();
+        education_drawMapChart(); // Call drawMapChart only after data is loaded
     });
 
     // Event listeners 
-    slider = document.getElementById('yearLabel');
-    selectedYear = parseInt(slider.textContent);
-    slider.addEventListener('input', function () {
-        selectedYear = parseInt(slider.textContent);
-        yearLabel.textContent = selectedYear;
+    education_slider = document.getElementById('yearLabel');
+    education_selectedYear = parseInt(education_slider.textContent);
+    education_slider.addEventListener('input', function () {
+        education_selectedYear = parseInt(education_slider.textContent);
+        yearLabel.textContent = education_selectedYear;
     });
-    ageDropDown.addEventListener('change', function () {
-        State_Age();
-        selectedAgeGroup = this.value;
-        if (isMapChart){
-            drawMapChart();
+    education_ageDropDown.addEventListener('change', function () {
+        education_State_Age();
+        education_selectedAgeGroup = this.value;
+        if (education_isMapChart){
+            education_drawMapChart();
         }
         else {
-            drawBarChart();
+            education_drawBarChart();
         }
     });
-    raceDropDown.addEventListener('change', function () {
-        State_Race();
-        selectedRaceGroup = this.value;
-        if (isMapChart){
-            drawMapChart();
+    education_raceDropDown.addEventListener('change', function () {
+        education_State_Race();
+        education_selectedRaceGroup = this.value;
+        if (education_isMapChart){
+            education_drawMapChart();
         }
         else {
-            drawBarChart();
+            education_drawBarChart();
         }
     });
-    mapButton.addEventListener('click', function() {
-        toggleSelected([mapButton, barButton]);
-        ageButton.disabled = false;
-        raceButton.disabled = false;
-        if (isAgeData){
-            State_Age();
-            ageDropDown.disabled = false;
-            raceDropDown.disabled = true;
+    education_mapButton.addEventListener('click', function() {
+        education_toggleSelected([education_mapButton, education_barButton]);
+        education_ageButton.disabled = false;
+        raeducation_ceButton.disabled = false;
+        if (education_isAgeData){
+            education_State_Age();
+            education_ageDropDown.disabled = false;
+            education_raceDropDown.disabled = true;
         }
         else{
-            State_Race();
-            ageDropDown.disabled = true;
-            raceDropDown.disabled = false;
-            raceButton.classList.add('selected');
+            education_State_Race();
+            education_ageDropDown.disabled = true;
+            education_raceDropDown.disabled = false;
+            raeducation_ceButton.classList.add('selected');
         }
-        raceDropDown.disabled = true;
-        drawMapChart();
+        education_raceDropDown.disabled = true;
+        education_drawMapChart();
     });
-    barButton.addEventListener('click', function() {
-        toggleSelected([mapButton, barButton]);
-        ageDropDown.disabled = true;
-        raceDropDown.disabled = true;
-        drawBarChart();
+    education_barButton.addEventListener('click', function() {
+        education_toggleSelected([education_mapButton, education_barButton]);
+        education_ageDropDown.disabled = true;
+        education_raceDropDown.disabled = true;
+        education_drawBarChart();
     });
 
-    hsButton.addEventListener('click', function() {
-        State_HS();
-        toggleSelected([hsButton, bachButton, totalButton]);
+    education_hsButton.addEventListener('click', function() {
+        education_State_HS();
+        education_toggleSelected([education_hsButton, education_bachButton, education_totalButton]);
     });
-    bachButton.addEventListener('click', function() {
-        State_Bach();
-        toggleSelected([hsButton, bachButton, totalButton]);
+    education_bachButton.addEventListener('click', function() {
+        education_State_Bach();
+        education_toggleSelected([education_hsButton, education_bachButton, education_totalButton]);
     });
-    totalButton.addEventListener('click', function() {
-        State_Total();
-        toggleSelected([hsButton, bachButton, totalButton]);
+    education_totalButton.addEventListener('click', function() {
+        education_State_Total();
+        education_toggleSelected([education_hsButton, education_bachButton, education_totalButton]);
     });
     
-    ageButton.addEventListener('click', function() {
-        State_Age();
-        toggleSelected([ageButton, raceButton]);
-        if (isMapChart){
-            raceDropDown.disabled = true;
-            ageDropDown.disabled = false;
+    education_ageButton.addEventListener('click', function() {
+        education_State_Age();
+        education_toggleSelected([education_ageButton, raeducation_ceButton]);
+        if (education_isMapChart){
+            education_raceDropDown.disabled = true;
+            education_ageDropDown.disabled = false;
         }
     });
-    raceButton.addEventListener('click', function() {
-        State_Race();
-        toggleSelected([ageButton, raceButton]);
-        if (isMapChart){
-            ageDropDown.disabled = true;
-            raceDropDown.disabled = false;
+    raeducation_ceButton.addEventListener('click', function() {
+        education_State_Race();
+        education_toggleSelected([education_ageButton, raeducation_ceButton]);
+        if (education_isMapChart){
+            education_ageDropDown.disabled = true;
+            education_raceDropDown.disabled = false;
         }   
     });
 });
 // Called by HTML - when slider changes, redraw 
-function updateYearLabel(year) {
-    selectedYear = parseInt(year);
+function education_updateYearLabel(year) {
+    education_selectedYear = parseInt(year);
     document.getElementById('yearLabel').textContent = year;
-    if (isMapChart){
-        drawMapChart();
+    if (education_isMapChart){
+        education_drawMapChart();
     }
     else {
-        drawBarChart();
+        education_drawBarChart();
     }
 }
 // Update Age Group based on dropdown selection
-function updateAgeGroup(input) {
-    selectedAgeGroup = input;
+function education_updateAgeGroup(input) {
+    education_selectedAgeGroup = input;
 }
-function updateRaceGroup(input) {
-    selectedRaceGroup = input;
+function education_updateRaceGroup(input) {
+    education_selectedRaceGroup = input;
 }
-function toggleSelected(group) {
+function education_toggleSelected(group) {
     group.forEach(button => button.classList.remove('selected')); 
     event.target.classList.add('selected');
 }
 
 
 // Load data helper functions
-function loadData() {
+function education_loadData() {
     return new Promise(function(resolve, reject) {
         try {
-            loadCall();
+            education_loadCall();
 
             setTimeout(function() {
                 resolve(); 
@@ -215,15 +215,15 @@ function loadData() {
         }
     });
 }
-function loadCall(){
-    loadCSVFiles(age_files, ageData, function() {
+function education_loadCall(){
+    education_loadCSVFiles(education_age_files, education_ageData, function() {
         // After age files are loaded, load race files
-        loadCSVFiles(race_files, raceData, function() {
+        education_loadCSVFiles(education_race_files, education_raceData, function() {
             // After both datasets are loaded, draw the education visualization
         });
     });
 }
-function loadCSVFiles(files, dataObject, callback) {
+function education_loadCSVFiles(files, dataObject, callback) {
     let remainingFiles = files.length;
 
     files.forEach(file => {
@@ -288,125 +288,125 @@ function loadCSVFiles(files, dataObject, callback) {
 }
 
 // Get Education Type Data for each Race and Age
-function getHighSchoolRaceData() {
+function education_getHighSchoolRaceData() {
     const highSchoolData = {};
 
     // Loop through each year in the raceData
-    Object.keys(raceData).forEach(year => {
+    Object.keys(education_raceData).forEach(year => {
         highSchoolData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(raceData[year]).forEach(property => {
+        Object.keys(education_raceData[year]).forEach(property => {
 
             if (property.includes('_HighSchool')) {
-                highSchoolData[year][property] = raceData[year][property];
+                highSchoolData[year][property] = education_raceData[year][property];
             }
         });
     });
 
-    raceHighSchoolData = highSchoolData;
+    education_raceHighSchoolData = highSchoolData;
     return highSchoolData;
 }
-function getHighSchoolAgeData(){
+function education_getHighSchoolAgeData(){
     const highSchoolData = {};
 
     // Loop through each year in the raceData
-    Object.keys(ageData).forEach(year => {
+    Object.keys(education_ageData).forEach(year => {
         highSchoolData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(ageData[year]).forEach(property => {
+        Object.keys(education_ageData[year]).forEach(property => {
 
             if (property.includes('_HighSchool')) {
-                highSchoolData[year][property] = ageData[year][property];
+                highSchoolData[year][property] = education_ageData[year][property];
             }
         });
     });
-    ageHighSchoolData = highSchoolData;
+    education_ageHighSchoolData = highSchoolData;
     return highSchoolData;
 }
-function getBachelorRaceData() {
+function education_getBachelorRaceData() {
     const bachelorData = {};
 
     // Loop through each year in the raceData
-    Object.keys(raceData).forEach(year => {
+    Object.keys(education_raceData).forEach(year => {
         bachelorData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(raceData[year]).forEach(property => {
+        Object.keys(education_raceData[year]).forEach(property => {
 
             if (property.includes('_Bachelor')) {
-                bachelorData[year][property] = raceData[year][property];
+                bachelorData[year][property] = education_raceData[year][property];
             }
         });
     });
 
-    raceBachelorData = bachelorData;
+    education_raceBachelorData = bachelorData;
     return bachelorData;
 }
-function getBachelorAgeData(){
+function education_getBachelorAgeData(){
     const bachelorData = {};
 
     // Loop through each year in the raceData
-    Object.keys(ageData).forEach(year => {
+    Object.keys(education_ageData).forEach(year => {
         bachelorData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(ageData[year]).forEach(property => {
+        Object.keys(education_ageData[year]).forEach(property => {
 
             if (property.includes('_Bachelor')) {
-                bachelorData[year][property] = ageData[year][property];
+                bachelorData[year][property] = education_ageData[year][property];
             }
         });
     });
-    ageBachelorData = bachelorData;
+    education_ageBachelorData = bachelorData;
     return bachelorData;
 }
-function getTotalEducationRaceData() {
+function education_getTotalEducationRaceData() {
     const totalData = {};
 
     // Loop through each year in the raceData
-    Object.keys(raceData).forEach(year => {
+    Object.keys(education_raceData).forEach(year => {
         totalData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(raceData[year]).forEach(property => {
+        Object.keys(education_raceData[year]).forEach(property => {
 
             if (property.includes('_Total')) {
-                totalData[year][property] = raceData[year][property];
+                totalData[year][property] = education_raceData[year][property];
             }
         });
     });
 
-    raceTotalData = totalData;
+    education_raceTotalData = totalData;
     return totalData;
 }
-function getTotalEducationAgeData(){
+function education_getTotalEducationAgeData(){
     const totalData = {};
 
     // Loop through each year in the raceData
-    Object.keys(ageData).forEach(year => {
+    Object.keys(education_ageData).forEach(year => {
         totalData[year] = {};
 
         // Loop through each property (state or other grouping) in the year
-        Object.keys(ageData[year]).forEach(property => {
+        Object.keys(education_ageData[year]).forEach(property => {
 
             if (property.includes('_Total')) {
-                totalData[year][property] = ageData[year][property];
+                totalData[year][property] = education_ageData[year][property];
             }
         });
     });
 
-    ageTotalData = totalData;
+    education_ageTotalData = totalData;
     return totalData;
 }
 
-function getAgeGroupData(data) {
+function education_getAgeGroupData(data) {
     const ageGroupData = {};
     Object.keys(data).forEach(type => {
         ageGroupData[type] = {};
         Object.keys(data[type]).forEach(property => {
-            if (property.includes(selectedAgeGroup)) {
+            if (property.includes(education_selectedAgeGroup)) {
                 let value = data[type][property];
                 if (value === 'N'  || value === 'NA') {
                     value = 1; // Set to 0 if the value is 'N'
@@ -417,12 +417,12 @@ function getAgeGroupData(data) {
     });
     return ageGroupData;
 }
-function getRaceGroupData(data) {
+function education_getRaceGroupData(data) {
     const raceGroupData = {};
     Object.keys(data).forEach(type => {
         raceGroupData[type] = {};
         Object.keys(data[type]).forEach(property => {
-            if (property.startsWith(selectedRaceGroup)) {
+            if (property.startsWith(education_selectedRaceGroup)) {
                 let value = data[type][property];
                 if (value === 'N' || value === 'NA') {
                     value = 1;
@@ -434,16 +434,16 @@ function getRaceGroupData(data) {
     return raceGroupData;
 }
 
-function getSelectedYearData(data){
+function education_getSelectedYearData(data){
     var yearData = [];
     Object.keys(data).forEach(year => {
-        if (year == selectedYear) {
+        if (year == education_selectedYear) {
             yearData = data[year];
         }
     });
     return yearData;
 }
-function getUSOnlyBarChart(data){
+function education_getUSOnlyBarChart(data){
     var usData = [];
     Object.keys(data).forEach(type => {
         Object.keys(data[type]).forEach(state => {
@@ -456,82 +456,82 @@ function getUSOnlyBarChart(data){
 }
 
 // Functions triggered by buttons
-function drawHS(){
-    State_HS();
-    if (isMapChart){
-        drawMapChart();
+function education_drawHS(){
+    education_State_HS();
+    if (education_isMapChart){
+        education_drawMapChart();
     }
     else{
-        drawBarChart();
+        education_drawBarChart();
     }
 }
-function drawBach(){
-    State_Bach();
-    if (isMapChart){
-        drawMapChart();
+function education_drawBach(){
+    education_State_Bach();
+    if (education_isMapChart){
+        education_drawMapChart();
     }
     else{
-        drawBarChart();
+        education_drawBarChart();
     }
 }
-function drawTotal(){
-    State_Total();
-    if (isMapChart){
-        drawMapChart();
+function education_drawTotal(){
+    education_State_Total();
+    if (education_isMapChart){
+        education_drawMapChart();
     }
     else{
-        drawBarChart();
-    }
-}
-
-function drawAge(){
-    State_Age();
-    if (isMapChart){
-        drawMapChart();
-    }
-    else{
-        drawBarChart();
-    }
-}
-function drawRace(){
-    State_Race();
-    if (isMapChart){
-        drawMapChart();
-    }
-    else{
-        drawBarChart();
+        education_drawBarChart();
     }
 }
 
+function education_drawAge(){
+    education_State_Age();
+    if (education_isMapChart){
+        education_drawMapChart();
+    }
+    else{
+        education_drawBarChart();
+    }
+}
+function education_drawRace(){
+    education_State_Race();
+    if (education_isMapChart){
+        education_drawMapChart();
+    }
+    else{
+        education_drawBarChart();
+    }
+}
 
-function filterData(){
+
+function education_filterData(){
     var data = [];
-    if (isAgeData){ // age data
-        if (isHSData){
-            data = getAgeGroupData(ageHighSchoolData);
-            data = getSelectedYearData(data);
+    if (education_isAgeData){ // age data
+        if (education_isHSData){
+            data = education_getAgeGroupData(education_ageHighSchoolData);
+            data = education_getSelectedYearData(data);
         }
-        else if (isBachData){
-            data = getAgeGroupData(ageBachelorData);
-            data = getSelectedYearData(data);
+        else if (education_isBachData){
+            data = education_getAgeGroupData(education_ageBachelorData);
+            data = education_getSelectedYearData(data);
         }
         else{
-            data = getAgeGroupData(ageTotalData);
-            data = getSelectedYearData(data);
+            data = education_getAgeGroupData(education_ageTotalData);
+            data = education_getSelectedYearData(data);
         }
     }
     else {  // race data
-        if (isHSData){
-            data = getRaceGroupData(raceHighSchoolData);
-            data = getSelectedYearData(data);
+        if (education_isHSData){
+            data = education_getRaceGroupData(education_raceHighSchoolData);
+            data = education_getSelectedYearData(data);
         }
-        else if (isBachData){
-            data = getRaceGroupData(raceBachelorData);
-            data = getSelectedYearData(data);
+        else if (education_isBachData){
+            data = education_getRaceGroupData(education_raceBachelorData);
+            data = education_getSelectedYearData(data);
         }
         else{
-            data = getRaceGroupData(raceTotalData);
-            data = getSelectedYearData(data);
+            data = education_getRaceGroupData(education_raceTotalData);
+            data = education_getSelectedYearData(data);
         }
     }
     var returnData = [];
@@ -540,53 +540,53 @@ function filterData(){
     });
     return returnData;
 }
-function filterDataBarChartAge(){
+function education_filterDataBarChartAge(){
     var data = [];
-    if (isAgeData){ // age data
-        if (isHSData){
-            data = getSelectedYearData(ageHighSchoolData);
-            data = getUSOnlyBarChart(data);
+    if (education_isAgeData){ // age data
+        if (education_isHSData){
+            data = education_getSelectedYearData(education_ageHighSchoolData);
+            data = education_getUSOnlyBarChart(data);
         }
-        else if (isBachData){
-            data = getSelectedYearData(ageBachelorData);
-            data = getUSOnlyBarChart(data);
+        else if (education_isBachData){
+            data = education_getSelectedYearData(education_ageBachelorData);
+            data = education_getUSOnlyBarChart(data);
         }
         else{
-            data = getSelectedYearData(ageTotalData);
-            data = getUSOnlyBarChart(data);
+            data = education_getSelectedYearData(education_ageTotalData);
+            data = education_getUSOnlyBarChart(data);
         }
     }
     else {  // race data
-        if (isHSData){
-            data = getSelectedYearData(raceHighSchoolData);
-            data = getUSOnlyBarChart(data);
+        if (education_isHSData){
+            data = education_getSelectedYearData(education_raceHighSchoolData);
+            data = education_getUSOnlyBarChart(data);
         }
-        else if (isBachData){
-            data = getSelectedYearData(raceBachelorData);
-            data = getUSOnlyBarChart(data);
+        else if (education_isBachData){
+            data = education_getSelectedYearData(education_raceBachelorData);
+            data = education_getUSOnlyBarChart(data);
         }
         else{
-            data = getSelectedYearData(raceTotalData);
-            data = getUSOnlyBarChart(data);
+            data = education_getSelectedYearData(education_raceTotalData);
+            data = education_getUSOnlyBarChart(data);
         }
     }
     return data;
 }
 
 
-function drawMapChart(){
+function education_drawMapChart(){
     const svg = d3.select("#visualization-education");
 
     // State management
-    if (isMapChart){
-        State_Map();
+    if (education_isMapChart){
+        education_State_Map();
     }
     else{
-        State_Map();
+        education_State_Map();
         svg.selectAll('*').remove();
     }
 
-    var data = filterData();
+    var data = education_filterData();
 
     const width = svg.attr("viewBox").split(" ")[2]; // Get the width from viewBox
     const height = svg.attr("viewBox").split(" ")[3]; // Get the height from viewBox
@@ -650,7 +650,7 @@ function drawMapChart(){
     
 }
 
-const xAxisLabels = [
+const education_xAxisLabels = [
     { value: "18to24", label: "18-24" },
     { value: "25Over", label: "25 and Over" },
     { value: "25to34", label: "25-34" },
@@ -669,32 +669,32 @@ const xAxisLabels = [
 ];
 
 
-const customColors = ['#223843', '#DBD3D8', '#D8B4A0', '#D77A61', '#4B543B', '#132A13'];
-const colorNames = ['Deep Navy', 'Pale Lavender', 'Muted Peach', 'Warm Coral', 'Earthy Olive', 'Dark Forest Green'];
-const colorScale = d3.scaleOrdinal()
-    .domain(colorNames)  
-    .range(customColors);
+const education_customColors = ['#223843', '#DBD3D8', '#D8B4A0', '#D77A61', '#4B543B', '#132A13'];
+const education_colorNames = ['Deep Navy', 'Pale Lavender', 'Muted Peach', 'Warm Coral', 'Earthy Olive', 'Dark Forest Green'];
+const education_colorScale = d3.scaleOrdinal()
+    .domain(education_colorNames)  
+    .range(education_customColors);
 
-function drawBarChart(){
+function education_drawBarChart(){
     const svg = d3.select("#visualization-education");
 
-    if (isMapChart){
-        State_Bar();
+    if (education_isMapChart){
+        education_State_Bar();
         svg.selectAll('*').remove();
     }
     else{
-        State_Bar();
+        education_State_Bar();
     }
 
-    var data = filterDataBarChartAge();
+    var data = education_filterDataBarChartAge();
 
     const chartData = Object.keys(data).map(key => {
         let match = '';
-        if (isAgeData){
-            match = xAxisLabels.find(item => key.includes(item.value));
+        if (education_isAgeData){
+            match = education_xAxisLabels.find(item => key.includes(item.value));
         }
         else{
-            match = xAxisLabels.find(item => key.startsWith(item.value));
+            match = education_xAxisLabels.find(item => key.startsWith(item.value));
         }
         return {
             group: match ? match.label : key,
@@ -734,7 +734,7 @@ function drawBarChart(){
                 .attr("y", innerHeight) 
                 .attr("width", xScale.bandwidth())
                 .attr("height", 0) 
-                .attr("fill", d => colorScale(d.group))
+                .attr("fill", d => education_colorScale(d.group))
                 .transition().duration(500)
                 .attr("y", d => yScale(d.population))
                 .attr("height", d => innerHeight - yScale(d.population)), 
@@ -801,42 +801,42 @@ function drawEducation() { //initial function
         .attr("fill", "steelblue");
 
     //Default - Map of Total education by age
-    State_Age();
-    State_Total();
-    State_Map();
+    education_State_Age();
+    education_State_Total();
+    education_State_Map();
 
-    drawMapChart();
+    education_drawMapChart();
 }
 
 
-function State_Map(){
-    isMapChart = true; 
-    isBarChart = false;
+function education_State_Map(){
+    education_isMapChart = true; 
+    education_isBarChart = false;
 }
-function State_Bar(){
-    isMapChart = false; 
-    isBarChart = true;
+function education_State_Bar(){
+    education_isMapChart = false; 
+    education_isBarChart = true;
 }
-function State_Age(){
-    isAgeData = true;
-    isRaceData = false;
+function education_State_Age(){
+    education_isAgeData = true;
+    education_isRaceData = false;
 }
-function State_Race(){
-    isAgeData = false;
-    isRaceData = true;
+function education_State_Race(){
+    education_isAgeData = false;
+    education_isRaceData = true;
 }
-function State_HS(){
-    isHSData = true;
-    isBachData = false;
-    isTotalData = false;
+function education_State_HS(){
+    education_isHSData = true;
+    education_isBachData = false;
+    education_isTotalData = false;
 }
-function State_Bach(){
-    isHSData = false;
-    isBachData = true;
-    isTotalData = false;
+function education_State_Bach(){
+    education_isHSData = false;
+    education_isBachData = true;
+    education_isTotalData = false;
 }
-function State_Total(){
-    isHSData = false;
-    isBachData = false;
-    isTotalData = true;
+function education_State_Total(){
+    education_isHSData = false;
+    education_isBachData = false;
+    education_isTotalData = true;
 }
