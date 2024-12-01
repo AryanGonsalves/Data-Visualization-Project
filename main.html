@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="main.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"></script>
+
 </head>
 <body>
 
@@ -62,10 +64,10 @@
                         <svg id="us-map"></svg>
                     </div>
                 </div>
-                <script src="safety.js"></script>
+                <script type="module" src="safety.js"></script>
+
             
                 <img src="/images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
-                <svg id="visualization-safety" width="800" height="400" style="display: none;"></svg>
             </div>            
             <div class="step health" data-step="3">
                 <h2>Health</h2>

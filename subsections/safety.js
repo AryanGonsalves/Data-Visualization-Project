@@ -1,3 +1,14 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+    d3.json("../data/safety/us-states.geojson")
+    .then((geojson) => {
+        console.log("GeoJSON successfully loaded:", geojson);
+        drawMapChart(geojson);
+    })
+    .catch((error) => {
+        console.error("Failed to load GeoJSON:", error);
+    });
+
 
 const datasetPaths = {
     //drugs: "../data/safety/drug%20use/drugdeaths.csv",
@@ -10,10 +21,19 @@ const datasetSelect = document.getElementById("dataset");
 const yAttributeSelect = document.getElementById("y-attribute");
 const xAxisSelect = document.getElementById("x-axis");
 const svg = d3.select("#barplot");
+const mapSvg = d3.select("#us-map");
 
 const margin = { top: 20, right: 30, bottom: 50, left: 70 };
 const width = 800 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
+
+// Projection and path for the map
+const mapWidth = 800;
+const mapHeight = 500;
+const projection = d3.geoAlbersUsa()
+    .scale(1000) // Adjust scale as necessary
+    .translate([mapWidth / 2, mapHeight / 2]);
+const path = d3.geoPath().projection(projection)
 
 const chart = svg
     .attr("width", width + margin.left + margin.right)
@@ -237,6 +257,8 @@ function drawBarGraph() {
         .on("mouseenter", function (event, d) {
             d3.select(this).attr("fill", "orange");
 
+            highlightMapFromBar(d.key);
+
             d3.select(".tooltip")
                 .html(`<strong>${xAttr}: ${d.key}</strong><br>Total: ${d.total}`)
                 .style("left", `${event.pageX + 10}px`)
@@ -253,6 +275,11 @@ function drawBarGraph() {
         .on("mouseleave", function () {
             d3.select(this).attr("fill", "url(#barGradient)");
             d3.select(".tooltip").transition().duration(200).style("opacity", 0);
+            
+            resetMapHighlight();
+
+            d3.select(".tooltip").transition().duration(200).style("opacity", 0);
+        
         });
 
     // Exit transition for bars
@@ -266,5 +293,74 @@ function drawBarGraph() {
         .remove();
 }
 
+// Draw the US Map Chart
+function drawMapChart(geojson) {
+    // Sort states alphabetically by name
+    geojson.features.sort((a, b) => a.properties.name.localeCompare(b.properties.name));
+
+    // Debug: Log GeoJSON features
+    console.log("GeoJSON Features:", geojson.features);
+
+    // Filter out invalid features
+    const validFeatures = geojson.features.filter((d) => path(d) !== null);
+
+    mapSvg
+        .attr("width", mapWidth)
+        .attr("height", mapHeight);
+
+    mapSvg.selectAll("path")
+        .data(validFeatures)
+        .join("path")
+        .attr("d", (d) => {
+            console.log("Rendering state:", d.properties.name, path(d)); // Debugging log
+            return path(d);
+        })
+        .attr("fill", "#e0e0e0")
+        .attr("stroke", "#888")
+        .attr("stroke-width", 0.5)
+        .on("mouseenter", function (event, d) {
+            d3.select(this).attr("fill", "orange");
+        })
+        .on("mouseleave", function () {
+            d3.select(this).attr("fill", "#e0e0e0");
+        });
+
+    // Add a debug circle for projection alignment
+   /* mapSvg.append("circle")
+        .attr("cx", projection([-100, 40])[0]) // Longitude, Latitude
+        .attr("cy", projection([-100, 40])[1])
+        .attr("r", 5)
+        .attr("fill", "red");*/
+
+    console.log(
+        "Virginia Geometry:",
+         geojson.features.find((d) => d.properties.name === "Virginia")
+     );
+     
+}
+
+
+function highlightMapFromBar(stateName) {
+    mapSvg.selectAll("path")
+        .filter((d) => d.properties.name === stateName)
+        .attr("fill", "yellow");
+}
+
+// Reset map highlighting
+function resetMapHighlight() {
+    mapSvg.selectAll("path").attr("fill", "#e0e0e0");
+}
+
+// Load the US states GeoJSON file from local path
+d3.json("../data/safety/us-states.geojson")
+    .then((geojson) => {
+        console.log("GeoJSON successfully loaded", geojson);
+        drawMapChart(geojson);
+    })
+    .catch((error) => {
+        console.error("Failed to load GeoJSON:", error);
+    });
+
 // Initialize with the first dataset
 loadDataset("shooting");
+});

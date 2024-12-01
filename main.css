@@ -252,3 +252,20 @@ input#yearSlider {
     cursor: not-allowed;
     color: #666;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#barplot-container,
+#map-container {
+    flex: 1;
+}
+
+svg {
+    width: 100%;
+    height: 600px;
+}
