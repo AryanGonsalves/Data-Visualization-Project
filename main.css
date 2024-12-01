@@ -70,18 +70,49 @@ h2 {
     width: 250px;
     height: 140px;
 }
-
 svg {
     display: block !important;
     position: relative;
     width: 100%;
     height: auto;
 }
-
 h3 {
     font-size: 0.5em; 
     margin: 0; 
 }
+#breaking-news-banner {
+    background-color: red; 
+    width: 100%; 
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1000; 
+}
+#breaking-news-text {
+    color: white; 
+    font-size: clamp(20px, 5vw, 48px);
+    font-weight: bold; 
+    line-height: 1.2; 
+    /* white-space: nowrap;  */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+#breaking-news-live {
+    background-color: white;
+    color: red;
+    font-size: 36px; 
+    font-weight: bold; 
+    padding: 15px 20px; 
+    position: absolute; 
+    right: 10px; 
+    bottom: 100px; 
+    border-radius: 5px; 
+    text-transform: uppercase;
+    border: 2px solid #01080D;
+    border-radius: 25px;
+}
+
 
 /* intro specific */
 .intro-container {
@@ -89,6 +120,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     overflow: hidden;
+    transition: opacity 1s ease-out;
 }
 
 .intro-image-container {
@@ -97,7 +129,6 @@ h3 {
     gap: 0px;
     max-width: 100%;
 }
-
 .intro-image {
     height: auto;
     object-fit: contain;
@@ -115,8 +146,10 @@ h3 {
     width: 100%; 
     max-width: 100%;
 }
-
-
+.faded {
+    opacity: 0 !important;
+    visibility: hidden;
+}
 
 /* education specific */
 /* Slider stuff */
