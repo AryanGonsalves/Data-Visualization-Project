@@ -27,11 +27,10 @@ const margin = { top: 20, right: 30, bottom: 50, left: 70 };
 const width = 800 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
-// Projection and path for the map
 const mapWidth = 800;
 const mapHeight = 500;
 const projection = d3.geoAlbersUsa()
-    .scale(1000) // Adjust scale as necessary
+    .scale(1000) 
     .translate([mapWidth / 2, mapHeight / 2]);
 const path = d3.geoPath().projection(projection)
 
@@ -82,13 +81,10 @@ const rulingParties = {
   "2024": "Democrat"
 };
 
-
-// Event listener for dataset selection
 datasetSelect.addEventListener("change", () => {
     loadDataset(datasetSelect.value);
 });
 
-// Load and preprocess datasets
 function loadDataset(dataset) {
     const filePath = datasetPaths[dataset];
     d3.csv(filePath)
@@ -112,8 +108,6 @@ function loadDataset(dataset) {
 }
 
 
-// Preprocessing functions
-
 function preprocessTrafficFatalities(loadedData) {
     console.log("Raw Traffic Fatalities Data:", loadedData);
 
@@ -121,7 +115,7 @@ function preprocessTrafficFatalities(loadedData) {
         Year: +d["Year"],
         State: d["State"]?.trim() || "Unknown",
         Fatalities: +d["Total Fatalities"] || null,
-    })).filter((d) => d.Year && d.Fatalities !== null); // Filter valid rows
+    })).filter((d) => d.Year && d.Fatalities !== null); 
 
     console.log("Processed Traffic Fatalities:", data);
 }
@@ -139,9 +133,9 @@ function preprocessSchoolShootings(loadedData) {
     console.log("Processed School Shootings:", data);
 }
 
-// Populate dropdowns
+
 function populateDropdowns() {
-    // Populate Y Attribute dropdown
+    
     const quantitativeAttributes = Object.keys(data[0]).filter(
         (key) => key !== "Year" && key !== "State"
     );
@@ -153,7 +147,6 @@ function populateDropdowns() {
         yAttributeSelect.appendChild(option);
     });
 
-    // Populate X Axis dropdown
     xAxisSelect.innerHTML = "";
     ["Year", "State"].forEach((attr) => {
         const option = document.createElement("option");
@@ -170,7 +163,6 @@ function populateDropdowns() {
 }
 
 
-// Draw Bar Graph
 function drawBarGraph() {
     const yAttr = yAttributeSelect.value;
     const xAttr = xAxisSelect.value;
@@ -185,8 +177,8 @@ function drawBarGraph() {
         xAttr === "Year"
             ? d3.scaleLinear()
                   .domain([
-                      d3.min(aggregatedData, (d) => +d.key) - 0.5, // Add buffer to start
-                      d3.max(aggregatedData, (d) => +d.key) + 0.5, // Add buffer to end
+                      d3.min(aggregatedData, (d) => +d.key) - 0.5, 
+                      d3.max(aggregatedData, (d) => +d.key) + 0.5, 
                   ])
                   .range([0, width])
             : d3.scaleBand()
@@ -199,41 +191,39 @@ function drawBarGraph() {
         .domain([0, d3.max(aggregatedData, (d) => d.total)])
         .range([height, 0]);
 
-    // Smooth transition for X-Axis
     xAxisGroup
         .transition()
         .duration(800)
         .ease(d3.easeCubicInOut)
         .call(
             xAttr === "Year"
-                ? d3.axisBottom(xScale).tickFormat(d3.format("d")) // Format years as integers
+                ? d3.axisBottom(xScale).tickFormat(d3.format("d")) 
                 : d3.axisBottom(xScale)
         )
         .selectAll("text")
-        .attr("transform", xAttr === "Year" ? "rotate(0)" : "rotate(-45)") // Rotate only for state tags
-        .style("text-anchor", xAttr === "Year" ? "middle" : "end") // Center-align for years, end-align for rotated states
+        .attr("transform", xAttr === "Year" ? "rotate(0)" : "rotate(-45)") 
+        .style("text-anchor", xAttr === "Year" ? "middle" : "end") 
         .style("font-size", "12px")
-        .attr("dx", xAttr === "Year" ? "0em" : "-0.5em") // Adjust horizontal position for rotated state tags
-        .attr("dy", xAttr === "Year" ? "1em" : "0.5em"); // Add vertical offset for rotated state tags
+        .attr("dx", xAttr === "Year" ? "0em" : "-0.5em") 
+        .attr("dy", xAttr === "Year" ? "1em" : "0.5em"); 
 
-    // Smooth transition for Y-Axis
+    
     yAxisGroup
         .transition()
         .duration(800)
         .ease(d3.easeCubicInOut)
         .call(d3.axisLeft(yScale));
 
-    // Adjust bar width and positioning
+    
     const barWidth =
         xAttr === "Year"
             ? (xScale(aggregatedData[1]?.key || aggregatedData[0]?.key) -
                   xScale(aggregatedData[0]?.key || 0)) *
-              0.8 // Scale the bar width to 80% of the tick distance
+              0.8 
             : xScale.bandwidth();
 
     const bars = chart.selectAll("rect").data(aggregatedData);
 
-    // Ensure gradient is defined only once
     let gradient = d3.select("defs #barGradient");
     if (gradient.empty()) {
         gradient = svg
@@ -258,7 +248,6 @@ function drawBarGraph() {
             .attr("stop-opacity", 0.4);
     }
 
-    // Add interactive hover effects
     const tooltip = d3.select(".tooltip");
     if (tooltip.empty()) {
         d3.select("body")
@@ -274,7 +263,7 @@ function drawBarGraph() {
             .style("opacity", 0);
     }
 
-    // Enter and update bars with smooth transitions
+    
     bars
         .enter()
         .append("rect")
@@ -290,14 +279,14 @@ function drawBarGraph() {
         .attr("height", (d) => height - yScale(d.total))
         .attr("fill", "url(#barGradient)");
 
-    // Add hover interactivity
+    
     chart
     .selectAll("rect")
     .on("mouseenter", function (event, d) {
-        // Highlight the bar
+        
         d3.select(this).attr("fill", "orange");
 
-        // Update the tooltip
+        
         d3.select(".tooltip")
             .html(`<strong>${xAttr}: ${d.key}</strong><br>Total: ${d.total}`)
             .style("left", `${event.pageX + 10}px`)
@@ -306,21 +295,20 @@ function drawBarGraph() {
             .duration(200)
             .style("opacity", 1);
 
-        // Highlight the map if xAttr is "Year"
+        
         if (xAttr === "Year") {
-            const selectedYear = d.key; // Get the year from the bar
+            const selectedYear = d.key; 
             const rulingParty = rulingParties[selectedYear];
 
-            // Change the map's color based on ruling party
             if (rulingParty === "Democrat") {
                 mapSvg.selectAll("path").attr("fill", "blue");
             } else if (rulingParty === "Republican") {
                 mapSvg.selectAll("path").attr("fill", "red");
             } else {
-                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Default gray
+                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); 
             }
         } else {
-            highlightMapFromBar(d.key); // For non-year attributes, highlight specific regions
+            highlightMapFromBar(d.key); 
         }
     })
         .on("mousemove", function (event) {
@@ -329,16 +317,14 @@ function drawBarGraph() {
                 .style("top", `${event.pageY - 28}px`);
         })
         .on("mouseleave", function () {
-            // Reset the bar color to gradient
+            
             d3.select(this).attr("fill", "url(#barGradient)");
     
-            // Hide the tooltip
             d3.select(".tooltip")
                 .transition()
                 .duration(200)
                 .style("opacity", 0);
     
-            // Reset the map highlight
             if (xAttr === "Year") {
                 mapSvg.selectAll("path").attr("fill", "#e0e0e0");
             } else {
@@ -346,7 +332,6 @@ function drawBarGraph() {
             }
         });
 
-    // Exit transition for bars
     bars
         .exit()
         .transition()
@@ -359,15 +344,14 @@ function drawBarGraph() {
     
 }
 
-// Draw the US Map Chart
 function drawMapChart(geojson) {
-    // Sort states alphabetically by name
+
     geojson.features.sort((a, b) => a.properties.name.localeCompare(b.properties.name));
 
-    // Debug: Log GeoJSON features
+    
     console.log("GeoJSON Features:", geojson.features);
 
-    // Filter out invalid features
+    
     const validFeatures = geojson.features.filter((d) => path(d) !== null);
 
     mapSvg
@@ -378,19 +362,58 @@ function drawMapChart(geojson) {
         .data(validFeatures)
         .join("path")
         .attr("d", (d) => {
-            console.log("Rendering state:", d.properties.name, path(d)); // Debugging log
+            console.log("Rendering state:", d.properties.name, path(d)); 
             return path(d);
         })
         .attr("fill", "#e0e0e0")
         .attr("stroke", "#888")
         .attr("stroke-width", 0.5)
         .on("mouseenter", function (event, d) {
+            const stateName = d.properties.name;
+            console.log("Hovered State Name:", stateName);
+            const barData = data.find((bar) => bar.key === stateName);
+            console.log("Matching Bar Data:", barData);
             d3.select(this).attr("fill", "orange");
-        })
-        .on("mouseleave", function () {
-            d3.select(this).attr("fill", "#e0e0e0");
-        });
 
+            chart.selectAll("rect")
+                .filter((barData) => barData.key === stateName)
+                .attr("fill", "orange");
+            
+                d3.select(".tooltip")
+                .html(
+                    `<strong>State:</strong> ${stateName}<br>` 
+                   // +(barData ? `<strong>Total:</strong> ${barData.total}` : `<strong>No data available</strong>`)
+                )
+                .style("left", `${event.pageX + 10}px`) 
+                .style("top", `${event.pageY - 28}px`)
+                .transition()
+                .duration(200)
+                .style("opacity", 1);
+                
+        })
+        .on("mousemove", function (event) {
+            
+            d3.select(".tooltip")
+                .style("left", `${event.pageX + 10}px`)
+                .style("top", `${event.pageY - 28}px`);
+        })
+
+        .on("mouseleave", function (event, d) {
+            const stateName = d.properties.name;
+
+           
+            d3.select(this).attr("fill", "#e0e0e0");
+
+           
+            chart.selectAll("rect")
+                .filter((barData) => barData.key === stateName)
+                .attr("fill", "url(#barGradient)");
+
+                d3.select(".tooltip")
+                .transition()
+                .duration(200)
+                .style("opacity", 0);
+            });
 
     console.log(
         "Virginia Geometry:",
@@ -403,15 +426,14 @@ function drawMapChart(geojson) {
 function highlightMapFromBar(stateName) {
     mapSvg.selectAll("path")
         .filter((d) => d.properties.name === stateName)
-        .attr("fill", "yellow");
+        .attr("fill", "orange");
 }
 
-// Reset map highlighting
+
 function resetMapHighlight() {
     mapSvg.selectAll("path").attr("fill", "#e0e0e0");
 }
 
-// Load the US states GeoJSON file from local path
 d3.json("../data/safety/us-states.geojson")
     .then((geojson) => {
         console.log("GeoJSON successfully loaded", geojson);
@@ -421,6 +443,5 @@ d3.json("../data/safety/us-states.geojson")
         console.error("Failed to load GeoJSON:", error);
     });
 
-// Initialize with the first dataset
 loadDataset("shooting");
 });
