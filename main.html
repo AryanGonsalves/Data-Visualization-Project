@@ -16,11 +16,18 @@
     <div class="scrolly-container">
         <div class="text">
             <!-- 7 different SVGs, one for each section. keep everything nice and separate -->
+            <img src="images/intro_top_banner.png" id="banner-image" width="100%" class="intro_image" />
+            <div id="breaking-news-banner">
+                <span id="breaking-news-live">LIVE</span>
+                <span id="breaking-news-text">BREAKING NEWS: Election 2024: A Demographic Story of Trump and Harris</span>
+              </div>
+            <!-- <img src="images/breaking_news_banner.png" id="banner-image-bottom" width="100%" class="image" /> -->
             <div class="step intro" data-step="1">
-                <h2>Intro</h2>
                 <div class="intro-container">
-                    <img src="/images/temp_image.jpg" id="intro-image" width="40%"  class="image" />
-                    <img src="/images/breaking_news.png" id="overlay-image" width="250" height="140" class="image"/>   <!-- overlay - in the works --> 
+                    <div class="intro-image-container">
+                        <img src="images/intro_interviewer.png" id="intro-image-1" class="intro-image" />
+                        <img src="images/intro.png" id="intro-image-2" class="intro-image" />
+                    </div>
                 </div>
             </div>
             <div class="step safety" data-step="2">
@@ -62,24 +69,24 @@
             </div>            
             <div class="step health" data-step="3">
                 <h2>Health</h2>
-                <img src="/images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
+                <img src="images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-health" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
-                <img src="/images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
+                <img src="images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
-                <img src="/images/temp_image.jpg" id="quality-image" width="533" height="400" class="image" />
+                <img src="images/temp_image.jpg" id="quality-image" width="733" height="600" class="image" />
                 <svg id="visualization-quality-of-life" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step education" data-step="6">
-                <h2>Education</h2>
+                <!-- <img src="images/education-banner.png" id="education-image" width="100%" class="image" /> -->
                 <div class="education-container">
                     <div class="education-image-text-container">
-                        <h3>This chart lets you explore educational data by age or race. You can select a specific education type for each group and switch between a map or bar chart to view the information.</h3>
+                        <img src="images/education_question.png" id="education-image" width="475" height="300" class="image" />
                         <!-- Dropdowns -->
                         <div class="education-dropdown-container">
                             <div>
@@ -110,7 +117,7 @@
                             </select>
                         </div>
                         <br>
-                        <img src="/images/temp_image.jpg" id="education-image" width="475" height="300" class="image" />
+                        <img src="images/education.png" id="education-image" width="475" height="300" class="image" />
                     </div>
                     <div class="education-svg-container">
                         <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
@@ -136,7 +143,7 @@
             </div>      
             <div class="step outro" data-step="7">
                 <h2>Outro</h2>
-                <img src="/images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
+                <img src="images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
                 <svg id="visualization-outro" width="800" height="400" style="display: none;"></svg>
             </div>
 
@@ -145,13 +152,14 @@
     </div>
 
     <!-- import your separate JS files for each section -->
-    <script src="/subsections/intro.js"></script>
-    <script src="/subsections/safety.js"></script>
-    <script src="/subsections/health.js"></script>
-    <script src="/subsections/economy.js"></script>
-    <script src="/subsections/qualityoflife.js"></script>
-    <script src="/subsections/education.js"></script>
-    <script src="/subsections/outro.js"></script>
-    <script src="main.js"></script> <!-- controls scroll interactions -->
+    <script  src="/subsections/intro.js"></script>
+    <script  src="/subsections/safety.js"></script>
+    <script  src="/subsections/health.js"></script>
+    <script  src="/subsections/economy.js"></script>
+    <script  src="/subsections/qualityoflife.js"></script>
+    <script  src="/subsections/education.js"></script>
+    <script  src="/subsections/outro.js"></script>
+    <script  src="main.js"></script> <!-- controls scroll interactions -->
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-FIPS Code,State/Area,Year,Month,Total Civilian Non-Institutional Population in State/Area,Total Civilian Labor Force in State/Area,Percent (%) of State/Area's Population,Total Employment in State/Area,Percent (%) of Labor Force Employed in State/Area,Total Unemployment in State/Area,Percent (%) of Labor Force Unemployed in State/Area
+FIPS Code,State/Area,year,Month,Total Civilian Non-Institutional Population in State/Area,Total Civilian Labor Force in State/Area,Area_Population,Total Employment in State/Area,Percent (%) of Labor Force Employed in State/Area,Total Unemployment in State/Area,Unemployment_rate
 6,California,2016,1,"30,446,733   ","18,917,326   ",62.1,"17,843,140   ",58.6,"1,074,186   ",5.7
 37,Los Angeles County,2016,1,"8,020,680   ","4,974,853   ",62.0,"4,694,698   ",58.5,"280,155   ",5.6
 8,Colorado,2016,1,"4,283,491   ","2,862,652   ",66.8,"2,767,788   ",64.6,"94,864   ",3.3
