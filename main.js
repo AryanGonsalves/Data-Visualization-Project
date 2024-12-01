@@ -102,6 +102,15 @@ function updateHeaderPosition(header) {
 
 let currentStepIndex = -1; // Tracks the currently visible step index
 
+// initially faded
+steps.forEach((step, index) => {
+    if (index != 0){
+        step.classList.add('faded');
+    }
+});
+
+
+
 window.addEventListener('scroll', () => {
     steps.forEach((step, index) => {
         const rect = step.getBoundingClientRect();
