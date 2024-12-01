@@ -21,35 +21,91 @@ const width = 960;
             .range(d3.schemeBlues[9]);
 
         // Load Data
-        Promise.all([
-            d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // GeoJSON for US states
+     Promise.all([
+            //d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // GeoJSON for US states
             d3.csv("data/Economy/unemployment_data.csv"), // Unemployment Data
             d3.csv("data/Economy/inflation_data.csv"), // Inflation Data
             d3.csv("data/Economy/job_placement_data.csv"), // Job Placement Data
             d3.csv("data/Economy/usa_gdp_per_capita.csv") // GDP Data
-        ]).then(([us, unemployment, inflation, jobPlacement, gdp]) => {
+        ]).then(function (values) {
+            unemploymentData = values[0];
+            //inflationData = values[1];
+            unemploymentData.forEach(function(d) {
+                d.fips = parseFIPS(d.FIPS);
+                State.forEach(function(state) {
+                    d[state] = +d[state];
+                }); 
+                d.year = parseYear(d.year);
+                d.Month = parseMonth(d.Month);
+                d.Non_institutional_Population = parseNon_Institutional_Population(d.Non_Institutional_Population);
+                d.LaborForce = parseLaborForce(d.LaborForce);
+                d.Area_Population= parseArea_Population(d.Area_Population);
+                d.TotalEmployment= parseTotalEmployment(d.TotalEmployment);
+                d.LaborForce_percent = parseLaborForce_percent(d.LaborForce_percent);
+                d.TotalUnemployment = parseTotalUnemployment(d.TotalUnemployment);
+                d.Unemployment_rate = parseUnemployment_rate(d.Unemployment_rate);
+            });
+
+
+
             // Process data
-            const unemploymentData = {};
-            unemployment.forEach(d => {
-                unemploymentData[d["State/Area"]] = +d["Unemployment_rate"];
+            //const unemploymentData = {};
+            //unemployment.forEach(d => {
+              //  unemploymentData[d["State/Area"]] = +d["Unemployment_rate"];
+            //});
+
+            inflationData = values[1];
+            //inflation.forEach(d => {
+              //  inflationData[d["id"]] = +d["inflation_rate"];
+            //});
+            inflationData.forEach(function(d) {
+                d.id = parseId(d.id);
+                d.rate = parserate(d.rate);
             });
 
-            const inflationData = {};
-            inflation.forEach(d => {
-                inflationData[d["id"]] = +d["inflation_rate"];
+
+            gdpData = values[2];
+            //gdp.forEach(d => {
+              //  gdpData[d["year"]] = +d["gdp per capita"];
+            //});
+            gdpData.forEach(function(d) {
+                d.year = parseyear(d.year);
+                d.gdp_per_capita = parsegdp_per_capita(d.gdp_per_capita);
+
             });
 
-            const gdpData = {};
-            gdp.forEach(d => {
-                gdpData[d["year"]] = +d["gdp per capita"];
-            });
+            jobPlacementData = values[3];
+            //jobPlacement.forEach(d => {
+              //  jobPlacementData[d["college_name"]] = {
+                //    placement_rate: d["placement_status"] === "Placed" ? 1 : 0,
+                  //  salary: +d["salary"]
+                //};
+            //});
+            jobPlacementData.forEach(function(d) {
+                d.id = parseid(d.id);
+                Name.forEach(function(d) {
+                    d[Name] = +d[Name];
 
-            const jobPlacementData = {};
-            jobPlacement.forEach(d => {
-                jobPlacementData[d["college_name"]] = {
-                    placement_rate: d["placement_status"] === "Placed" ? 1 : 0,
-                    salary: +d["salary"]
-                };
+
+                }); 
+                gender.forEach(function(d) {
+                    d[gender] = +d[gender];
+                });
+                degree.forEach(function(d) {
+                    d[degree] = +d[degree];
+                });
+                stream.forEach(function(d) {
+                    d[stream] = +d[stream];
+                }) 
+                college_name.forEach(function(d) {
+                    d[college_name] = +d[college_name]
+                }) 
+                placement_status.forEach(function(d) {
+                    d[placement_status] = +d[placement_status];
+                }) 
+                d.salary = parsesalary(d.salary);
+                d.gpa = parsegpa(d.gpa);
+                d.years_of_experience = parseyears_of_experience(d.years_of_experience);
             });
 
             // Merge GeoJSON with Data
