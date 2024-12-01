@@ -108,6 +108,10 @@ export function drawEconomy(){
             d.gpa = parsegpa(d.gpa);
             d.years_of_experience = parseyears_of_experience(d.years_of_experience);
         });
+         console.log(unemploymentData);
+        console.log(inflationData);
+        console.log(jobPlacementData);
+        console.log(gdpData);
 
         // Merge GeoJSON with Data
         const states = topojson.feature(us, us.objects.states).features;
