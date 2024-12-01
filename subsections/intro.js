@@ -1,3 +1,3 @@
-function drawIntro() {
+export function drawIntro() {
     
 }
