@@ -1,7 +1,7 @@
 import { drawIntro } from './subsections/intro.js';
 import { drawSafety } from './subsections/safety.js';
 import { drawHealth } from './subsections/health.js';
-// import { drawEconomy } from './subsections/economy.js';
+import { drawEconomy } from './subsections/economy.js';
 import { drawQualityOfLife } from './subsections/qualityoflife.js';
 import { drawEducation } from './subsections/education.js';
 import { drawOutro } from './subsections/outro.js';
@@ -38,7 +38,7 @@ try {
 }
 
 try {
-    // drawEconomy();
+    drawEconomy();
 } catch (error) {
     console.error("Error in drawEconomy:", error);
 }
