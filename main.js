@@ -107,11 +107,11 @@ window.addEventListener('scroll', () => {
         const rect = step.getBoundingClientRect();
 
         // Check if the step is sufficiently inside the viewport
-        const isVisible = rect.top < window.innerHeight * 0.7 && rect.bottom > window.innerHeight * 0.5;
+        const isVisible = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.25;
 
         if (isVisible && currentStepIndex !== index) {
-            // Update the current step index
             currentStepIndex = index;
+
 
             // Fade out all other steps
             steps.forEach((s, i) => {
@@ -119,6 +119,10 @@ window.addEventListener('scroll', () => {
                     s.classList.add('faded');
                 } else {
                     s.classList.remove('faded');
+                    if (index === 6) {
+                        console.log("going to animate");
+                        outro_animatePoints();
+                    }
                 }
             });
         }

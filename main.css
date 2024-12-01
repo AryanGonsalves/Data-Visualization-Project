@@ -116,6 +116,45 @@ h3 {
 }
 
 
+/* outro specific */
+.outro-container {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+}
+
+.outro-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.outro-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.outro-svg {
+    display: block;
+    border: 0px solid #ccc; 
+    height: 1000px;
+}
+
+#outro-image-1 {
+    flex: 0 0 30%; 
+    max-width: 60%;
+}
+#outro-image-2 {
+    flex: 0 0 65%; 
+    max-width: 75%;
+}
+
+
+
 /* intro specific */
 .intro-container {
     display: flex;
