@@ -1,4 +1,4 @@
-function drawSafety() {
+export function drawSafety() {
     d3.selectAll("visualization-safety");
 
     const svg = d3.select("#visualization-safety");

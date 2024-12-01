@@ -785,7 +785,7 @@ function drawBarChart(){
         );
 }
 
-function drawEducation() { //initial function
+export function drawEducation() { //initial function
     const svg = d3.select("#visualization-education");
 
     const width = svg.attr("viewBox").split(" ")[2]; // Get the width from viewBox
