@@ -252,3 +252,102 @@ input#yearSlider {
     cursor: not-allowed;
     color: #666;
 }
+
+/* qualityoflife.css */
+
+/* Quality of Life Visualization Styles */
+/* Prefix all classes and IDs with 'quality-' */
+#quality-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+#quality-map-container {
+    position: relative;
+}
+
+#quality-map-svg {
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+
+#quality-bar-chart-container {
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#quality-toggle-buttons {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.quality-toggle-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.quality-toggle-button.selected {
+    background-color: #ddd;
+    font-weight: bold;
+}
+
+.quality-tile {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+.quality-label {
+    font-size: 12px;
+    text-anchor: middle;
+    alignment-baseline: middle;
+    fill: white;
+}
+
+.quality-tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 6px;
+    font-size: 12px;
+    background: lightsteelblue;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.quality-bar {
+    fill: red; /* Set the bar color to red */
+}
+
+.quality-slider-container .quality-slider-track {
+    fill: white;
+    stroke: black;
+}
+
+.quality-slider-container .quality-year-bg {
+    cursor: pointer;
+}
+
+.quality-slider-container .quality-year-label {
+    font-size: 14px;
+    fill: black;
+}
+
+.quality-slider-container .quality-slider-handle {
+    fill: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+/* Legend styles */
+.quality-legend {
+    font-size: 12px;
+}
+
+.quality-legend rect {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
