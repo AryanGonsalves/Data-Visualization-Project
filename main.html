@@ -25,9 +25,41 @@
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety</h2>
+                <div id="controls">
+                    <label for="dataset">Select Dataset:</label>
+                    <select id="dataset">
+                        <!--<option value="drugs">Drug Deaths</option> -->
+                        <option value="shooting">School Shootings</option>
+                        <option value="traffic">Traffic Fatalities</option>
+                    </select>
+            
+                    <!-- X-Axis Selection -->
+                    <label for="x-axis">X-Axis:</label>
+                    <select id="x-axis">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+            
+                    <!-- Y-Axis Attribute Selection -->
+                    <label for="y-attribute">Y-Axis Attribute:</label>
+                    <select id="y-attribute">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                </div>
+            
+                <!-- Flexbox container for the barplot and the map -->
+                <div class="flex-container">
+                    <div id="barplot-container">
+                        <svg id="barplot"></svg>
+                    </div>
+                    <div id="map-container">
+                        <svg id="us-map"></svg>
+                    </div>
+                </div>
+                <script src="safety.js"></script>
+            
                 <img src="/images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
                 <svg id="visualization-safety" width="800" height="400" style="display: none;"></svg>
-            </div>
+            </div>            
             <div class="step health" data-step="3">
                 <h2>Health</h2>
                 <img src="/images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
