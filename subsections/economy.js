@@ -1,8 +1,5 @@
 export function drawEconomy(){
-    // put all your data loading and drawing here
-}
-
-const width = 960;
+    const width = 960;
 const height = 600;
 
 // Create SVG
@@ -170,3 +167,6 @@ Promise.all([
 }).catch(error => {
     console.error("Error loading data: ", error);
 });
+    // put all your data loading and drawing here
+}
+
