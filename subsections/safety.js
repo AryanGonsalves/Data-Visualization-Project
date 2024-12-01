@@ -44,6 +44,45 @@ const chart = svg
 const xAxisGroup = chart.append("g").attr("transform", `translate(0, ${height})`);
 const yAxisGroup = chart.append("g");
 
+const rulingParties = {
+  "1990": "Republican",
+  "1991": "Republican",
+  "1992": "Republican",
+  "1993": "Democrat",
+  "1994": "Democrat",
+  "1995": "Democrat",
+  "1996": "Democrat",
+  "1997": "Democrat",
+  "1998": "Democrat",
+  "1999": "Democrat",
+  "2000": "Democrat",
+  "2001": "Republican",
+  "2002": "Republican",
+  "2003": "Republican",
+  "2004": "Republican",
+  "2005": "Republican",
+  "2006": "Republican",
+  "2007": "Republican",
+  "2008": "Republican",
+  "2009": "Democrat",
+  "2010": "Democrat",
+  "2011": "Democrat",
+  "2012": "Democrat",
+  "2013": "Democrat",
+  "2014": "Democrat",
+  "2015": "Democrat",
+  "2016": "Democrat",
+  "2017": "Republican",
+  "2018": "Republican",
+  "2019": "Republican",
+  "2020": "Republican",
+  "2021": "Democrat",
+  "2022": "Democrat",
+  "2023": "Democrat",
+  "2024": "Democrat"
+};
+
+
 // Event listener for dataset selection
 datasetSelect.addEventListener("change", () => {
     loadDataset(datasetSelect.value);
@@ -253,33 +292,58 @@ function drawBarGraph() {
 
     // Add hover interactivity
     chart
-        .selectAll("rect")
-        .on("mouseenter", function (event, d) {
-            d3.select(this).attr("fill", "orange");
+    .selectAll("rect")
+    .on("mouseenter", function (event, d) {
+        // Highlight the bar
+        d3.select(this).attr("fill", "orange");
 
-            highlightMapFromBar(d.key);
+        // Update the tooltip
+        d3.select(".tooltip")
+            .html(`<strong>${xAttr}: ${d.key}</strong><br>Total: ${d.total}`)
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY - 28}px`)
+            .transition()
+            .duration(200)
+            .style("opacity", 1);
 
-            d3.select(".tooltip")
-                .html(`<strong>${xAttr}: ${d.key}</strong><br>Total: ${d.total}`)
-                .style("left", `${event.pageX + 10}px`)
-                .style("top", `${event.pageY - 28}px`)
-                .transition()
-                .duration(200)
-                .style("opacity", 1);
-        })
+        // Highlight the map if xAttr is "Year"
+        if (xAttr === "Year") {
+            const selectedYear = d.key; // Get the year from the bar
+            const rulingParty = rulingParties[selectedYear];
+
+            // Change the map's color based on ruling party
+            if (rulingParty === "Democrat") {
+                mapSvg.selectAll("path").attr("fill", "blue");
+            } else if (rulingParty === "Republican") {
+                mapSvg.selectAll("path").attr("fill", "red");
+            } else {
+                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Default gray
+            }
+        } else {
+            highlightMapFromBar(d.key); // For non-year attributes, highlight specific regions
+        }
+    })
         .on("mousemove", function (event) {
             d3.select(".tooltip")
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`);
         })
         .on("mouseleave", function () {
+            // Reset the bar color to gradient
             d3.select(this).attr("fill", "url(#barGradient)");
-            d3.select(".tooltip").transition().duration(200).style("opacity", 0);
-            
-            resetMapHighlight();
-
-            d3.select(".tooltip").transition().duration(200).style("opacity", 0);
-        
+    
+            // Hide the tooltip
+            d3.select(".tooltip")
+                .transition()
+                .duration(200)
+                .style("opacity", 0);
+    
+            // Reset the map highlight
+            if (xAttr === "Year") {
+                mapSvg.selectAll("path").attr("fill", "#e0e0e0");
+            } else {
+                resetMapHighlight();
+            }
         });
 
     // Exit transition for bars
@@ -291,6 +355,8 @@ function drawBarGraph() {
         .attr("y", height)
         .attr("height", 0)
         .remove();
+
+    
 }
 
 // Draw the US Map Chart
@@ -325,12 +391,6 @@ function drawMapChart(geojson) {
             d3.select(this).attr("fill", "#e0e0e0");
         });
 
-    // Add a debug circle for projection alignment
-   /* mapSvg.append("circle")
-        .attr("cx", projection([-100, 40])[0]) // Longitude, Latitude
-        .attr("cy", projection([-100, 40])[1])
-        .attr("r", 5)
-        .attr("fill", "red");*/
 
     console.log(
         "Virginia Geometry:",
