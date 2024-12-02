@@ -390,3 +390,21 @@ input#yearSlider {
     stroke: #ccc;
     stroke-width: 1px;
 }
+
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#barplot-container,
+#map-container {
+    flex: 1;
+}
+
+svg {
+    width: 100%;
+    height: 600px;
+}
