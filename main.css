@@ -145,12 +145,12 @@ h3 {
 }
 
 #outro-image-1 {
-    flex: 0 0 30%; 
-    max-width: 60%;
+    flex: 0 0 80%; 
+    max-width: 80%;
 }
 #outro-image-2 {
-    flex: 0 0 65%; 
-    max-width: 75%;
+    flex: 0 0 100%; 
+    max-width: 100%;
 }
 
 
