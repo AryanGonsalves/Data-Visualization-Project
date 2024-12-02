@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     d3.json("../data/safety/us-states.geojson")
     .then((geojson) => {
-        console.log("GeoJSON successfully loaded:", geojson);
+        //console.log("GeoJSON successfully loaded:", geojson);
         drawMapChart(geojson);
     })
     .catch((error) => {
@@ -89,7 +89,7 @@ function loadDataset(dataset) {
     const filePath = datasetPaths[dataset];
     d3.csv(filePath)
         .then((loadedData) => {
-            console.log(`Raw data for ${dataset}:`, loadedData);
+            //console.log(`Raw data for ${dataset}:`, loadedData);
             if (dataset === "drugs") preprocessDrugDeaths(loadedData);
             else if (dataset === "traffic") preprocessTrafficFatalities(loadedData);
             else if (dataset === "shooting") preprocessSchoolShootings(loadedData);
@@ -109,7 +109,7 @@ function loadDataset(dataset) {
 
 
 function preprocessTrafficFatalities(loadedData) {
-    console.log("Raw Traffic Fatalities Data:", loadedData);
+    //console.log("Raw Traffic Fatalities Data:", loadedData);
 
     data = loadedData.map((d) => ({
         Year: +d["Year"],
@@ -117,7 +117,7 @@ function preprocessTrafficFatalities(loadedData) {
         Fatalities: +d["Total Fatalities"] || null,
     })).filter((d) => d.Year && d.Fatalities !== null); 
 
-    console.log("Processed Traffic Fatalities:", data);
+    //console.log("Processed Traffic Fatalities:", data);
 }
 
 function preprocessSchoolShootings(loadedData) {
@@ -130,7 +130,7 @@ function preprocessSchoolShootings(loadedData) {
             Total: (+d["Fatalities"] || 0) + (+d["Wounded"] || 0),
         }))
         .filter((d) => d.Year && d.Total > 0);
-    console.log("Processed School Shootings:", data);
+    //console.log("Processed School Shootings:", data);
 }
 
 
@@ -349,7 +349,7 @@ function drawMapChart(geojson) {
     geojson.features.sort((a, b) => a.properties.name.localeCompare(b.properties.name));
 
     
-    console.log("GeoJSON Features:", geojson.features);
+    //console.log("GeoJSON Features:", geojson.features);
 
     
     const validFeatures = geojson.features.filter((d) => path(d) !== null);
@@ -362,7 +362,7 @@ function drawMapChart(geojson) {
         .data(validFeatures)
         .join("path")
         .attr("d", (d) => {
-            console.log("Rendering state:", d.properties.name, path(d)); 
+            //console.log("Rendering state:", d.properties.name, path(d)); 
             return path(d);
         })
         .attr("fill", "#e0e0e0")
@@ -370,9 +370,9 @@ function drawMapChart(geojson) {
         .attr("stroke-width", 0.5)
         .on("mouseenter", function (event, d) {
             const stateName = d.properties.name;
-            console.log("Hovered State Name:", stateName);
+            //console.log("Hovered State Name:", stateName);
             const barData = data.find((bar) => bar.key === stateName);
-            console.log("Matching Bar Data:", barData);
+            //console.log("Matching Bar Data:", barData);
             d3.select(this).attr("fill", "orange");
 
             chart.selectAll("rect")
@@ -415,10 +415,10 @@ function drawMapChart(geojson) {
                 .style("opacity", 0);
             });
 
-    console.log(
-        "Virginia Geometry:",
-         geojson.features.find((d) => d.properties.name === "Virginia")
-     );
+    // console.log(
+    //     "Virginia Geometry:",
+    //      geojson.features.find((d) => d.properties.name === "Virginia")
+    //  );
      
 }
 
@@ -436,7 +436,7 @@ function resetMapHighlight() {
 
 d3.json("../data/safety/us-states.geojson")
     .then((geojson) => {
-        console.log("GeoJSON successfully loaded", geojson);
+        //console.log("GeoJSON successfully loaded", geojson);
         drawMapChart(geojson);
     })
     .catch((error) => {

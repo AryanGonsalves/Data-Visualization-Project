@@ -17,7 +17,7 @@ try {
 }
 
 try {
-    drawSafety();
+    // drawSafety();
 } catch (error) {
     console.error("Error in drawSafety:", error);
 }
@@ -35,7 +35,7 @@ try {
 }
 
 try {
-    drawQualityOfLife();
+    // drawQualityOfLife();
 } catch (error) {
     console.error("Error in drawQualityOfLife:", error);
 }
