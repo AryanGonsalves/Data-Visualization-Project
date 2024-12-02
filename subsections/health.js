@@ -1,4 +1,4 @@
-export function drawHealth() {
+function drawHealth() {
     d3.selectAll("svg");
 
     const svg = d3.select("#visualization-health");

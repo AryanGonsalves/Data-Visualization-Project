@@ -1,24 +1,15 @@
-import { drawIntro } from './subsections/intro.js';
-import { drawSafety } from './subsections/safety.js';
-import { drawHealth } from './subsections/health.js';
-import { drawEconomy } from './subsections/economy.js';
-import { drawQualityOfLife } from './subsections/qualityoflife.js';
-import { drawEducation } from './subsections/education.js';
-import { drawOutro } from './subsections/outro.js';
 
 
-// const scroller = scrollama();
 let totalScrollHeight = calculateTotalScrollHeight(); // Calculate total scroll height
 // Recalculate total scroll height on window resize
 window.addEventListener("resize", () => {
     totalScrollHeight = calculateTotalScrollHeight();
 });
 
-// scroller.setup({
-//     step: ".step",
-//     offset: 0.5,
-// }).onStepEnter(handleStepEnter);
+// Array to keep track of step elements
+const steps = document.querySelectorAll('.step');
 
+// Initialize sections
 try {
     drawIntro();
 } catch (error) {
@@ -26,7 +17,7 @@ try {
 }
 
 try {
-    drawSafety();
+    // drawSafety();
 } catch (error) {
     console.error("Error in drawSafety:", error);
 }
@@ -44,7 +35,7 @@ try {
 }
 
 try {
-    drawQualityOfLife();
+    // drawQualityOfLife();
 } catch (error) {
     console.error("Error in drawQualityOfLife:", error);
 }
@@ -61,34 +52,31 @@ try {
     console.error("Error in drawOutro:", error);
 }
 
-
 // Handle when a step enters the viewport
 function handleStepEnter(response) {
-    const step = response.element.getAttribute("data-step");
-    const headers = document.querySelectorAll('.step h2');
-    headers.forEach(header => {
-        header.style.display = 'none';
+    const step = response.element;
+    const steps = document.querySelectorAll('.step');
+
+    // Fade out all steps
+    steps.forEach(s => {
+        s.classList.add('faded'); // Add the faded class to hide everything
     });
-    const currentHeader = response.element.querySelector("h2");
+
+    // Fade in the current step
+    step.classList.remove('faded'); // Remove the faded class for the current step
+
+    // Update header position if there's a specific header inside the step
+    const currentHeader = step.querySelector("h2");
     if (currentHeader) {
-        currentHeader.style.display = 'block';
         updateHeaderPosition(currentHeader);
     }
 }
 
-function updateHeaderPosition(header) {
-    // Calculate position based on viewport and step height
-    const rect = header.getBoundingClientRect();
-    const headerHeight = rect.height;
-
-    // Set position to fixed at the top of the viewport, adjusting for the header height
-    header.style.position = 'fixed';
-    header.style.top = '8%'; // Slightly below the top
-    header.style.left = '50%'; // Center horizontally
-    header.style.transform = 'translateX(-50%)'; // Adjust for center alignment
+function handleStepExit(response) {
+    // Optional: Add logic for when a step exits if needed
 }
 
-// Function to calculate total scroll height
+// Utility function to calculate total scroll height
 function calculateTotalScrollHeight() {
     const steps = document.querySelectorAll('.step');
     let totalHeight = 0;
@@ -100,5 +88,52 @@ function calculateTotalScrollHeight() {
     return totalHeight;
 }
 
+function updateHeaderPosition(header) {
+    const rect = header.getBoundingClientRect();
+    const headerHeight = rect.height;
+
+    header.style.position = 'fixed';
+    header.style.top = '8%';
+    header.style.left = '50%';
+    header.style.transform = 'translateX(-50%)';
+}
 
 
+
+let currentStepIndex = -1; // Tracks the currently visible step index
+
+// initially faded
+steps.forEach((step, index) => {
+    if (index != 0){
+        step.classList.add('faded');
+    }
+});
+
+
+
+window.addEventListener('scroll', () => {
+    steps.forEach((step, index) => {
+        const rect = step.getBoundingClientRect();
+
+        // Check if the step is sufficiently inside the viewport
+        const isVisible = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.25;
+
+        if (isVisible && currentStepIndex !== index) {
+            currentStepIndex = index;
+
+
+            // Fade out all other steps
+            steps.forEach((s, i) => {
+                if (i !== index) {
+                    s.classList.add('faded');
+                } else {
+                    s.classList.remove('faded');
+                    if (index === 6) {
+                        console.log("going to animate");
+                        outro_animatePoints();
+                    }
+                }
+            });
+        }
+    });
+});
