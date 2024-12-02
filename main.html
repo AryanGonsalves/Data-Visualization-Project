@@ -130,22 +130,25 @@
                 <img src="images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg>
             </div>
+
+
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
                 <img src="images/temp_image.jpg" id="quality-image" width="733" height="600" class="image" />
+                
                 <div id="quality-container">
                     <div id="quality-map-container">
-                        <svg id="quality-map-svg" width="1000" height="600"></svg>
+                        <svg id="quality-map-svg" width="800" height="600"></svg> <!-- Increased width to 1000px -->
                     </div>
+                    
+                    <!-- Bar Chart Container -->
                     <div id="quality-bar-chart-container">
-                        <div id="quality-toggle-buttons">
-                            <button id="quality-gender-button" class="quality-toggle-button selected">Gender</button>
-                            <button id="quality-race-button" class="quality-toggle-button">Race</button>
-                        </div>
-                        <svg id="quality-bar-chart-svg" width="1000" height="600"></svg>
+                        <svg id="quality-bar-chart-svg" width="600" height="600"></svg> <!-- Bar chart SVG remains at 600x600px -->
                     </div>
                 </div>
             </div>
+
+
             <div class="step education" data-step="6">
                 <!-- <img src="images/education-banner.png" id="education-image" width="100%" class="image" /> -->
                 <div class="education-container">
