@@ -29,7 +29,7 @@ try {
 }
 
 try {
-    // drawEconomy();
+    drawEconomy();
 } catch (error) {
     console.error("Error in drawEconomy:", error);
 }
