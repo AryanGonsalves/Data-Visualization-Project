@@ -443,5 +443,16 @@ d3.json("../data/safety/us-states.geojson")
         console.error("Failed to load GeoJSON:", error);
     });
 
+document.querySelectorAll("#controls select").forEach((select) => {
+        select.addEventListener("mouseenter", () => {
+            select.style.borderColor = "#007bff";
+            select.style.boxShadow = "0 0 5px rgba(0, 123, 255, 0.5)";
+        });
+        select.addEventListener("mouseleave", () => {
+            select.style.borderColor = "#ccc";
+            select.style.boxShadow = "none";
+        });
+    });
+
 loadDataset("shooting");
 });

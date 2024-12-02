@@ -33,29 +33,80 @@
                 </div>
             </div>
             <div class="step safety" data-step="2">
-                <h2>Safety</h2>
-                <div id="controls">
-                    <label for="dataset">Select Dataset:</label>
-                    <select id="dataset">
-                        <!--<option value="drugs">Drug Deaths</option> -->
+                <h2>Safety Over the Years</h2>
+                <img src="/images/Safety-img.jpg" id="safety-image" width="500" height="400" class="image" /><br><br>
+                <div id="controls" class="safety-controls" style="
+                display: flex; 
+                flex-direction: row; 
+                align-items: center; 
+                background-color: #f9f9f9; 
+                border: 1px solid #ddd; 
+                border-radius: 8px; 
+                padding: 10px 15px; 
+                margin-bottom: 10px; 
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <div class="control-group" style="
+                    display: flex; 
+                    align-items: center; 
+                    margin-right: 15px;">
+                    <label for="dataset" style="
+                        font-size: 13px; 
+                        font-weight: 500; 
+                        margin-right: 5px; 
+                        color: #555;">Dataset:</label>
+                    <select id="dataset" style="
+                        padding: 5px 8px; 
+                        font-size: 13px; 
+                        border: 1px solid #ccc; 
+                        border-radius: 4px; 
+                        background-color: #fff; 
+                        outline: none; 
+                        transition: border-color 0.3s ease;">
                         <option value="shooting">School Shootings</option>
                         <option value="traffic">Traffic Fatalities</option>
                     </select>
-            
-                    <!-- X-Axis Selection -->
-                    <label for="x-axis">X-Axis:</label>
-                    <select id="x-axis">
-                        <!-- Options will be dynamically populated -->
-                    </select>
-            
-                    <!-- Y-Axis Attribute Selection -->
-                    <label for="y-attribute">Y-Axis Attribute:</label>
-                    <select id="y-attribute">
+                </div>
+                <div class="control-group" style="
+                    display: flex; 
+                    align-items: center; 
+                    margin-right: 15px;">
+                    <label for="x-axis" style="
+                        font-size: 13px; 
+                        font-weight: 500; 
+                        margin-right: 5px; 
+                        color: #555;">X-Axis:</label>
+                    <select id="x-axis" style="
+                        padding: 5px 8px; 
+                        font-size: 13px; 
+                        border: 1px solid #ccc; 
+                        border-radius: 4px; 
+                        background-color: #fff; 
+                        outline: none; 
+                        transition: border-color 0.3s ease;">
                         <!-- Options will be dynamically populated -->
                     </select>
                 </div>
+                <div class="control-group" style="
+                    display: flex; 
+                    align-items: center;">
+                    <label for="y-attribute" style="
+                        font-size: 13px; 
+                        font-weight: 500; 
+                        margin-right: 5px; 
+                        color: #555;">Y-Axis:</label>
+                    <select id="y-attribute" style="
+                        padding: 5px 8px; 
+                        font-size: 13px; 
+                        border: 1px solid #ccc; 
+                        border-radius: 4px; 
+                        background-color: #fff; 
+                        outline: none; 
+                        transition: border-color 0.3s ease;">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                </div>
+            </div>
             
-                <!-- Flexbox container for the barplot and the map -->
                 <div class="flex-container">
                     <div id="barplot-container">
                         <svg id="barplot"></svg>
@@ -67,7 +118,7 @@
                 <script type="module" src="safety.js"></script>
 
             
-                <img src="/images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
+               
             </div>            
             <div class="step health" data-step="3">
                 <h2>Health</h2>
