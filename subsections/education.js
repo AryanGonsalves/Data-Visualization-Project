@@ -576,7 +576,6 @@ function education_filterDataBarChartAge(){
 
 function education_drawMapChart(){
     const svg = d3.select("#visualization-education");
-
     // State management
     if (education_isMapChart){
         education_State_Map();
@@ -596,6 +595,21 @@ function education_drawMapChart(){
         .scale(width * 1.2) 
         .translate([width / 2, height / 2]);  
     const path = d3.geoPath().projection(projection);
+
+
+    const cleanedData = Object.entries(data).map(([stateName, stateData]) => {
+        return {
+            name: stateName,
+            Estimate: parseInt(stateData.Estimate.replace(/,/g, ''), 10),
+        };
+    });
+
+    const minEstimate = d3.min(cleanedData, d => d.Estimate);
+    const maxEstimate = d3.max(cleanedData, d => d.Estimate);
+
+    const radiusScale = d3.scaleLinear()
+        .domain([minEstimate, maxEstimate]) 
+        .range([5, 130]);
 
     // Load US states GeoJSON
     d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(function (us) {
@@ -619,14 +633,18 @@ function education_drawMapChart(){
                         return centroid ? centroid[1] : null;
                     })
                     .attr("r", 0) 
-                    .style("fill", "rgba(143, 188, 143, 0.6)")
+                    .style("fill", "#2980b9")
                     .style("stroke", "black")
                     .style("stroke-width", 0.5)
                     .transition().duration(1000)
                         .attr("r", function(d) {
-                            const stateData = data[d.properties.name];
+                            // const stateData = data[d.properties.name];
+                            const stateData = cleanedData.find(state => state.name === d.properties.name);
+
                             if (stateData && stateData.Estimate) {
-                                return parseInt(stateData.Estimate);
+                                // return parseInt(stateData.Estimate);
+                                // return Math.log(parseInt(stateData.Estimate) + 10) *6; 
+                                return radiusScale(stateData.Estimate); 
                             }
                             return 0;
                         }),
@@ -634,9 +652,13 @@ function education_drawMapChart(){
                     .transition()
                     .duration(500)
                     .attr("r", function(d) {
-                        const stateData = data[d.properties.name];
+                        // const stateData = data[d.properties.name];
+                        const stateData = cleanedData.find(state => state.name === d.properties.name);
+
                         if (stateData && stateData.Estimate) {
-                            return Math.sqrt(parseInt(stateData.Estimate));
+                            // return Math.sqrt(parseInt(stateData.Estimate));
+                            // return Math.log(parseInt(stateData.Estimate) + 10) *6;  
+                            return radiusScale(stateData.Estimate);
                         }
                         return 0;
                     }),
