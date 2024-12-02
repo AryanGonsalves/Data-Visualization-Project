@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.9.0/d3-legend.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script type="text/javascript" src="js/barChart.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<div>
+    <div class="row" style="text-align: center">
+        <!--<h2>-->
+        <!--Neighborhood Analysis & Recommendation using Visualizations in D3-->
+        <!--</h2>-->
+        <h2>
+            US States Economy
+        </h2>
+    <div class = "row">
+        <div class="col-sm-12 center-align form-group">
+            <label for="dataset" style="font-size: 20px">Select the factor to visualize</label>
+            <select class="form-control" id="dataset" onchange="updateMap(value)" style="width: 25%;margin: auto">
+                <option selected value="unemployement">UNEMPLOYEMENT_RATE</option>
+                <option value="population">POPULATION</option>
+                <option value="salary">AVERAGE_SALARY/MON</option>
+                <option value="price">RENTAL COST [PRICE/SQ. FT.]</option>
+                <option value="mortality">MORTALITY_RATE</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div  class="col-sm-7 pull-left" id="map-view">
+        </div>
+        <div id="bar-chart" class="col-sm-5 pull-left">
+            <div id="average"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" id="table">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12" id="legend">
+    </div>
+</div>
+</body>
+</html>
