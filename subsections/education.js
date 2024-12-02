@@ -597,19 +597,23 @@ function education_drawMapChart(){
     const path = d3.geoPath().projection(projection);
 
 
-    const cleanedData = Object.entries(data).map(([stateName, stateData]) => {
-        return {
-            name: stateName,
-            Estimate: parseInt(stateData.Estimate.replace(/,/g, ''), 10),
-        };
+    const cleanedData = Object.entries(data)
+        .filter(([stateName]) => stateName !== "UnitedStates")  // Exclude "United States"
+        .map(([stateName, stateData]) => {
+            return {
+                name: stateName,
+                Estimate: parseInt(stateData.Estimate.replace(/,/g, ''), 10),
+            };
     });
+
 
     const minEstimate = d3.min(cleanedData, d => d.Estimate);
     const maxEstimate = d3.max(cleanedData, d => d.Estimate);
 
+
     const radiusScale = d3.scaleLinear()
         .domain([minEstimate, maxEstimate]) 
-        .range([5, 130]);
+        .range([5, 45]);
 
     // Load US states GeoJSON
     d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(function (us) {
