@@ -27,14 +27,18 @@
             <div class="step intro" data-step="1">
                 <div class="intro-container">
                     <div class="intro-image-container">
-                        <img src="images/intro_interviewer.png" id="intro-image-1" class="intro-image" />
-                        <img src="images/intro.png" id="intro-image-2" class="intro-image" />
+                        <img src="images/interviewer_intro.png" id="intro-image-1" class="intro-image" />
+                        <img src="images/pre_intro.png" id="intro-image-2" class="intro-image" />
                     </div>
                 </div>
             </div>
             <div class="step safety" data-step="2">
                 <h2>Safety Over the Years</h2>
-                <img src="/images/Safety-img.jpg" id="safety-image" width="500" height="400" class="image" /><br><br>
+                <div class="intro-image-container">
+                    <img src="images/interviewer_safety.png" id="intro-image-1" class="intro-image" />
+                    <img src="images/pres_safety.png" id="intro-image-2" class="intro-image" />
+                </div>
+                
                 <div id="controls" class="safety-controls" style="
                     display: flex; 
                     flex-direction: row; 
@@ -133,19 +137,22 @@
             </div>
             <div class="step health" data-step="3">
                 <h2>Health</h2>
-                <img src="images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
+                <img src="images/interviewer_health.png" id="health-image" width="533" height="400" class="image" />
+                <img src="images/pres_health.png" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-health" width="800" height="400" style="display: none;"></svg>
             </div>
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
-                <img src="images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
+                <img src="images/interviewer_economy.png" id="health-image" width="533" height="400" class="image" />
+                <img src="images/pres_economy.PNG" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg>
             </div>
 
 
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
-                <img src="images/temp_image.jpg" id="quality-image" width="733" height="600" class="image" />
+                <img src="images/interviewer_qol.png" id="health-image" width="533" height="400" class="image" />
+                <img src="images/pres_qol.png" id="health-image" width="533" height="400" class="image" />
                 
                 <div id="quality-container">
                     <div id="quality-map-container">
@@ -164,8 +171,8 @@
                 <!-- <img src="images/education-banner.png" id="education-image" width="100%" class="image" /> -->
                 <div class="education-container">
                     <div class="education-image-text-container">
-                        <img src="images/education_question.png" id="education-image" width="475" height="300" class="image" />
-                        <img src="images/education.png" id="education-image" width="475" height="300" class="image" />
+                        <img src="images/interviewer_education.png" id="education-image" width="475" height="300" class="image" />
+                        <img src="images/pres_education.png" id="education-image" width="475" height="300" class="image" />
                     </div>
                     <div class="education-svg-container">
                         <!-- Dropdowns -->
@@ -174,17 +181,13 @@
                                 <button id="ageButton" class="education-button" onclick="education_drawAge()">Age</button>
                                 <button id="raceButton" class="education-button" onclick="education_drawRace()">Race</button>
                             </div>
-                            <!-- Age Group Dropdown -->
-                            <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
+                            <!-- <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
                                 <option value="18to24">18-24</option>
-                                <!-- this doesnt have values for some reason -->
-                                <!-- <option value="25Over">25 and Over</option> -->
                                 <option value="25to34">25-34</option>
                                 <option value="35to44">35-44</option>
                                 <option value="45to64">45-64</option>
                                 <option value="65Over">65 and Over</option>
                             </select>
-                            <!-- Race Group Dropdown -->
                             <select id="raceGroupDropdown" onchange="education_updateRaceGroup(this.value)">
                                 <option value="AmericanIndianAlaskaNative_">American Indian / Alaska Native</option>
                                 <option value="Asian_">Asian</option>
@@ -195,10 +198,10 @@
                                 <option value="TwoOrMoreRace_">Two or More Races</option>
                                 <option value="WhiteNotHispanicLatino_">White (Not Hispanic / Latino)</option>
                                 <option value="White_">White</option>
-                            </select>
+                            </select> -->
                         </div>
                         <br>
-                        <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="visualization-education" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet"></svg>
                         <!-- Slider -->
                         <div class="slider-container">
                             <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="education_updateYearLabel(this.value)" list="tickmarks">
@@ -207,13 +210,13 @@
                         <!-- Buttons -->
                         <div class="button-container">
                             <div class="column">
-                                <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
-                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button>
+                                <!-- <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
+                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button> -->
                             </div>
                             <div class="column">
-                                <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
+                                <!-- <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
                                 <button id="bachButton" class="education-button" onclick="education_drawBach()">Bachelors Degree or Higher</button>
-                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button>
+                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button> -->
                             </div>
                         </div>
                     </div>
@@ -222,8 +225,8 @@
             <div class="step outro" data-step="7">
                 <div class="outro-container">
                     <div class="outro-image-container">
-                        <img src="images/outro_interviewer.png" id="outro-image-1" class="outro-image" />
-                        <img src="images/outro.png" id="outro-image-2" class="outro-image" />
+                        <img src="images/interviewer_outro.png" id="outro-image-1" class="outro-image" />
+                        <img src="images/pres_outro.png" id="outro-image-2" class="outro-image" />
                     </div>
                     <svg id="visualization-outro" width="800" height="400" style="display: none;" class="outro-svg"></svg>
                 </div>

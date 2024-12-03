@@ -41,7 +41,7 @@ try {
 }
 
 try {
-    drawEducation();
+    // drawEducation();
 } catch (error) {
     console.error("Error in drawEducation:", error);
 }
