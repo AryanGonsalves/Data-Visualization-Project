@@ -100,7 +100,7 @@ function loadDataset(dataset) {
             }
 
             populateDropdowns();
-            drawBarGraph();
+            updateVisualization();
         })
         .catch((error) => {
             console.error(`Error loading dataset "${dataset}":`, error);
@@ -155,15 +155,70 @@ function populateDropdowns() {
         xAxisSelect.appendChild(option);
     });
 
-    yAttributeSelect.removeEventListener("change", drawBarGraph);
-    yAttributeSelect.addEventListener("change", drawBarGraph);
+    
 
-    xAxisSelect.removeEventListener("change", drawBarGraph);
-    xAxisSelect.addEventListener("change", drawBarGraph);
+    yAttributeSelect.removeEventListener("change", updateVisualization);
+    yAttributeSelect.addEventListener("change",updateVisualization);
+
+    xAxisSelect.removeEventListener("change", updateVisualization);
+    xAxisSelect.addEventListener("change", updateVisualization);
+}
+
+let isPieChart = false; // Track the current visualization state
+
+// Attach event listener to the toggle button
+document.getElementById("toggle-visualization").addEventListener("click", function () {
+    isPieChart = !isPieChart;
+    this.textContent = isPieChart ? "Switch to Bar Chart" : "Switch to Pie Chart";
+    updateVisualization(); // Update the visualization based on the current state
+});
+
+// Ensure the chart updates dynamically when the dataset or attributes change
+datasetSelect.addEventListener("change", updateVisualization);
+xAxisSelect.addEventListener("change", updateVisualization);
+yAttributeSelect.addEventListener("change", updateVisualization);
+
+// Clear the chart before rendering
+function clearChart() {
+    chart.selectAll("*").remove();
+}
+
+let currentVisualization = "bar"; // Track the active visualization type
+
+function updateVisualization() {
+    if (isPieChart) {
+        // Clear chart-specific elements and hide axes
+        chart.selectAll("rect").remove(); // Remove bars
+        xAxisGroup.style("display", "none"); // Hide X-Axis
+        yAxisGroup.style("display", "none"); // Hide Y-Axis
+
+        // Reset the transform for the pie chart (centered)
+        chart.attr("transform", `translate(${width / 2}, ${height / 2})`);
+        drawPieChart(); // Render pie chart
+    } else {
+        //exitPieChart();
+        // Clear pie chart-specific elements and show axes
+        chart.selectAll("path").remove(); // Remove pie slices
+        xAxisGroup.style("display", null); // Show X-Axis
+        yAxisGroup.style("display", null); // Show Y-Axis
+
+        // Reset the transform for the bar chart (with margins)
+        chart.attr("transform", `translate(${margin.left},${margin.top})`);
+        drawBarGraph(); // Render bar chart
+    }
 }
 
 
+
 function drawBarGraph() {
+
+    if (currentVisualization !== "bar") {
+        chart.selectAll("*").remove(); // Clear chart area
+        currentVisualization = "bar"; // Set the current visualization type to "bar"
+    }
+
+    chart.attr("transform", `translate(${margin.left},${margin.top})`);
+
     const yAttr = yAttributeSelect.value;
     const xAttr = xAxisSelect.value;
 
@@ -192,6 +247,7 @@ function drawBarGraph() {
         .range([height, 0]);
 
     xAxisGroup
+    .attr("transform", `translate(0, ${height})`)
         .transition()
         .duration(800)
         .ease(d3.easeCubicInOut)
@@ -263,6 +319,7 @@ function drawBarGraph() {
             .style("opacity", 0);
     }
 
+    
     
     bars
         .enter()
@@ -343,15 +400,176 @@ function drawBarGraph() {
 
     
 }
+function drawPieChart() {
+    
+    chart.selectAll("rect").remove(); 
+    chart.selectAll("path").remove(); 
+
+    
+    if (!chart) {
+        console.error("Error: `chart` selection is undefined or invalid.");
+        return;
+    }
+    chart.attr("transform", `translate(${width / 2}, ${(height+100) / 2})`);
+
+    const yAttr = yAttributeSelect.value;
+    const xAttr = xAxisSelect.value;
+
+    if (!data || data.length === 0) {
+        console.error("Error: Data is undefined or empty.");
+        return;
+    }
+
+    if (!xAttr || !yAttr) {
+        console.error("Error: Attributes for x or y are not defined.");
+        return;
+    }
+
+    // Group and aggregate data
+    const groupedData = d3.group(data, (d) => d[xAttr]);
+    const aggregatedData = Array.from(groupedData, ([key, values]) => ({
+        key,
+        total: d3.sum(values, (d) => d[yAttr]),
+    }));
+
+    if (aggregatedData.length === 0) {
+        console.error("Error: Aggregated data is empty.");
+        return;
+    }
+
+    const radius = Math.min(width, height) / 2;
+
+    const pie = d3.pie()
+        .value((d) => d.total)
+        .sort((a, b) => {
+            const sortAttr = document.getElementById("x-axis").value; 
+            if (sortAttr === "state") {
+                const stateA = a.state || ""; 
+                const stateB = b.state || "";
+                return stateA.localeCompare(stateB); 
+            } else if (sortAttr === "year") {
+                return a.year - b.year; // Numerical sorting
+            } else {
+                return 0; // No sorting
+            }
+        });
+    const arcs = pie(aggregatedData);
+
+    const arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius);
+
+    const colors = d3.quantize(d3.interpolateRainbow, aggregatedData.length);
+    const alternatingColors = aggregatedData.map((_, i) => colors[(i * 25) % colors.length]);
+        
+    const colorScale = d3.scaleOrdinal()
+        .domain(aggregatedData.map((d) => d.key))
+        .range(alternatingColors);
+
+    // Bind data to paths
+    const paths = chart.selectAll("path").data(arcs, (d) => d.data.key);
+
+    // Exit selection: Remove unneeded slices
+    paths
+        .exit()
+        .transition()
+        .duration(500)
+        .attrTween("d", function (d) {
+            const interpolate = d3.interpolate(d, { startAngle: d.startAngle, endAngle: d.startAngle });
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+        .remove();
+
+    // Update selection: Update existing slices
+    paths
+        .transition()
+        .duration(500)
+        .attrTween("d", function (d) {
+            const interpolate = d3.interpolate(this._current, d);
+            this._current = d;
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+        .attr("fill", (d) => colorScale(d.data.key));
+
+    // Enter selection: Add new slices
+    const pieGroup = paths
+        .enter()
+        .append("path")
+        .attr("fill", (d) => colorScale(d.data.key))
+        .each(function (d) {
+            this._current = d; // Store the current position for later transitions
+        })
+        .transition()
+        .duration(500)
+        .attrTween("d", function (d) {
+            const interpolate = d3.interpolate({ startAngle: d.startAngle, endAngle: d.startAngle }, d);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        });
+
+    // Tooltip and interactivity
+    chart.selectAll("path")
+    .on("mouseenter", function (event, d) {
+        d3.select(this).attr("stroke", "black").attr("stroke-width", 2);
+        console.log(d.data.key);
+
+        d3.select(".tooltip")
+            .html(
+                `<strong>${xAttr}:</strong> ${d.data.key}<br>` +
+                `<strong>${yAttr}:</strong> ${d.data.total}`
+            )
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY - 28}px`)
+            .transition()
+            .duration(200)
+            .style("opacity", 1);
+
+        if (xAttr === "Year") {
+            const selectedYear = d.data.key; // Extract the year
+            const rulingParty = rulingParties[selectedYear]; // Get the ruling party
+
+            if (rulingParty === "Democrat") {
+                mapSvg.selectAll("path").attr("fill", "blue"); // Color the map blue
+            } else if (rulingParty === "Republican") {
+                mapSvg.selectAll("path").attr("fill", "red"); // Color the map red
+            } else {
+                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Default color
+            }
+        } else {
+            highlightMapFromBar(d.data.key); // Highlight the corresponding map state
+        }
+    })
+    .on("mousemove", function (event) {
+        d3.select(".tooltip")
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY - 28}px`);
+    })
+    .on("mouseleave", function () {
+        d3.select(this).attr("stroke", "none");
+
+        d3.select(".tooltip")
+            .transition()
+            .duration(200)
+            .style("opacity", 0);
+
+        if (xAttr === "Year") {
+            mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Reset map to default
+        } else {
+            resetMapHighlight(); // Reset map highlighting
+        }
+    });
+
+}
+
 
 function drawMapChart(geojson) {
-
     geojson.features.sort((a, b) => a.properties.name.localeCompare(b.properties.name));
 
-    
-    //console.log("GeoJSON Features:", geojson.features);
-
-    
     const validFeatures = geojson.features.filter((d) => path(d) !== null);
 
     mapSvg
@@ -361,66 +579,123 @@ function drawMapChart(geojson) {
     mapSvg.selectAll("path")
         .data(validFeatures)
         .join("path")
-        .attr("d", (d) => {
-            //console.log("Rendering state:", d.properties.name, path(d)); 
-            return path(d);
-        })
+        .attr("d", (d) => path(d))
         .attr("fill", "#e0e0e0")
         .attr("stroke", "#888")
         .attr("stroke-width", 0.5)
         .on("mouseenter", function (event, d) {
-            const stateName = d.properties.name;
-            //console.log("Hovered State Name:", stateName);
-            const barData = data.find((bar) => bar.key === stateName);
-            //console.log("Matching Bar Data:", barData);
-            d3.select(this).attr("fill", "orange");
+            const stateName = d.properties.name.trim(); // Ensure consistency in naming
 
-            chart.selectAll("rect")
-                .filter((barData) => barData.key === stateName)
-                .attr("fill", "orange");
-            
-                d3.select(".tooltip")
-                .html(
-                    `<strong>State:</strong> ${stateName}<br>` 
-                   // +(barData ? `<strong>Total:</strong> ${barData.total}` : `<strong>No data available</strong>`)
-                )
-                .style("left", `${event.pageX + 10}px`) 
+            if (currentVisualization === "bar") {
+                d3.select(this).attr("fill", "orange");
+                chart.selectAll("rect")
+                    .filter((barData) => barData.key === stateName)
+                    .attr("fill", "orange");
+            } else if (currentVisualization === "pie") {
+                chart.selectAll("path")
+                    .filter((pieData) => pieData.data && pieData.data.key === stateName) // Match state name to pie slice
+                    .attr("stroke", "orange")
+                    .attr("stroke-width", 2);
+            }
+
+            // Tooltip
+            d3.select(".tooltip")
+                .html(`<strong>State:</strong> ${stateName}`)
+                .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`)
                 .transition()
                 .duration(200)
                 .style("opacity", 1);
-                
         })
         .on("mousemove", function (event) {
-            
             d3.select(".tooltip")
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`);
         })
-
         .on("mouseleave", function (event, d) {
-            const stateName = d.properties.name;
+            const stateName = d.properties.name.trim();
 
-           
-            d3.select(this).attr("fill", "#e0e0e0");
+            if (currentVisualization === "bar") {
+                d3.select(this).attr("fill", "#e0e0e0");
+                chart.selectAll("rect")
+                    .filter((barData) => barData.key === stateName)
+                    .attr("fill", "url(#barGradient)");
+            }  else if (currentVisualization === "pie") {
+                chart.selectAll("path")
+                    .filter((pieData) => pieData.data && pieData.data.key === stateName)
+                    .attr("stroke", "none")
+                    .attr("stroke-width", 1); // Reset to original stroke width
+            }
 
-           
-            chart.selectAll("rect")
-                .filter((barData) => barData.key === stateName)
-                .attr("fill", "url(#barGradient)");
-
-                d3.select(".tooltip")
+            // Hide tooltip
+            d3.select(".tooltip")
                 .transition()
                 .duration(200)
                 .style("opacity", 0);
+        });
+}
+
+// Highlight corresponding pie slice based on map hover
+function highlightPieFromMap(stateName) {
+    console.log(`Highlighting pie slice for state: ${stateName}`);
+    chart.selectAll("path")
+        .filter((d) => {
+            const pieKey = d.data?.key.trim().toLowerCase(); // Trim and lowercase pie key
+            const mapKey = stateName.trim().toLowerCase(); // Trim and lowercase map key
+            console.log(`Comparing mapKey: "${mapKey}" with pieKey: "${pieKey}"`); // Debug log
+            return pieKey === mapKey; // Match keys
+        })
+        .attr("stroke", "orange") // Highlight the slice
+        .attr("stroke-width", 2);
+}
+
+/*
+// Reset all pie slice highlights
+function resetPieHighlight() {
+    console.log("Resetting pie slice highlights");
+    chart.selectAll("path")
+        .attr("stroke", "#fff") // Reset stroke color
+        .attr("stroke-width", 1); // Reset stroke width
+}
+
+function exitPieChart() {
+    // Force the chart group to stay centered during exit
+    chart.attr("transform", `translate(${width / 2}, ${(height + 100) / 2})`);
+
+    const radius = Math.min(width, height) / 2;
+
+    const arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius);
+
+    chart.selectAll("path")
+        .transition()
+        .duration(500)
+        .attrTween("d", function (d) {
+            // Log current position and check for inconsistencies
+            console.log("Exiting Slice Current State:", d);
+
+            // Use the current `d` object as the starting position
+            const current = { startAngle: d.startAngle, endAngle: d.endAngle };
+            const interpolate = d3.interpolate(current, {
+                startAngle: d.startAngle,
+                endAngle: d.startAngle, // Collapse to a line
             });
 
-    // console.log(
-    //     "Virginia Geometry:",
-    //      geojson.features.find((d) => d.properties.name === "Virginia")
-    //  );
-     
+            return function (t) {
+                // Log the interpolated values for debugging
+                const interpolated = interpolate(t);
+                console.log("Interpolated Slice State:", interpolated);
+                return arc(interpolated);
+            };
+        })
+        .style("opacity", 0) // Fade out slices
+        .remove(); // Remove after transition
 }
+*/
+
+
+
 
 
 function highlightMapFromBar(stateName) {
@@ -428,6 +703,7 @@ function highlightMapFromBar(stateName) {
         .filter((d) => d.properties.name === stateName)
         .attr("fill", "orange");
 }
+
 
 
 function resetMapHighlight() {
