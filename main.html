@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="main.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"></script>
+
 </head>
 <body>
 
@@ -25,36 +27,143 @@
             <div class="step intro" data-step="1">
                 <div class="intro-container">
                     <div class="intro-image-container">
-                        <img src="images/intro_interviewer.png" id="intro-image-1" class="intro-image" />
-                        <img src="images/intro.png" id="intro-image-2" class="intro-image" />
+                        <img src="images/interviewer_intro.png" id="intro-image-1" class="intro-image" />
+                        <img src="images/pre_intro.png" id="intro-image-2" class="intro-image" />
                     </div>
                 </div>
             </div>
             <div class="step safety" data-step="2">
-                <h2>Safety</h2>
-                <img src="images/temp_image.jpg" id="safety-image" width="533" height="400" class="image" />
-                <svg id="visualization-safety" width="800" height="400" style="display: none;"></svg>
+                <h2>Safety Over the Years</h2>
+                <div class="intro-image-container">
+                    <img src="images/interviewer_safety.png" id="intro-image-1" class="intro-image" />
+                    <img src="images/pres_safety.png" id="intro-image-2" class="intro-image" />
+                </div>
+                
+                <div id="controls" class="safety-controls" style="
+                    display: flex; 
+                    flex-direction: row; 
+                    align-items: center; 
+                    background-color: #f9f9f9; 
+                    border: 1px solid #ddd; 
+                    border-radius: 8px; 
+                    padding: 10px 15px; 
+                    margin-bottom: 10px; 
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    <div class="control-group" style="
+                        display: flex; 
+                        align-items: center; 
+                        margin-right: 15px;">
+                        <label for="dataset" style="
+                            font-size: 13px; 
+                            font-weight: 500; 
+                            margin-right: 5px; 
+                            color: #555;">Dataset:</label>
+                        <select id="dataset" style="
+                            padding: 5px 8px; 
+                            font-size: 13px; 
+                            border: 1px solid #ccc; 
+                            border-radius: 4px; 
+                            background-color: #fff; 
+                            outline: none; 
+                            transition: border-color 0.3s ease;">
+                            <option value="shooting">School Shootings</option>
+                            <option value="traffic">Traffic Fatalities</option>
+                        </select>
+                    </div>
+                    <div class="control-group" style="
+                        display: flex; 
+                        align-items: center; 
+                        margin-right: 15px;">
+                        <label for="x-axis" style="
+                            font-size: 13px; 
+                            font-weight: 500; 
+                            margin-right: 5px; 
+                            color: #555;">X-Axis:</label>
+                        <select id="x-axis" style="
+                            padding: 5px 8px; 
+                            font-size: 13px; 
+                            border: 1px solid #ccc; 
+                            border-radius: 4px; 
+                            background-color: #fff; 
+                            outline: none; 
+                            transition: border-color 0.3s ease;">
+                            <!-- Options will be dynamically populated -->
+                        </select>
+                    </div>
+                    <div class="control-group" style="
+                        display: flex; 
+                        align-items: center;">
+                        <label for="y-attribute" style="
+                            font-size: 13px; 
+                            font-weight: 500; 
+                            margin-right: 5px; 
+                            color: #555;">Y-Axis:</label>
+                        <select id="y-attribute" style="
+                            padding: 5px 8px; 
+                            font-size: 13px; 
+                            border: 1px solid #ccc; 
+                            border-radius: 4px; 
+                            background-color: #fff; 
+                            outline: none; 
+                            transition: border-color 0.3s ease;">
+                            <!-- Options will be dynamically populated -->
+                        </select>
+                    </div>
+                    <!-- Add toggle button -->
+                    <button id="toggle-visualization" style="
+                        padding: 8px 12px; 
+                        font-size: 14px; 
+                        border: none; 
+                        border-radius: 4px; 
+                        background-color: #007bff; 
+                        color: white; 
+                        cursor: pointer; 
+                        margin-left: 15px;">Switch to Pie Chart</button>
+                </div>
+                
+                <!-- Side-by-side layout -->
+                <div class="flex-container" style="
+                    display: flex; 
+                    flex-direction: row; 
+                    justify-content: space-between;">
+                    <div id="barplot-container" style="width: 50%;">
+                        <svg id="barplot"></svg>
+                    </div>
+                    <div id="map-container" style="width: 50%;">
+                        <svg id="us-map"></svg>
+                    </div>
+                </div>
+                <script type="module" src="safety.js"></script>
             </div>
             <div class="step health" data-step="3">
                 <h2>Health</h2>
-                <img src="images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
-                <div style="position: relative;">
-                    <svg id="visualization-health" width="800" height="400" style="display: block;"></svg>
-                    
-                    <!-- Dropdown for Choose a state -->
-                    <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
-                        <label for="state-select" style="font-size: 14px; color: #004d40;">Choose a state:</label>
-                        <select id="state-select" style="font-size: 14px;">
-                            <!-- States will be populated here -->
-                        </select>
-                    </div>
-            
-                    <!-- Dropdown for Choose a view, moved to the right with padding below -->
-                    <div style="position: absolute; top: 20px; left: 300px; z-index: 10;"> <!-- Adjusted left value -->
-                        <label for="view-select" style="font-size: 14px; color: #004d40;">Choose a view:</label>
-                        <select id="view-select" style="font-size: 14px;">
-                            <!-- View options (Gender, Age Group) will be populated here -->
-                        </select>
+            <div class="step health" data-step="3">
+                <h2>Health</h2>
+                    <img src="images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
+                            <div style="position: relative;">
+                                <svg id="visualization-health" width="800" height="400" style="display: block;"></svg>
+
+                                <!-- Dropdown for Choose a state -->
+                                <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
+                                    <label for="state-select" style="font-size: 14px; color: #004d40;">Choose a state:</label>
+                                    <select id="state-select" style="font-size: 14px;">
+                                        <!-- States will be populated here -->
+                                    </select>
+                                </div>
+
+                                <!-- Dropdown for Choose a view, moved to the right with padding below -->
+                                <div style="position: absolute; top: 20px; left: 300px; z-index: 10;"> <!-- Adjusted left value -->
+                                    <label for="view-select" style="font-size: 14px; color: #004d40;">Choose a view:</label>
+                                    <select id="view-select" style="font-size: 14px;">
+                                        <!-- View options (Gender, Age Group) will be populated here -->
+                                    </select>
+                                </div>
+
+                                <!-- Padding below the dropdowns -->
+                                <div style="position: absolute; top: 100px; left: 20px; z-index: 10; padding-top: 20px;">
+                                    <!-- Additional content or padding can go here -->
+                                </div>
+                            </div>
                     </div>
             
                     <!-- Padding below the dropdowns -->
@@ -65,47 +174,51 @@
             </div>                      
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
-                <img src="images/temp_image.jpg" id="economy-image" width="533" height="400" class="image" />
+                <img src="images/interviewer_economy.png" id="health-image" width="533" height="400" class="image" />
+                <img src="images/pres_economy.PNG" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg>
             </div>
+
+
             <div class="step quality-of-life" data-step="5">
                 <h2>Quality of Life</h2>
-                <img src="images/temp_image.jpg" id="quality-image" width="733" height="600" class="image" />
+                <img src="images/interviewer_qol.png" id="health-image" width="533" height="400" class="image" />
+                <img src="images/pres_qol.png" id="health-image" width="533" height="400" class="image" />
+                
                 <div id="quality-container">
                     <div id="quality-map-container">
-                        <svg id="quality-map-svg" width="1000" height="600"></svg>
+                        <svg id="quality-map-svg" width="800" height="600"></svg> <!-- Increased width to 1000px -->
                     </div>
+                    
+                    <!-- Bar Chart Container -->
                     <div id="quality-bar-chart-container">
-                        <div id="quality-toggle-buttons">
-                            <button id="quality-gender-button" class="quality-toggle-button selected">Gender</button>
-                            <button id="quality-race-button" class="quality-toggle-button">Race</button>
-                        </div>
-                        <svg id="quality-bar-chart-svg" width="1000" height="600"></svg>
+                        <svg id="quality-bar-chart-svg" width="600" height="600"></svg> <!-- Bar chart SVG remains at 600x600px -->
                     </div>
                 </div>
             </div>
+
+
             <div class="step education" data-step="6">
                 <!-- <img src="images/education-banner.png" id="education-image" width="100%" class="image" /> -->
                 <div class="education-container">
                     <div class="education-image-text-container">
-                        <img src="images/education_question.png" id="education-image" width="475" height="300" class="image" />
+                        <img src="images/interviewer_education.png" id="education-image" width="475" height="300" class="image" />
+                        <img src="images/pres_education.png" id="education-image" width="475" height="300" class="image" />
+                    </div>
+                    <div class="education-svg-container">
                         <!-- Dropdowns -->
                         <div class="education-dropdown-container">
                             <div>
                                 <button id="ageButton" class="education-button" onclick="education_drawAge()">Age</button>
                                 <button id="raceButton" class="education-button" onclick="education_drawRace()">Race</button>
                             </div>
-                            <!-- Age Group Dropdown -->
-                            <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
+                            <!-- <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
                                 <option value="18to24">18-24</option>
-                                <!-- this doesnt have values for some reason -->
-                                <!-- <option value="25Over">25 and Over</option> -->
                                 <option value="25to34">25-34</option>
                                 <option value="35to44">35-44</option>
                                 <option value="45to64">45-64</option>
                                 <option value="65Over">65 and Over</option>
                             </select>
-                            <!-- Race Group Dropdown -->
                             <select id="raceGroupDropdown" onchange="education_updateRaceGroup(this.value)">
                                 <option value="AmericanIndianAlaskaNative_">American Indian / Alaska Native</option>
                                 <option value="Asian_">Asian</option>
@@ -116,13 +229,10 @@
                                 <option value="TwoOrMoreRace_">Two or More Races</option>
                                 <option value="WhiteNotHispanicLatino_">White (Not Hispanic / Latino)</option>
                                 <option value="White_">White</option>
-                            </select>
+                            </select> -->
                         </div>
                         <br>
-                        <img src="images/education.png" id="education-image" width="475" height="300" class="image" />
-                    </div>
-                    <div class="education-svg-container">
-                        <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="visualization-education" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet"></svg>
                         <!-- Slider -->
                         <div class="slider-container">
                             <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="education_updateYearLabel(this.value)" list="tickmarks">
@@ -131,23 +241,31 @@
                         <!-- Buttons -->
                         <div class="button-container">
                             <div class="column">
-                                <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
-                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button>
+                                <!-- <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
+                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button> -->
                             </div>
                             <div class="column">
-                                <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
+                                <!-- <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
                                 <button id="bachButton" class="education-button" onclick="education_drawBach()">Bachelors Degree or Higher</button>
-                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button>
+                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>      
             <div class="step outro" data-step="7">
-                <h2>Outro</h2>
-                <img src="images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" />
-                <svg id="visualization-outro" width="800" height="400" style="display: none;"></svg>
+                <div class="outro-container">
+                    <div class="outro-image-container">
+                        <img src="images/interviewer_outro.png" id="outro-image-1" class="outro-image" />
+                        <img src="images/pres_outro.png" id="outro-image-2" class="outro-image" />
+                    </div>
+                    <svg id="visualization-outro" width="800" height="400" style="display: none;" class="outro-svg"></svg>
+                </div>
+                <!-- <img src="images/temp_image.jpg" id="outro-image" width="533" height="400" class="image" /> -->
             </div>
+            <br><br><br><br><br><br><br><br>
+
+
 
         </div>        
         

@@ -1,0 +1,867 @@
+Date,State,School,Fatalities,Wounded,Total
+3/27/1990,New York,C,0,1,1
+5/20/1990,Tennessee,HS,1,,1
+8/26/1990,Nevada,HS,1,,1
+09/11/1990,Texas,HS,0,3,3
+01/08/1991,Texas,HS,0,,0
+02/06/1991,Texas,HS,1,0,1
+4/23/1991,California,MS,1,,1
+4/23/1991,California,MS,1,0,1
+9/18/1991,Texas,HS,1,,1
+9/18/1991,Texas,HS,1,0,1
+10/08/1991,New York,HS,1,,1
+11/01/1991,Iowa,C,5,,5
+11/01/1991,Iowa,C,6,1,7
+11/14/1991,Texas,HS,0,,0
+11/25/1991,New York,HS,1,,1
+11/25/1991,New York,HS,1,0,1
+12/12/1991,Ohio,C,1,0,1
+1/29/1992,Ohio,C,0,1,1
+2/26/1992,New York,HS,2,,2
+2/26/1992,New York,HS,2,0,2
+05/01/1992,California,HS,4,,4
+05/01/1992,California,HS,3,10,13
+5/14/1992,California,MS,0,,0
+09/11/1992,Texas,HS,0,,0
+10/12/1992,Nebraska,C,0,,0
+10/12/1992,Arizona,HS,1,,1
+10/19/1992,New York,HS,0,3,3
+11/04/1992,Michigan,HS,0,11,11
+11/10/1992,Illinois,ES,0,,0
+11/13/1992,Texas,HS,1,,1
+11/16/1992,Alabama,HS,1,,1
+11/20/1992,Illinois,HS,1,,1
+11/23/1992,New York,HS,0,,0
+12/03/1992,Illinois,ES,1,,1
+12/14/1992,Massachusetts,C,2,,2
+12/14/1992,Massachusetts,C,2,4,6
+01/06/1993,New York,HS,0,1,1
+01/08/1993,Pennsylvania,HS,1,,1
+01/12/1993,Florida,HS,1,,1
+1/18/1993,Kentucky,HS,2,,2
+1/18/1993,Kentucky,HS,2,0,2
+1/21/1993,California,HS,1,,1
+02/01/1993,Washington,MS,1,,1
+02/01/1993,New York,HS,1,,1
+02/04/1993,Georgia,HS,1,,1
+02/08/1993,Minnesota,MS,1,,1
+02/08/1993,District of Columbia,HS,1,,1
+2/18/1993,Texas,HS,1,,1
+2/22/1993,California,HS,1,,1
+2/22/1993,California,HS,1,0,1
+2/26/1993,Massachusetts,HS,0,,0
+3/18/1993,Georgia,HS,1,,1
+3/25/1993,Missouri,HS,1,,1
+04/03/1993,California,HS,1,,1
+4/14/1993,Texas,HS,1,,1
+4/15/1993,Massachusetts,MS,1,,1
+4/15/1993,Massachusetts,MS,1,0,1
+4/16/1993,California,HS,1,,1
+4/26/1993,North Carolina,HS,1,,1
+5/14/1993,Texas,HS,1,0,1
+5/24/1993,Pennsylvania,HS,1,,1
+5/24/1993,Pennsylvania,HS,1,0,1
+5/27/1993,Louisiana,HS,1,,1
+07/08/1993,Utah,C,1,,1
+8/31/1993,Georgia,HS,1,,1
+09/02/1993,Texas,HS,1,,1
+9/17/1993,Wyoming,MS,1,4,5
+9/18/1993,Wyoming,MS,1,,1
+10/12/1993,Delaware,HS,1,,1
+10/14/1993,Michigan,HS,1,,1
+11/01/1993,Illinois,HS,1,,1
+11/04/1993,Florida,HS,1,,1
+11/04/1993,Connecticut,HS,1,,1
+11/04/1993,Connecticut,HS,1,0,1
+11/05/1993,Mississippi,HS,1,,1
+11/29/1993,Missouri,HS,1,,1
+12/01/1993,Wisconsin,HS,1,,1
+12/01/1993,Wisconsin,HS,1,0,1
+12/08/1993,Georgia,HS,1,,1
+12/17/1993,Michigan,HS,1,,1
+1/20/1994,Texas,HS,0,,0
+1/20/1994,California,HS,1,,1
+1/24/1994,South Carolina,HS,1,0,1
+1/26/1994,South Carolina,HS,1,,1
+1/31/1994,Washington,MS,1,,1
+1/31/1994,Washington,MS,1,0,1
+02/08/1994,Michigan,HS,1,,1
+2/14/1994,California,HS,1,,1
+2/18/1994,South Carolina,HS,0,1,1
+03/01/1994,Missouri,C,2,,2
+03/01/1994,Missouri,HS,2,0,2
+3/15/1994,South Carolina,HS,1,,1
+3/22/1994,Florida,MS,0,,0
+3/23/1994,Washington,HS,1,,1
+3/25/1994,Georgia,HS,0,,0
+04/12/1994,Montana,ES,1,,1
+04/12/1994,Montana,ES,1,0,1
+4/13/1994,California,ES,0,,0
+4/21/1994,Tennessee,MS,1,,1
+4/21/1994,Tennessee,MS,1,0,1
+05/02/1994,Florida,HS,1,,1
+5/25/1994,Kentucky,HS,4,,4
+7/25/1994,Iowa,HS,1,,1
+09/07/1994,California,HS,1,,1
+10/12/1994,North Carolina,HS,1,,1
+10/12/1994,North Carolina,HS,1,1,2
+10/17/1994,Illinois,HS,0,1,1
+11/05/1994,California,ES,1,,1
+11/07/1994,Ohio,MS,1,,1
+11/07/1994,Ohio,MS,1,4,5
+11/15/1994,Washington,HS,1,,1
+12/14/1994,New York,C,0,1,1
+01/05/1995,District of Columbia,HS,1,,1
+01/10/1995,Florida,HS,0,,0
+01/12/1995,Washington,HS,0,,0
+01/12/1995,Washington,HS,0,2,2
+1/23/1995,California,MS,1,,1
+1/26/1995,North Carolina,C,2,,2
+02/02/1995,California,HS,1,,1
+8/29/1995,Texas,MS,1,,1
+09/12/1995,Tennessee,HS,1,,1
+9/14/1995,Kansas,HS,2,,2
+9/29/1995,Florida,MS,1,,1
+9/29/1995,Florida,MS,1,0,1
+10/12/1995,South Carolina,HS,1,,1
+10/12/1995,South Carolina,HS,2,1,3
+11/15/1995,Tennessee,HS,2,,2
+11/15/1995,Tennessee,HS,2,1,3
+11/28/1995,New York,HS,1,,1
+1/19/1996,District of Columbia,MS,1,,1
+1/19/1996,D.C.,HS,1,0,1
+1/26/1996,Tennessee,HS,1,,1
+02/02/1996,Washington,MS,3,,3
+02/02/1996,Washington,MS,3,1,4
+02/08/1996,California,HS,1,,1
+2/29/1996,Missouri,HS,1,1,2
+03/11/1996,North Carolina,HS,1,,1
+04/11/1996,Alabama,HS,1,,1
+06/04/1996,California,HS,1,,1
+8/15/1996,California,C,3,,3
+8/15/1996,California,C,3,0,3
+8/26/1996,Texas,C,1,,1
+9/17/1996,Pennsylvania,C,1,,1
+9/17/1996,Pennsylvania,C,1,2,3
+9/25/1996,Georgia,HS,1,,1
+9/25/1996,Georgia,HS,1,2,3
+10/02/1996,Pennsylvania,ES,2,,2
+10/04/1996,California,HS,1,,1
+10/09/1996,Arkansas,-,1,0,1
+10/13/1996,Missouri,HS,1,,1
+10/16/1996,Indiana,C,1,,1
+11/27/1996,California,HS,1,,1
+01/11/1997,New York,HS,1,,1
+1/27/1997,Florida,MS,1,,1
+1/27/1997,Florida,MS,1,0,1
+1/31/1997,Oklahoma,,1,,1
+2/19/1997,Alaska,HS,2,,2
+2/19/1997,Alaska,HS,2,2,4
+2/20/1997,Florida,HS,1,,1
+3/18/1997,Michigan,HS,1,,1
+10/01/1997,Mississippi,HS,3,,3
+10/01/1997,Mississippi,HS,3,7,10
+10/14/1997,Texas,HS,1,,1
+10/15/1997,Florida,MS,0,1,1
+10/22/1997,California,HS,2,,2
+11/13/1997,California,ES,1,,1
+12/01/1997,Kentucky,HS,3,,3
+12/01/1997,Kentucky,HS,3,5,8
+12/15/1997,Arkansas,HS,2,,2
+12/15/1997,Arkansas,HS,0,2,2
+2/25/1998,Michigan,HS,1,,1
+03/01/1998,Pennsylvania,C,1,3,4
+3/24/1998,Arkansas,MS,5,,5
+3/24/1998,Arkansas,MS,5,10,15
+3/25/1998,Michigan,HS,1,,1
+3/30/1998,North Carolina,MS,0,,0
+4/24/1998,Pennsylvania,HS,1,,1
+4/24/1998,Pennsylvania,MS,1,3,4
+4/28/1998,California,ES,2,,2
+05/01/1998,New York,ES,1,,1
+5/19/1998,Tennessee,HS,1,,1
+5/19/1998,Tennessee,HS,1,0,1
+5/21/1998,Oregon,HS,4,,4
+5/21/1998,California,HS,1,,1
+5/21/1998,Oregon,HS,4,23,27
+5/27/1998,California,MS,0,,0
+5/29/1998,Florida,HS,2,,2
+6/15/1998,Virginia,HS,0,,0
+6/15/1998,Virginia,HS,0,2,2
+09/04/1998,California,C,2,,2
+09/12/1998,California,HS,0,,0
+12/10/1998,Michigan,C,1,,1
+12/10/1998,Michigan,C,1,0,1
+01/08/1999,Georgia,HS,2,,2
+01/08/1999,Georgia,HS,1,1,2
+1/21/1999,Texas,HS,1,,1
+02/11/1999,Illinois,HS,0,,0
+4/16/1999,Idaho,HS,0,,0
+4/16/1999,Idaho,HS,0,0,0
+4/20/1999,Colorado,HS,15,,15
+4/20/1999,Colorado,HS,15,21,36
+4/23/1999,Georgia,MS,1,,1
+5/20/1999,Georgia,HS,0,,0
+5/20/1999,Georgia,HS,0,6,6
+8/25/1999,Georgia,HS,1,,1
+09/07/1999,Texas,HS,1,,1
+09/09/1999,California,HS,1,,1
+11/19/1999,New Mexico,MS,0,,0
+11/19/1999,New Mexico,MS,1,0,1
+12/06/1999,Oklahoma,MS,0,,0
+12/06/1999,Oklahoma,MS,0,6,6
+1/19/2000,Florida,HS,0,,0
+2/29/2000,Michigan,ES,1,,1
+2/29/2000,Michigan,ES,1,0,1
+05/10/2000,Arizona,ES,2,,2
+5/26/2000,Florida,MS,1,,1
+5/26/2000,Florida,MS,1,0,1
+6/28/2000,Washington,C,2,,2
+7/26/2000,Ohio,HS,1,,1
+8/28/2000,Arkansas,C,2,,2
+8/28/2000,Arkansas,C,2,0,2
+09/05/2000,Ohio,ES,2,,2
+9/26/2000,Louisiana,MS,0,,0
+9/26/2000,Louisiana,-,0,2,2
+10/23/2000,California,C,1,,1
+10/26/2000,New York,HS,1,,1
+10/27/2000,Tennessee,HS,1,,1
+12/01/2000,California,HS,0,,0
+12/01/2000,California,HS,0,1,1
+01/10/2001,California,HS,1,,1
+1/17/2001,Maryland,HS,1,,1
+1/29/2001,Texas,MS,1,,1
+03/02/2001,California,HS,0,,0
+03/05/2001,California,HS,2,,2
+03/05/2001,California,HS,2,13,15
+03/07/2001,Pennsylvania,HS,0,,0
+03/07/2001,Pennsylvania,HS,0,1,1
+3/22/2001,California,HS,0,,0
+3/22/2001,California,HS,0,5,5
+3/30/2001,Indiana,HS,1,,1
+3/30/2001,Indiana,HS,1,0,1
+04/03/2001,Texas,MS,0,,0
+4/25/2001,Ohio,HS,1,,1
+5/15/2001,Texas,HS,0,,0
+5/16/2001,Washington,C,2,0,2
+5/17/2001,Washington,C,1,,1
+10/12/2001,Utah,HS,0,,0
+11/12/2001,Michigan,HS,0,,0
+1/15/2002,New York,HS,0,,0
+1/15/2002,New York,HS,0,2,2
+1/16/2002,Virginia,C,3,,3
+1/16/2002,Virginia,C,3,3,6
+2/20/2002,Wisconsin,HS,1,0,1
+06/11/2002,Missouri,-,3,2,5
+7/26/2002,North Carolina,MS,1,,1
+10/04/2002,Texas,MS,1,,1
+10/07/2002,Maryland,MS,0,,0
+10/07/2002,Maryland,MS,0,1,1
+10/28/2002,Arizona,C,4,,4
+10/28/2002,Arizona,C,4,0,4
+10/29/2002,New Jersey,HS,0,1,1
+11/07/2002,Missouri,ES,1,,1
+12/16/2002,Illinois,HS,1,,1
+3/23/2003,Mississippi,HS,0,,0
+04/10/2003,California,HS,0,,0
+4/14/2003,Louisiana,HS,1,,1
+4/14/2003,Louisiana,HS,1,3,4
+4/17/2003,Texas,ES,1,,1
+4/24/2003,Pennsylvania,MS,1,,1
+4/24/2003,Pennsylvania,HS,2,0,2
+05/09/2003,Ohio,C,1,,1
+05/09/2003,Ohio,C,1,2,3
+5/13/2003,Pennsylvania,HS,1,,1
+06/04/2003,Pennsylvania,MS,0,,0
+7/15/2003,Texas,HS,0,,0
+9/24/2003,Minnesota,HS,2,,2
+9/24/2003,Minnesota,HS,2,0,2
+10/30/2003,District Of Columbia,HS,1,,1
+11/07/2003,Texas,HS,1,,1
+1/21/2004,Nevada,ES,1,,1
+02/02/2004,District Of Columbia,HS,1,,1
+02/02/2004,D.C.,HS,1,0,1
+02/09/2004,New York,HS,0,,0
+02/09/2004,New York,-,0,1,1
+02/11/2004,Pennsylvania,ES,1,,1
+3/17/2004,Washington,MS,0,,0
+05/07/2004,Maryland,HS,0,,0
+05/07/2004,Maryland,HS,0,4,4
+5/24/2004,Utah,HS,1,,1
+06/01/2004,Virgin Islands,HS,1,,1
+8/30/2004,Illinois,HS,1,,1
+10/04/2004,Tennessee,HS,0,,0
+11/22/2004,Pennsylvania,HS,1,,1
+12/10/2004,Washington,HS,1,,1
+01/06/2005,Pennsylvania,HS,1,,1
+02/08/2005,Illinois,HS,0,1,1
+03/02/2005,Tennessee,HS,1,0,1
+3/21/2005,Minnesota,HS,10,,10
+3/21/2005,Minnesota,HS,10,7,17
+5/17/2005,Pennsylvania,ES,1,,1
+9/13/2005,Illinois,HS,0,,0
+9/13/2005,Illinois,HS,0,1,1
+11/08/2005,Tennessee,HS,1,,1
+11/08/2005,Tennessee,HS,1,2,3
+1/13/2006,Alabama,HS,1,,1
+1/13/2006,Florida,MS,0,1,1
+1/15/2006,Florida,MS,1,,1
+2/23/2006,Oregon,HS,1,,1
+2/23/2006,Oregon,HS,0,1,1
+3/14/2006,Nevada,MS,0,,0
+3/14/2006,Nevada,MS,0,2,2
+06/05/2006,California,HS,1,,1
+8/24/2006,Vermont,ES,2,,2
+8/24/2006,Vermont,ES,2,3,5
+8/30/2006,North Carolina,HS,3,,3
+8/30/2006,North Carolina,HS,0,2,2
+09/02/2006,West Virginia,C,2,,2
+09/02/2006,West Virginia,C,3,0,3
+9/17/2006,Pennsylvania,C,0,,0
+9/17/2006,Pennsylvania,-,0,5,5
+9/27/2006,Colorado,HS,1,,1
+9/27/2006,Colorado,HS,2,0,2
+9/29/2006,Wisconsin,HS,1,,1
+9/29/2006,Wisconsin,HS,1,0,1
+10/02/2006,Pennsylvania,HS,5,,5
+10/02/2006,Pennsylvania,HS,6,3,9
+10/09/2006,Missouri,MS,0,,0
+10/09/2006,Missouri,MS,0,0,0
+10/17/2006,Texas,HS,1,,1
+10/29/2006,California,ES,1,,1
+11/28/2006,Texas,HS,1,,1
+12/12/2006,Pennsylvania,MS,1,,1
+01/03/2007,Washington,HS,1,,1
+01/03/2007,Washington,HS,1,0,1
+02/08/2007,Oregon,HS,1,,1
+03/07/2007,Michigan,HS,0,,0
+03/07/2007,Texas,HS,0,,0
+03/07/2007,California,HS,0,1,1
+3/24/2007,North Carolina,C,0,,0
+04/02/2007,Washington,C,1,,1
+04/10/2007,Oregon,HS,0,,0
+4/16/2007,Virginia,C,32,,32
+4/16/2007,Virginia,C,33,23,56
+9/21/2007,Delaware,C,1,,1
+9/28/2007,California,HS,0,,0
+9/30/2007,Tennessee,C,1,,1
+10/10/2007,Ohio,HS,0,,0
+10/10/2007,Ohio,HS,1,4,5
+11/06/2007,Florida,HS,0,1,1
+1/15/2008,Oklahoma,HS,0,,0
+1/16/2008,Ohio,HS,0,,0
+1/16/2008,North Carolina,HS,0,,0
+02/04/2008,Tennessee,HS,0,,0
+02/04/2008,Tennessee,HS,0,1,1
+02/07/2008,Ohio,ES,0,,0
+02/08/2008,Louisiana,C,3,,3
+02/08/2008,Louisiana,C,3,0,3
+02/11/2008,Tennessee,HS,0,,0
+02/11/2008,Tennessee,HS,0,1,1
+02/12/2008,California,MS,1,,1
+02/12/2008,California,HS,1,0,1
+2/14/2008,Illinois,C,5,,5
+2/14/2008,Illinois,C,6,21,27
+2/23/2008,Arkansas,C,0,,0
+2/27/2008,Arkansas,C,0,,0
+2/28/2008,Florida,HS,0,,0
+03/06/2008,Alabama,HS,1,,1
+03/07/2008,Illinois,HS,1,,1
+04/05/2008,Illinois,HS,1,,1
+4/16/2008,California,HS,1,,1
+4/24/2008,Nebraska,MS,0,,0
+4/29/2008,District of Columbia,C,0,,0
+7/24/2008,Arizona,C,0,,0
+8/14/2008,Washington,MS,1,,1
+8/14/2008,Washington,MS,1,0,1
+8/21/2008,Tennessee,HS,1,,1
+8/21/2008,Tennessee,HS,1,0,1
+8/29/2008,Oregon,HS,0,,0
+09/02/2008,Ohio,HS,0,,0
+09/02/2008,Ohio,HS,0,0,0
+10/13/2008,Texas,C,1,,1
+10/16/2008,Michigan,HS,1,,1
+10/16/2008,Michigan,HS,1,3,4
+10/20/2008,California,HS,1,,1
+10/21/2008,Indiana,HS,1,,1
+10/26/2008,Arkansas,C,2,,2
+10/26/2008,Arkansas,C,2,1,3
+10/31/2008,Maine,ES,0,,0
+11/12/2008,Florida,HS,1,,1
+11/13/2008,Florida,HS,1,0,1
+11/15/2008,Utah,HS,1,,1
+11/21/2008,Georgia,C,0,,0
+01/08/2009,Delaware,HS,0,,0
+01/09/2009,Illinois,HS,0,,0
+01/09/2009,Illinois,HS,0,5,5
+1/23/2009,Illinois,HS,1,,1
+02/07/2009,Texas,C,1,,1
+02/11/2009,California,ES,0,,0
+2/17/2009,Michigan,HS,0,,0
+03/06/2009,North Carolina,HS,0,,0
+03/10/2009,Florida,HS,2,,2
+04/10/2009,Michigan,C,1,,1
+4/24/2009,Texas,C,1,,1
+4/26/2009,Virginia,C,0,,0
+4/26/2009,Virginia,C,0,3,3
+05/01/2009,Wisconsin,HS,0,,0
+05/05/2009,New York,HS,0,,0
+5/18/2009,Louisiana,MS,0,,0
+5/18/2009,Massachusetts,C,1,,1
+5/18/2009,Massachusetts,C,1,0,1
+5/18/2009,Louisiana,MS,1,0,1
+06/09/2009,Kentucky,MS,1,,1
+6/16/2009,California,HS,0,,0
+6/16/2009,California,HS,0,3,3
+6/24/2009,Iowa,HS,1,,1
+09/02/2009,California,C,0,,0
+09/03/2009,Georgia,C,1,,1
+09/03/2009,California,C,0,1,1
+09/08/2009,Connecticut,HS,0,,0
+9/14/2009,Michigan,HS,0,,0
+9/16/2009,Virginia,HS,0,,0
+10/16/2009,South Carolina,HS,1,,1
+10/16/2009,South Carolina,HS,1,0,1
+10/30/2009,California,HS,1,,1
+11/16/2009,Texas,ES,0,,0
+12/02/2009,Massachusetts,HS,0,,0
+12/08/2009,Virginia,C,0,,0
+12/11/2009,Louisiana,HS,0,,0
+01/07/2010,Arizona,HS,0,,0
+1/20/2010,Alabama,HS,1,,1
+02/05/2010,Alabama,MS,1,,1
+02/05/2010,Alabama,MS,1,0,1
+02/10/2010,Tennessee,ES,0,,0
+02/12/2010,Alabama,C,3,,3
+02/12/2010,Alabama,C,3,3,6
+2/19/2010,Illinois,C,0,,0
+2/19/2010,Illinois,C,0,1,1
+2/23/2010,Colorado,MS,0,,0
+2/23/2010,Colorado,MS,0,2,2
+2/26/2010,Washington,ES,2,,2
+03/09/2010,Ohio,C,1,,1
+03/09/2010,Ohio,C,1,1,2
+4/29/2010,Virginia,HS,0,,0
+5/18/2010,California,HS,0,,0
+8/31/2010,Tennessee,HS,1,,1
+09/07/2010,Michigan,HS,0,,0
+09/08/2010,Michigan,HS,0,2,2
+9/16/2010,Louisiana,MS,1,,1
+9/21/2010,South Carolina,HS,0,,0
+9/28/2010,Texas,C,1,,1
+9/28/2010,Texas,C,1,0,1
+10/01/2010,California,HS,1,,1
+10/01/2010,California,HS,1,0,1
+10/03/2010,North Carolina,C,1,,1
+10/08/2010,California,ES,0,,0
+10/08/2010,California,ES,0,2,2
+10/25/2010,Alabama,ES,0,,0
+11/29/2010,Wisconsin,HS,0,,0
+11/29/2010,Wisconsin,HS,1,0,1
+12/06/2010,Colorado,HS,0,1,1
+01/05/2011,Nebraska,HS,1,,1
+01/05/2011,Nebraska,HS,2,2,4
+1/18/2011,California,HS,0,,0
+02/02/2011,California,ES,1,,1
+2/14/2011,Tennessee,C,0,,0
+2/23/2011,California,C,1,,1
+3/25/2011,Indiana,MS,0,,0
+3/25/2011,Indiana,MS,0,1,1
+3/31/2011,Texas,HS,1,,1
+3/31/2011,Texas,HS,1,5,6
+04/06/2011,Alabama,C,1,,1
+4/13/2011,Florida,HS,0,,0
+4/19/2011,Texas,ES,0,,0
+5/23/2011,Hawaii,MS,0,,0
+5/23/2011,Hawaii,MS,0,1,1
+8/26/2011,Michigan,HS,0,,0
+10/24/2011,North Carolina,HS,0,,0
+10/24/2011,North Carolina,HS,0,1,1
+11/15/2011,California,C,0,,0
+12/08/2011,Virginia,C,1,,1
+12/08/2011,Virginia,C,2,0,2
+12/09/2011,Texas,MS,0,,0
+12/09/2011,Texas,MS,0,2,2
+01/04/2012,Texas,MS,0,,0
+01/10/2012,Texas,HS,0,,0
+01/10/2012,Texas,HS,0,1,1
+02/10/2012,New Hampshire,ES,0,,0
+2/22/2012,Washington,ES,0,,0
+2/27/2012,Ohio,HS,3,,3
+2/27/2012,Ohio,HS,3,3,6
+03/06/2012,Florida,HS,1,,1
+03/06/2012,Florida,-,2,0,2
+3/24/2012,Mississippi,C,1,,1
+04/02/2012,California,C,7,,7
+04/02/2012,California,C,7,3,10
+5/26/2012,North Carolina,ES,1,,1
+8/16/2012,Tennessee,HS,0,,0
+8/16/2012,Tennessee,HS,0,2,2
+8/27/2012,Maryland,HS,0,,0
+8/27/2012,Maryland,HS,0,1,1
+09/07/2012,Illinois,HS,0,,0
+09/07/2012,Illinois,HS,0,0,0
+09/12/2012,Maryland,C,0,,0
+10/06/2012,Alabama,C,1,0,1
+10/19/2012,Illinois,HS,1,0,1
+10/31/2012,California,C,0,,0
+10/31/2012,California,C,0,4,4
+11/30/2012,Maryland,C,0,,0
+12/14/2012,Connecticut,ES,27,,27
+12/14/2012,Connecticut,ES,28,2,30
+01/07/2013,Florida,ES,1,,1
+01/07/2013,Florida,-,1,0,1
+01/10/2013,California,HS,0,,0
+01/10/2013,California,HS,0,2,2
+01/12/2013,Michigan,HS,0,1,1
+1/15/2013,Kentucky,C,3,,3
+1/15/2013,Missouri,C,0,,0
+1/15/2013,Missouri,C,0,2,2
+1/15/2013,Kentucky,C,3,0,3
+1/16/2013,Illinois,C,0,,0
+1/16/2013,Illinois,C,1,0,1
+1/22/2013,Texas,C,0,,0
+1/22/2013,Texas,C,0,3,3
+1/31/2013,Arizona,HS,0,,0
+1/31/2013,Georgia,MS,0,,0
+1/31/2013,Arizona,HS,0,0,0
+1/31/2013,Georgia,MS,0,2,2
+3/18/2013,Florida,C,1,,1
+3/18/2013,Florida,C,1,0,1
+04/12/2013,Virginia,C,0,,0
+04/12/2013,Virginia,C,0,2,2
+4/16/2013,Louisiana,C,0,,0
+4/16/2013,Louisiana,C,0,3,3
+4/18/2013,Massachusetts,C,2,,2
+4/18/2013,Massachusetts,C,2,1,3
+5/14/2013,Alabama,MS,0,,0
+5/14/2013,Alabama,MS,0,0,0
+06/07/2013,California,C,6,,6
+06/07/2013,California,C,6,4,10
+6/20/2013,Florida,HS,2,,2
+8/20/2013,Georgia,ES,0,,0
+8/20/2013,Georgia,-,0,0,0
+8/23/2013,Mississippi,HS,1,,1
+8/23/2013,Mississippi,HS,1,2,3
+8/30/2013,North Carolina,HS,0,,0
+8/30/2013,North Carolina,HS,0,1,1
+10/04/2013,Florida,HS,0,,0
+10/04/2013,Florida,HS,0,2,2
+10/21/2013,Nevada,MS,2,,2
+10/21/2013,Nevada,MS,2,2,4
+11/02/2013,North Carolina,C,0,,0
+11/02/2013,North Carolina,C,0,1,1
+11/03/2013,Georgia,HS,0,,0
+11/03/2013,Georgia,HS,0,2,2
+11/13/2013,Pennsylvania,HS,0,,0
+11/13/2013,Pennsylvania,HS,0,3,3
+12/04/2013,Florida,HS,0,,0
+12/04/2013,Florida,HS,0,1,1
+12/13/2013,Colorado,HS,2,,2
+12/13/2013,Colorado,HS,2,0,2
+12/19/2013,California,HS,0,,0
+12/19/2013,California,HS,0,1,1
+01/09/2014,Tennessee,HS,0,1,1
+1/13/2014,Connecticut,HS,0,1,1
+1/14/2014,New Mexico,MS,0,3,3
+1/17/2014,Pennsylvania,HS,0,2,2
+1/20/2014,Pennsylvania,C,0,1,1
+1/21/2014,Indiana,C,1,0,1
+1/24/2014,South Carolina,C,1,0,1
+1/25/2014,California,C,1,0,1
+1/27/2014,Illinois,HS,0,1,1
+1/28/2014,Tennessee,C,0,1,1
+1/30/2014,Florida,C,0,1,1
+1/31/2014,Iowa,HS,0,1,1
+02/10/2014,North Carolina,HS,0,1,1
+02/10/2014,Ohio,HS,0,0,0
+02/12/2014,California,C,0,1,1
+2/22/2014,Georgia,C,0,1,1
+03/12/2014,Florida,ES,1,0,1
+3/25/2014,Georgia,HS,0,0,0
+04/09/2014,North Carolina,HS,0,0,0
+04/11/2014,Michigan,HS,1,0,1
+05/04/2014,Georgia,C,0,1,1
+05/05/2014,Georgia,C,0,1,1
+05/08/2014,Georgia,C,0,1,1
+5/14/2014,California,HS,0,1,1
+06/05/2014,Washington,C,1,2,3
+06/10/2014,Oregon,HS,2,1,3
+09/09/2014,Florida,-,0,1,1
+9/27/2014,Indiana,C,0,1,1
+9/30/2014,North Carolina,HS,0,1,1
+9/30/2014,Kentucky,HS,0,1,1
+10/03/2014,Georgia,HS,1,0,1
+10/24/2014,Washington,HS,5,1,6
+11/20/2014,Florida,C,1,3,4
+11/20/2014,Florida,HS,1,1,2
+12/05/2014,Oklahoma,C,1,0,1
+12/12/2014,Oregon,HS,0,4,4
+1/15/2015,Wisconsin,HS,0,3,3
+1/16/2015,Florida,-,0,2,2
+02/04/2015,Maryland,HS,0,2,2
+2/14/2015,California,MS,1,0,1
+2/23/2015,Florida,C,0,3,3
+3/30/2015,Missouri,ES,0,1,1
+4/13/2015,North Carolina,C,1,0,1
+4/16/2015,Louisiana,MS,0,1,1
+4/27/2015,Washington,HS,0,0,0
+05/12/2015,Florida,HS,0,2,2
+5/24/2015,Michigan,HS,0,7,7
+8/27/2015,Georgia,C,1,0,1
+09/03/2015,California,C,1,2,3
+9/14/2015,Mississippi,C,2,0,2
+9/30/2015,South Dakota,HS,0,1,1
+10/01/2015,Oregon,C,10,9,19
+10/09/2015,Arizona,C,1,3,4
+10/09/2015,Texas,C,1,1,2
+10/22/2015,Tennessee,C,1,3,4
+11/01/2015,North Carolina,C,1,1,2
+11/20/2015,Nevada,HS,1,0,1
+1/22/2016,Indiana,HS,0,1,1
+1/29/2016,Pennsylvania,HS,0,0,0
+02/09/2016,Michigan,HS,0,4,4
+02/12/2016,Arizona,HS,2,0,2
+2/29/2016,Ohio,HS,0,4,4
+4/23/2016,Wisconsin,HS,1,2,3
+06/01/2016,California,C,2,0,2
+06/08/2016,Massachusetts,HS,1,3,4
+09/06/2016,Maine,HS,1,0,1
+09/09/2016,Texas,HS,1,2,3
+9/28/2016,South Carolina,ES,2,2,4
+10/11/2016,Alabama,HS,0,1,1
+10/13/2016,Ohio,HS,0,2,2
+10/18/2016,California,HS,0,4,4
+10/25/2016,Utah,MS,0,1,1
+12/01/2016,Utah,MS,0,0,0
+1/20/2017,Ohio,HS,0,1,1
+1/20/2017,Washington,C,0,1,1
+3/21/2017,California,HS,0,1,1
+04/10/2017,California,ES,3,1,4
+05/04/2017,Texas,C,2,0,2
+9/13/2017,Washington,HS,1,3,4
+9/20/2017,Illinois,HS,0,1,1
+11/14/2017,California,ES,6,18,24
+12/07/2017,New Mexico,HS,3,0,3
+01/09/2018,Iowa,-,0,0,0
+1/20/2018,North Carolina,C,1,0,1
+1/22/2018,Texas,HS,0,1,1
+1/22/2018,Louisiana,HS,0,1,1
+1/23/2018,Kentucky,HS,2,18,20
+02/01/2018,California,MS,0,5,5
+2/14/2018,Florida,HS,17,14,31
+03/02/2018,Michigan,C,2,0,2
+03/07/2018,Alabama,HS,1,2,3
+3/14/2018,Alabama,C,2,1,3
+3/20/2018,Maryland,HS,2,1,3
+4/20/2018,Florida,HS,0,1,1
+05/11/2018,California,HS,0,1,1
+5/16/2018,Texas,HS,0,1,1
+5/18/2018,Texas,HS,10,10,20
+5/18/2018,Georgia,HS,1,3,4
+5/25/2018,Indiana,MS,0,2,2
+8/17/2018,Florida,HS,0,2,2
+8/30/2018,California,HS,0,1,1
+09/05/2018,Rhode Island,HS,1,1,2
+09/10/2018,Tennessee,HS,0,1,1
+09/11/2018,Nevada,HS,1,0,1
+10/29/2018,North Carolina,HS,1,1,2
+12/13/2018,Indiana,MS,1,0,1
+1/25/2019,Alabama,HS,0,2,2
+02/08/2019,Maryland,HS,0,1,1
+02/12/2019,Missouri,HS,1,0,1
+2/14/2019,New Mexico,HS,0,0,0
+3/22/2019,Alabama,ES,0,1,1
+04/01/2019,Arizona,HS,0,1,1
+4/25/2019,Georgia,ES,0,10,10
+4/30/2019,North Carolina,C,2,4,6
+05/04/2019,Oregon,C,1,0,1
+05/06/2019,Florida,ES,0,0,0
+05/07/2019,Colorado,HS,1,7,8
+05/07/2019,Georgia,C,0,1,1
+08/08/2019,Alabama,ES,0,0,0
+8/30/2019,Alabama,HS,0,10,10
+10/22/2019,California,HS,0,1,1
+11/14/2019,California,HS,2,4,6
+11/15/2019,New Jersey,HS,1,2,3
+11/23/2019,California,ES,2,0,2
+12/02/2019,Wisconsin,HS,0,1,1
+12/03/2019,Wisconsin,HS,0,2,2
+01/08/2020,Florida,HS,0,1,1
+01/11/2020,Texas,HS,1,1,2
+1/14/2020,Texas,HS,1,0,1
+1/14/2020,Texas,HS,0,2,2
+1/23/2020,California,ES,0,1,1
+02/03/2020,Texas,C,2,1,3
+9/16/2020,California,HS,1,0,1
+9/16/2020,Illinois,C,0,1,1
+2/26/2021,Louisiana,HS,1,0,1
+03/01/2021,Arkansas,MS,1,0,1
+04/12/2021,Tennessee,HS,1,1,2
+4/26/2021,Minnesota,MS,0,0,0
+05/06/2021,Idaho,MS,0,3,3
+8/13/2021,New Mexico,MS,1,0,1
+8/18/2021,South Carolina,HS,0,3,3
+8/27/2021,Virginia,HS,0,2,2
+8/27/2021,Pennsylvania,HS,1,4,5
+8/27/2021,North Carolina,HS,0,1,1
+09/01/2021,North Carolina,HS,1,0,1
+09/04/2021,Maryland,C,0,3,3
+9/20/2021,Virginia,HS,0,4,4
+9/21/2021,Kansas,HS,0,3,3
+9/24/2021,Alabama,HS,0,1,1
+9/30/2021,Tennessee,ES,0,1,1
+9/30/2021,Mississippi,ES,0,1,1
+10/01/2021,Texas,HS,0,1,1
+10/06/2021,Texas,HS,0,4,4
+10/12/2021,Illinois,HS,0,2,2
+10/13/2021,Louisiana,C,1,1,2
+10/17/2021,Louisiana,C,1,7,8
+11/01/2021,Mississippi,HS,0,0,0
+11/19/2021,Colorado,HS,0,3,3
+11/26/2021,California,HS,0,2,2
+11/29/2021,Arizona,HS,0,1,1
+11/30/2021,Michigan,HS,4,7,11
+11/30/2021,Tennessee,HS,1,2,3
+12/06/2021,California,ES,1,2,3
+12/08/2021,Missouri,MS,0,2,2
+01/04/2022,Illinois,HS,0,2,2
+01/09/2022,North Carolina,C,0,0,0
+01/11/2022,New Mexico,HS,0,0,0
+1/19/2022,Florida,HS,0,1,1
+1/19/2022,Pennsylvania,HS,1,0,1
+1/21/2022,Maryland,HS,0,1,1
+1/29/2022,Wisconsin,HS,1,0,1
+02/01/2022,Minnesota,HS,1,1,2
+02/01/2022,Virginia,C,2,1,3
+02/08/2022,Maryland,HS,0,1,1
+03/04/2022,Kansas,HS,0,3,3
+03/07/2022,Iowa,HS,1,2,3
+3/31/2022,South Carolina,MS,1,0,1
+04/05/2022,Pennsylvania,HS,0,1,1
+4/22/2022,District of Columbia,HS,0,4,4
+05/09/2022,Georgia,,0,1,1
+5/17/2022,Illinois,ES,0,1,1
+5/24/2022,Texas,ES,22,15,37
+5/31/2022,Louisiana,C,1,2,3
+06/01/2022,California,ES,0,1,1
+8/19/2022,Tennessee,HS,0,0,0
+8/19/2022,Ohio,HS,0,0,0
+8/29/2022,California,HS,0,1,1
+09/03/2022,Delaware,C,0,4,4
+9/24/2022,Minnesota,HS,0,2,2
+9/27/2022,Pennsylvania,HS,1,4,5
+9/28/2022,California,HS,0,4,4
+9/30/2022,Oklahoma,HS,1,3,4
+9/30/2022,New York,HS,0,3,3
+10/05/2022,Arizona,C,1,0,1
+10/07/2022,Ohio,HS,0,3,3
+10/08/2022,Maryland,C,0,1,1
+10/24/2022,Missouri,HS,3,7,10
+11/04/2022,Connecticut,C,0,1,1
+11/08/2022,Washington,HS,1,0,1
+11/12/2022,Florida,HS,1,2,3
+11/13/2022,Virginia,C,3,2,5
+11/17/2022,Indiana,C,0,1,1
+11/19/2022,New Mexico,C,1,1,2
+11/27/2022,Florida,C,1,4,5
+12/08/2022,North Carolina,MS,0,0,0
+01/04/2023,Michigan,ES,1,0,1
+01/05/2023,New York,HS,0,0,0
+01/06/2023,Virginia,ES,0,1,1
+01/07/2023,Oregon,HS,0,1,1
+01/10/2023,Kentucky,ES,0,1,1
+1/23/2023,Iowa,HS,2,1,3
+02/06/2023,Delaware,HS,0,0,0
+2/13/2023,Michigan,C,4,5,9
+2/13/2023,New York,ES,0,0,0
+2/14/2023,Pennsylvania,HS,0,4,4
+2/24/2023,Florida,C,0,0,0
+03/03/2023,South Carolina,C,0,1,1
+03/11/2023,Maine,C,0,0,0
+3/20/2023,Texas,HS,1,1,2
+3/22/2023,Texas,HS,0,1,1
+3/22/2023,Colorado,HS,1,2,3
+3/25/2023,South Carolina,C,0,0,0
+3/27/2023,Tennessee,ES,7,1,8
+3/30/2023,North Carolina,C,0,1,1
+04/10/2023,Kentucky,C,1,1,2
+4/15/2023,Pennsylvania,C,0,2,2
+4/24/2023,Oklahoma,C,1,0,1
+4/27/2023,Virginia,HS,0,2,2
+4/28/2023,Tennessee,HS,0,1,1
+4/29/2023,Florida,C,0,1,1
+05/01/2023,Michigan,HS,0,1,1
+05/12/2023,Nebraska,C,0,0,0
+05/12/2023,Tennessee,HS,1,0,1
+5/24/2023,Pennsylvania,HS,1,0,1
+06/02/2023,Massachusetts,HS,0,1,1
+06/06/2023,Virginia,C,2,5,7
+07/05/2023,District Of Columbia,C,1,0,1
+7/13/2023,District Of Columbia,C,1,0,1
+8/16/2023,Georgia,HS,0,1,1
+8/18/2023,Georgia,C,2,0,2
+8/22/2023,Texas,ES,0,0,0
+8/22/2023,Alabama,C,0,2,2
+8/25/2023,Oklahoma,HS,1,4,5
+8/25/2023,North Carolina,C,0,1,1
+8/28/2023,North Carolina,C,1,0,1
+09/12/2023,Louisiana,C,1,2,3
+9/15/2023,Illinois,HS,1,0,1
+09/24/2023,Alabama,C,0,2,2
+10/03/2023,Maryland,C,0,5,5
+10/12/2023,Massachusetts,C,0,0,0
+10/15/2023,Missouri,MS,0,0,0
+10/15/2023,Mississippi,C,1,0,1
+10/17/2023,California,C,0,1,1
+10/23/2023,Wisconsin,MS,1,0,1
+10/28/2023,Massachusetts,C,1,1,2
+11/03/2023,Nevada,,0,2,2
+11/13/2023,Texas,C,0,1,1
+11/13/2023,Texas,C,1,0,1
+11/27/2023,Illinois,C,0,0,0
+11/28/2023,Virginia,C,0,0,0
+12/06/2023,Nevada,C,4,3,7
+01/04/2024,Iowa,HS,3,6,9
+01/17/2024,Indiana,C,0,0,0
+01/29/2024,Texas,HS,0,1,1
+01/30/2024,Alabama,HS,0,2,2
+02/06/2024,South Carolina,C,0,1,1
+02/09/2024,Maine,,0,0,0
+02/09/2024,California,C,0,0,0
+02/14/2024,Georgia,HS,0,4,4
+02/16/2024,Colorado,C,2,0,2
+02/19/2024,Texas,,0,1,1
+02/25/2024,Illinois,C,0,0,0
+02/26/2024,Texas,HS,0,1,1
+03/11/2024,Massachusetts,HS,0,0,0
+04/02/2024,Massachusetts,,0,0,0
+,,,,,0
+04/12/2024,Texas,HS,0,1,1
+04/21/2024,Delaware,C,1,0,1
+04/22/2024,Washington,ES,1,0,1
+04/15/2024,North Carolina,C,0,0,0
+04/23/2024,North Carolina,C,0,0,0
+04/24/2024,Texas,HS,1,0,1
+04/30/2024,New York,C,0,0,0
+05/01/2024,Wisconsin,MS,1,0,1
+05/01/2024,New York,C,0,0,0
+05/03/2024,D.C.,HS,0,1,1
+05/18/2024,Georgia,C,1,0,1
+05/19/2024,Missouri,C,0,2,2
+06/06/2024,Washington,HS,1,0,1
+,,,,,0
+08/10/2024,Tennessee,C,0,2,2
+08/14/2024,Virginia,C,0,4,4
+08/18/2024,Mississippi,C,0,2,2
+08/26/2024,Texas,C,2,0,2
+08/30/2024,Alabama,C,0,1,1
+08/21/2024,California,,0,1,1
+09/03/2024,Alabama,C,0,1,1
+09/04/2024,Georgia,HS,4,9,13
+09/04/2024,New York,,0,1,1
+09/06/2024,Maryland,HS,1,0,1
+09/10/2024,Nebraska,HS,0,1,1
+09/19/2024,Georgia,C,0,0,0
+09/22/2024,Arizona,C,1,0,1
+10/05/2024,Colorado,,1,0,1
