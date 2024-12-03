@@ -669,10 +669,6 @@ function education_drawMapChart(){
         thisYearBachData = education_averageEstimateByState(thisYearBachData, education_isAgeData);
     }
 
-    console.log("thisYearHSData", thisYearHSData);
-    console.log("thisYearBachData", thisYearBachData);
-
-
     const totalRacePopulation = d3.sum(thisYearTotalData, d => d.value);
 
     const pieData = d3.pie()
@@ -755,13 +751,129 @@ function education_drawMapChart(){
     ];
 
 
-    // ARC PART
+
     svg.selectAll('.arc').remove();
     svg.selectAll('.arc-label').remove();
 
     const group = svg.append("g")
         .attr("transform", `translate(${center[0]}, ${center[1]})`);
+        
 
+    const tooltipArc = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "#fff")
+        .style("border-radius", "4px")
+        .style("padding", "5px")
+        .style("font-size", "12px")
+        .style("pointer-events", "none")
+
+
+    console.log("piedata", pieData);
+
+    pieData.forEach(d => {
+        d.data.group = d.data.group.replace("_Total", "").replace("Population", "");
+    });
+
+
+
+    // BAR CHART APRT
+    // this will be average of all groups for HS and Bachelors, since the rest were for Total
+    const combinedData = Object.keys(thisYearHSData).reduce((acc, state) => {
+        acc[state] = {
+            HS: thisYearHSData[state],
+            Bach: thisYearBachData[state]
+        };
+        return acc;
+    }, {});
+
+  
+    // Convert the combinedData object to an array
+    // Assuming combinedData is already structured with states as keys
+    const dataArray = Object.entries(combinedData);
+    const barWidth = 20;
+    const radius = 50;
+    const barOffset = 330;
+
+    svg.select(".chartGroup").remove();
+
+    const chartGroup = group.append("g").attr("class", "chartGroup");
+
+
+    const tooltip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0.7)")
+        .style("color", "white")
+        .style("padding", "5px")
+        .style("border-radius", "3px")
+        .style("font-size", "18px");
+
+    // Loop through each state and create radial bars
+    dataArray.forEach(([state, data], index) => {
+        const angle = (index / dataArray.length) * 2 * Math.PI; 
+        const maxValue = Math.max(data.HS, data.Bach); 
+
+        // Create a group for each state's bars
+        const barGroup = chartGroup.append("g")
+            .attr("transform", `rotate(${angle * 180 / Math.PI}) translate(0, ${radius})`);
+    
+        // Create bars for HS data (scaled by maxValue)
+        barGroup.append("rect")
+            .attr("x", -barWidth / 2) 
+            .attr("y", barOffset)
+            .attr("width", barWidth)
+            .attr("height", (data.HS / maxValue) * radius)
+            .style("fill", "#A7A8AA")
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                .text(`High School Degree or Higher: ${Math.round(data.HS)}`);
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+            });
+    
+        // Create bars for Bach data (scaled by maxValue)
+        barGroup.append("rect")
+            .attr("x", -barWidth / 2)
+            .attr("y", (data.HS / maxValue) * radius + barOffset)
+            .attr("width", barWidth)
+            .attr("height", (data.Bach / maxValue) * radius)
+            .style("fill", "#B0C4DE")
+            .on("mouseover", function(event) {
+                tooltip.style("visibility", "visible")
+                .text(`Bachelors Degree or Higher: ${Math.round(data.Bach)}`);
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("top", (event.pageY + 5) + "px")
+                    .style("left", (event.pageX + 5) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.style("visibility", "hidden");
+            });
+    
+        // Optional: Add state labels at the end of each bar
+        barGroup.append("text")
+            .attr("x", 0)
+            .attr("y", (data.HS / maxValue) * radius + (data.Bach / maxValue) * radius + barOffset  +20)
+            .attr("text-anchor", "middle")
+            .text(state)
+            .style("font-size", "12px");
+    });
+
+
+
+
+
+    // ARC PART
+        
     // Bind pie data for arcs
     const arcs = group.selectAll(".arc")
         .data(pieData)
@@ -783,7 +895,6 @@ function education_drawMapChart(){
                         return arc(i(t));
                     };
                 }),
-
             update => update
                 .transition().duration(500)
                 .attr("d", arc)
@@ -797,13 +908,12 @@ function education_drawMapChart(){
                         { startAngle: 0, endAngle: 0 }
                     );
                     return function(t) {
-                        return arc(i(t)); // Shrink arc path to 0
+                        return arc(i(t));
                     };
                 })
                 .remove()
         );
 
-    // Bind pie data for labels
     const labels = group.selectAll(".arc-label")
         .data(pieData)
         .join(
@@ -813,76 +923,25 @@ function education_drawMapChart(){
                 .attr("text-anchor", "middle")
                 .style("font-size", "18px")
                 .style("fill", "#000")
-                .text(d => d.data.group.replace("_Total", "").replace("Population", ""))
+                .text(d => `${d.data.group.replace("_Total", "").replace("Population", "")} - ${Math.round(d.data.value / d3.sum(pieData.map(d => d.value)) * 100)}%`)
                 .style("opacity", 0)
                 .transition()
                 .duration(500)
                 .style("opacity", 1),
-
+    
             update => update
                 .transition().duration(500)
                 .attr("transform", d => `translate(${arc.centroid(d)})`)
-                .text(d => d.data.group.replace("_Total", "").replace("Population", "")),
-
+                .text(d => `${d.data.group.replace("_Total", "").replace("Population", "")} - ${Math.round(d.data.value / d3.sum(pieData.map(d => d.value)) * 100)}%`),
+    
             exit => exit
                 .transition().duration(200)
                 .style("opacity", 0)
                 .remove()
         );
 
-
-    // BAR CHART APRT
-    // this will be average of all groups for HS and Bachelors, since the rest were for Total
-    const chartWidth = 100;
-    const chartHeight = 300;
-    const barWidth = 20;
-    const margin = 10;
-
-    
-    // Set up the x and y scales
-    const xScale = d3.scaleBand()
-      .domain(Object.keys(thisYearHSData))
-      .range([0, chartWidth * Object.keys(thisYearHSData).length])
-      .padding(0.1);
-    
-    const yScale = d3.scaleLinear()
-      .domain([0, d3.max(Object.values(thisYearHSData).concat(Object.values(thisYearBachData)))])
-      .range([chartHeight, 0]);
-    
-    // Draw bars for high school data
-    svg.selectAll(".hs-bar")
-      .data(Object.entries(thisYearHSData))
-      .enter().append("rect")
-      .attr("class", "hs-bar")
-      .attr("x", d => xScale(d[0]))
-      .attr("y", d => yScale(d[1]))
-      .attr("width", barWidth)
-      .attr("height", d => chartHeight - yScale(d[1]))
-      .attr("fill", "blue");
-    
-    // Draw bars for bachelor's data
-    svg.selectAll(".bach-bar")
-      .data(Object.entries(thisYearBachData))
-      .enter().append("rect")
-      .attr("class", "bach-bar")
-      .attr("x", d => xScale(d[0]) + barWidth)  // Offset by barWidth to place next to the HS bar
-      .attr("y", d => yScale(d[1]))
-      .attr("width", barWidth)
-      .attr("height", d => chartHeight - yScale(d[1]))
-      .attr("fill", "green");
-    
-    // Add x-axis labels
-    svg.selectAll(".x-axis-label")
-      .data(Object.keys(thisYearHSData))
-      .enter().append("text")
-      .attr("class", "x-axis-label")
-      .attr("x", d => xScale(d) + barWidth / 2)
-      .attr("y", chartHeight + margin)
-      .attr("text-anchor", "middle")
-      .text(d => d)
-      .style("font-size", "10px");
-
 }
+
 
 
 function education_averageEstimateByState(data) {
