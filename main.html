@@ -170,17 +170,13 @@
                                 <button id="ageButton" class="education-button" onclick="education_drawAge()">Age</button>
                                 <button id="raceButton" class="education-button" onclick="education_drawRace()">Race</button>
                             </div>
-                            <!-- Age Group Dropdown -->
-                            <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
+                            <!-- <select id="ageGroupDropdown" onchange="education_updateAgeGroup(this.value)">
                                 <option value="18to24">18-24</option>
-                                <!-- this doesnt have values for some reason -->
-                                <!-- <option value="25Over">25 and Over</option> -->
                                 <option value="25to34">25-34</option>
                                 <option value="35to44">35-44</option>
                                 <option value="45to64">45-64</option>
                                 <option value="65Over">65 and Over</option>
                             </select>
-                            <!-- Race Group Dropdown -->
                             <select id="raceGroupDropdown" onchange="education_updateRaceGroup(this.value)">
                                 <option value="AmericanIndianAlaskaNative_">American Indian / Alaska Native</option>
                                 <option value="Asian_">Asian</option>
@@ -191,10 +187,10 @@
                                 <option value="TwoOrMoreRace_">Two or More Races</option>
                                 <option value="WhiteNotHispanicLatino_">White (Not Hispanic / Latino)</option>
                                 <option value="White_">White</option>
-                            </select>
+                            </select> -->
                         </div>
                         <br>
-                        <svg id="visualization-education" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="visualization-education" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet"></svg>
                         <!-- Slider -->
                         <div class="slider-container">
                             <input type="range" id="yearSlider" min="2016" max="2023" step="1" value="2016" oninput="education_updateYearLabel(this.value)" list="tickmarks">
@@ -203,13 +199,13 @@
                         <!-- Buttons -->
                         <div class="button-container">
                             <div class="column">
-                                <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
-                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button>
+                                <!-- <button id="mapButton" class="education-button" onclick="education_drawMapChart()">US Map</button>
+                                <button id="barButton" class="education-button" onclick="education_drawBarChart()">Bar Chart</button> -->
                             </div>
                             <div class="column">
-                                <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
+                                <!-- <button id="hsButton" class="education-button" onclick="education_drawHS()">High School Graduate or Higher</button>
                                 <button id="bachButton" class="education-button" onclick="education_drawBach()">Bachelors Degree or Higher</button>
-                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button>
+                                <button id="totalButton" class="education-button" onclick="education_drawTotal()">All Education Types</button> -->
                             </div>
                         </div>
                     </div>
