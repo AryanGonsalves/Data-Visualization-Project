@@ -304,11 +304,11 @@ function drawBarGraph() {
             .attr("stop-opacity", 0.4);
     }
 
-    const tooltip = d3.select(".tooltip");
+    const tooltip = d3.select(".safety-tooltip");
     if (tooltip.empty()) {
         d3.select("body")
             .append("div")
-            .attr("class", "tooltip")
+            .attr("class", "safety-tooltip")
             .style("position", "absolute")
             .style("background", "#fff")
             .style("border", "1px solid #ccc")
@@ -344,7 +344,7 @@ function drawBarGraph() {
         d3.select(this).attr("fill", "orange");
 
         
-        d3.select(".tooltip")
+        d3.select(".safety-tooltip")
             .html(`<strong>${xAttr}: ${d.key}</strong><br>Total: ${d.total}`)
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY - 28}px`)
@@ -369,7 +369,7 @@ function drawBarGraph() {
         }
     })
         .on("mousemove", function (event) {
-            d3.select(".tooltip")
+            d3.select(".safety-tooltip")
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`);
         })
@@ -377,7 +377,7 @@ function drawBarGraph() {
             
             d3.select(this).attr("fill", "url(#barGradient)");
     
-            d3.select(".tooltip")
+            d3.select(".safety-tooltip")
                 .transition()
                 .duration(200)
                 .style("opacity", 0);
@@ -460,7 +460,7 @@ function drawPieChart() {
         .outerRadius(radius);
 
     const colors = d3.quantize(d3.interpolateRainbow, aggregatedData.length);
-    const alternatingColors = aggregatedData.map((_, i) => colors[(i * 25) % colors.length]);
+    const alternatingColors = aggregatedData.map((_, i) => colors[(i * 20) % colors.length]);
         
     const colorScale = d3.scaleOrdinal()
         .domain(aggregatedData.map((d) => d.key))
@@ -518,7 +518,7 @@ function drawPieChart() {
         d3.select(this).attr("stroke", "black").attr("stroke-width", 2);
         console.log(d.data.key);
 
-        d3.select(".tooltip")
+        d3.select(".safety-tooltip")
             .html(
                 `<strong>${xAttr}:</strong> ${d.data.key}<br>` +
                 `<strong>${yAttr}:</strong> ${d.data.total}`
@@ -545,14 +545,14 @@ function drawPieChart() {
         }
     })
     .on("mousemove", function (event) {
-        d3.select(".tooltip")
+        d3.select(".safety-tooltip")
             .style("left", `${event.pageX + 10}px`)
             .style("top", `${event.pageY - 28}px`);
     })
     .on("mouseleave", function () {
         d3.select(this).attr("stroke", "none");
 
-        d3.select(".tooltip")
+        d3.select(".safety-tooltip")
             .transition()
             .duration(200)
             .style("opacity", 0);
@@ -599,7 +599,7 @@ function drawMapChart(geojson) {
             }
 
             // Tooltip
-            d3.select(".tooltip")
+            d3.select(".safety-tooltip")
                 .html(`<strong>State:</strong> ${stateName}`)
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`)
@@ -608,7 +608,7 @@ function drawMapChart(geojson) {
                 .style("opacity", 1);
         })
         .on("mousemove", function (event) {
-            d3.select(".tooltip")
+            d3.select(".safety-tooltip")
                 .style("left", `${event.pageX + 10}px`)
                 .style("top", `${event.pageY - 28}px`);
         })
@@ -628,7 +628,7 @@ function drawMapChart(geojson) {
             }
 
             // Hide tooltip
-            d3.select(".tooltip")
+            d3.select(".safety-tooltip")
                 .transition()
                 .duration(200)
                 .style("opacity", 0);
