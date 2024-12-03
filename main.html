@@ -137,18 +137,40 @@
             </div>
             <div class="step health" data-step="3">
                 <h2>Health</h2>
-                <img src="images/interviewer_health.png" id="health-image" width="533" height="400" class="image" />
-                <img src="images/pres_health.png" id="health-image" width="533" height="400" class="image" />
-                <label for="state-select">Choose a state:</label>
-                <select id="state-select">
-                    <!-- States will be populated here -->
-                </select>
+            <div class="step health" data-step="3">
+                <h2>Health</h2>
+                    <img src="images/temp_image.jpg" id="health-image" width="533" height="400" class="image" />
+                            <div style="position: relative;">
+                                <svg id="visualization-health" width="800" height="400" style="display: block;"></svg>
+
+                                <!-- Dropdown for Choose a state -->
+                                <div style="position: absolute; top: 20px; left: 20px; z-index: 10;">
+                                    <label for="state-select" style="font-size: 14px; color: #004d40;">Choose a state:</label>
+                                    <select id="state-select" style="font-size: 14px;">
+                                        <!-- States will be populated here -->
+                                    </select>
+                                </div>
+
+                                <!-- Dropdown for Choose a view, moved to the right with padding below -->
+                                <div style="position: absolute; top: 20px; left: 300px; z-index: 10;"> <!-- Adjusted left value -->
+                                    <label for="view-select" style="font-size: 14px; color: #004d40;">Choose a view:</label>
+                                    <select id="view-select" style="font-size: 14px;">
+                                        <!-- View options (Gender, Age Group) will be populated here -->
+                                    </select>
+                                </div>
+
+                                <!-- Padding below the dropdowns -->
+                                <div style="position: absolute; top: 100px; left: 20px; z-index: 10; padding-top: 20px;">
+                                    <!-- Additional content or padding can go here -->
+                                </div>
+                            </div>
+                    </div>
             
-                <label for="view-select">Choose a view:</label>
-                <select id="view-select">
-                    <!-- View options (Gender, Age Group) will be populated here -->
-                </select>
-                <svg id="visualization-health" width="800" height="400" style="display: none;"></svg>
+                    <!-- Padding below the dropdowns -->
+                    <div style="position: absolute; top: 100px; left: 20px; z-index: 10; padding-top: 20px;">
+                        <!-- Additional content or padding can go here -->
+                    </div>
+                </div>
             </div>                      
             <div class="step economy" data-step="4">
                 <h2>Economy</h2>
