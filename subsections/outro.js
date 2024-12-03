@@ -57,9 +57,18 @@ function outro_animatePoints() {
         .attr("x", width/1.5)
         .attr("y", 80)
         .attr("text-anchor", "middle")
-        .attr("font-size", "54px")
+        .attr("font-size", "44px")
         .attr("font-weight", "bold")
         .text("2020 Presidential Election Votes by Candidate");
+
+    svg.append("text")
+        .attr("x", width/1.5)
+        .attr("y", 180)
+        .attr("text-anchor", "middle")
+        .attr("font-size", "54px")
+        .attr("font-weight", "bold")
+        .text("Who will you vote for?");
+
 
     svg.append("text")
         .attr("x", width / 3)

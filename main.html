@@ -38,7 +38,7 @@
                     <img src="images/interviewer_safety.png" id="intro-image-1" class="intro-image" />
                     <img src="images/pres_safety.png" id="intro-image-2" class="intro-image" />
                 </div>
-                
+                <h2>This chart displays the distribution of school violence and traffic violence rates across different states. Hover over the map to highlight the corresponding state's data on the pie chart for a clearer breakdown of each state's contribution.</h3>
                 <div id="controls" class="safety-controls" style="
                     display: flex; 
                     flex-direction: row; 
@@ -136,11 +136,11 @@
                 <script type="module" src="safety.js"></script>
             </div>
             <div class="step health" data-step="3">
-                <h2>Health</h2>
                 <div class="intro-image-container">
                     <img src="images/interviewer_health.png" id="intro-image-1" class="intro-image" />
                     <img src="images/pres_health.png" id="intro-image-2" class="intro-image" />
                 </div>
+                <h2>This lollipop chart shows the percentage of uninsured individuals across different states, grouped by gender or age, and further categorized by political affiliation (Democratic or Republican). Hover over the chart to see detailed data for each state and demographic group.</h2>
                 <div style="position: relative;">
                     <svg id="visualization-health" width="800" height="400" style="display: block;"></svg>
                     
@@ -175,11 +175,11 @@
 
 
             <div class="step quality-of-life" data-step="5">
-                <h2>Quality of Life</h2>
                 <div class="intro-image-container">
                     <img src="images/interviewer_qol.png" id="intro-image-1" class="intro-image" />
                     <img src="images/pres_qol.png" id="intro-image-2" class="intro-image" />
-                </div>                
+                </div>            
+                <h2>This choropleth grid map visualizes the homeless population across the U.S. over the years, with color gradients indicating population levels by state. The accompanying bar chart further breaks down the data by gender, offering additional insights into demographic trends.</h2>    
                 <div id="quality-container">
                     <div id="quality-map-container">
                         <svg id="quality-map-svg" width="800" height="600"></svg> <!-- Increased width to 1000px -->
@@ -199,6 +199,12 @@
                     <div class="education-image-text-container">
                         <img src="images/interviewer_education.png" id="education-image" width="475" height="300" class="image" />
                         <img src="images/pres_education.png" id="education-image" width="475" height="300" class="image" />
+                        <h4>This interactive map visualizes the total number of people in the U.S. with a high school 
+                            diploma or higher, or a bachelor's degree or higher, with circle sizes representing the 
+                            count for each state. You can group the data by age or race by pressing the respective button, 
+                            where each segment is proportional to the amount. Additionally, a stacked bar chart outside the 
+                            map shows the breakdown of people with high school and bachelor's degrees or higher by state. 
+                            Hover over the bars to see the exact values for each educational level.</h4>
                     </div>
                     <div class="education-svg-container">
                         <!-- Dropdowns -->
