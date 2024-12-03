@@ -833,7 +833,54 @@ function education_drawMapChart(){
 
     // BAR CHART APRT
     // this will be average of all groups for HS and Bachelors, since the rest were for Total
-     
+    const chartWidth = 100;
+    const chartHeight = 300;
+    const barWidth = 20;
+    const margin = 10;
+
+    
+    // Set up the x and y scales
+    const xScale = d3.scaleBand()
+      .domain(Object.keys(thisYearHSData))
+      .range([0, chartWidth * Object.keys(thisYearHSData).length])
+      .padding(0.1);
+    
+    const yScale = d3.scaleLinear()
+      .domain([0, d3.max(Object.values(thisYearHSData).concat(Object.values(thisYearBachData)))])
+      .range([chartHeight, 0]);
+    
+    // Draw bars for high school data
+    svg.selectAll(".hs-bar")
+      .data(Object.entries(thisYearHSData))
+      .enter().append("rect")
+      .attr("class", "hs-bar")
+      .attr("x", d => xScale(d[0]))
+      .attr("y", d => yScale(d[1]))
+      .attr("width", barWidth)
+      .attr("height", d => chartHeight - yScale(d[1]))
+      .attr("fill", "blue");
+    
+    // Draw bars for bachelor's data
+    svg.selectAll(".bach-bar")
+      .data(Object.entries(thisYearBachData))
+      .enter().append("rect")
+      .attr("class", "bach-bar")
+      .attr("x", d => xScale(d[0]) + barWidth)  // Offset by barWidth to place next to the HS bar
+      .attr("y", d => yScale(d[1]))
+      .attr("width", barWidth)
+      .attr("height", d => chartHeight - yScale(d[1]))
+      .attr("fill", "green");
+    
+    // Add x-axis labels
+    svg.selectAll(".x-axis-label")
+      .data(Object.keys(thisYearHSData))
+      .enter().append("text")
+      .attr("class", "x-axis-label")
+      .attr("x", d => xScale(d) + barWidth / 2)
+      .attr("y", chartHeight + margin)
+      .attr("text-anchor", "middle")
+      .text(d => d)
+      .style("font-size", "10px");
 
 }
 
