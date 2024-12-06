@@ -82,15 +82,17 @@ class BarChart {
 
 
 
-        var national_avg;
-        if (selectedDimension == 'unemployement' || selectedDimension == 'mortality') {
-            national_avg = parseFloat(national_avg_val * 35) + 100;
+        var national_avg
+        if (selectedDimension == 'unemployement') {
+            national_avg = parseFloat(this.data[0]['NA ' + value] * 35) + 100
         } else if (selectedDimension == 'population') {
-            national_avg = parseFloat(national_avg_val / 90000) + 100;
+            national_avg = parseFloat(this.data[0]['NA ' + value] / 90000) + 100
         } else if (selectedDimension == 'salary') {
-            national_avg = parseFloat(national_avg_val / 250) + 100;
+            national_avg = parseFloat(this.data[0]['NA ' + value] / 250) + 100
+        } else if (selectedDimension == 'mortality') {
+            national_avg = parseFloat(this.data[0]['NA ' + value] * 35) + 100
         } else if (selectedDimension == 'price') {
-            national_avg = parseFloat(national_avg_val * 110) + 100;
+            national_avg = parseFloat(this.data[0]['NA ' + value] * 110) + 100
         }
 
         this.svg.append("rect")
@@ -135,7 +137,6 @@ class BarChart {
             national_avg_val = '$' + this.data[0]['NA ' + value] + '/sq. feet'
         }
 
-        
         legend.append("text")
             .attr("x", 24)
             .attr("y", 4)
