@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     d3.json("../data/safety/us-states.geojson")
     .then((geojson) => {
-        //console.log("GeoJSON successfully loaded:", geojson);
+        ////console.log("GeoJSON successfully loaded:", geojson);
         drawMapChart(geojson);
     })
     .catch((error) => {
@@ -89,7 +89,7 @@ function loadDataset(dataset) {
     const filePath = datasetPaths[dataset];
     d3.csv(filePath)
         .then((loadedData) => {
-            //console.log(`Raw data for ${dataset}:`, loadedData);
+            ////console.log(`Raw data for ${dataset}:`, loadedData);
             if (dataset === "drugs") preprocessDrugDeaths(loadedData);
             else if (dataset === "traffic") preprocessTrafficFatalities(loadedData);
             else if (dataset === "shooting") preprocessSchoolShootings(loadedData);
@@ -109,7 +109,7 @@ function loadDataset(dataset) {
 
 
 function preprocessTrafficFatalities(loadedData) {
-    //console.log("Raw Traffic Fatalities Data:", loadedData);
+    ////console.log("Raw Traffic Fatalities Data:", loadedData);
 
     data = loadedData.map((d) => ({
         Year: +d["Year"],
@@ -117,7 +117,7 @@ function preprocessTrafficFatalities(loadedData) {
         Fatalities: +d["Total Fatalities"] || null,
     })).filter((d) => d.Year && d.Fatalities !== null); 
 
-    //console.log("Processed Traffic Fatalities:", data);
+    ////console.log("Processed Traffic Fatalities:", data);
 }
 
 function preprocessSchoolShootings(loadedData) {
@@ -130,7 +130,7 @@ function preprocessSchoolShootings(loadedData) {
             Total: (+d["Fatalities"] || 0) + (+d["Wounded"] || 0),
         }))
         .filter((d) => d.Year && d.Total > 0);
-    //console.log("Processed School Shootings:", data);
+    ////console.log("Processed School Shootings:", data);
 }
 
 
@@ -516,7 +516,7 @@ function drawPieChart() {
     chart.selectAll("path")
     .on("mouseenter", function (event, d) {
         d3.select(this).attr("stroke", "black").attr("stroke-width", 2);
-        console.log(d.data.key);
+        //console.log(d.data.key);
 
         d3.select(".safety-tooltip")
             .html(
@@ -637,12 +637,12 @@ function drawMapChart(geojson) {
 
 // Highlight corresponding pie slice based on map hover
 function highlightPieFromMap(stateName) {
-    console.log(`Highlighting pie slice for state: ${stateName}`);
+    //console.log(`Highlighting pie slice for state: ${stateName}`);
     chart.selectAll("path")
         .filter((d) => {
             const pieKey = d.data?.key.trim().toLowerCase(); // Trim and lowercase pie key
             const mapKey = stateName.trim().toLowerCase(); // Trim and lowercase map key
-            console.log(`Comparing mapKey: "${mapKey}" with pieKey: "${pieKey}"`); // Debug log
+            //console.log(`Comparing mapKey: "${mapKey}" with pieKey: "${pieKey}"`); // Debug log
             return pieKey === mapKey; // Match keys
         })
         .attr("stroke", "orange") // Highlight the slice
@@ -652,7 +652,7 @@ function highlightPieFromMap(stateName) {
 /*
 // Reset all pie slice highlights
 function resetPieHighlight() {
-    console.log("Resetting pie slice highlights");
+    //console.log("Resetting pie slice highlights");
     chart.selectAll("path")
         .attr("stroke", "#fff") // Reset stroke color
         .attr("stroke-width", 1); // Reset stroke width
@@ -673,7 +673,7 @@ function exitPieChart() {
         .duration(500)
         .attrTween("d", function (d) {
             // Log current position and check for inconsistencies
-            console.log("Exiting Slice Current State:", d);
+            //console.log("Exiting Slice Current State:", d);
 
             // Use the current `d` object as the starting position
             const current = { startAngle: d.startAngle, endAngle: d.endAngle };
@@ -685,7 +685,7 @@ function exitPieChart() {
             return function (t) {
                 // Log the interpolated values for debugging
                 const interpolated = interpolate(t);
-                console.log("Interpolated Slice State:", interpolated);
+                //console.log("Interpolated Slice State:", interpolated);
                 return arc(interpolated);
             };
         })
@@ -712,7 +712,7 @@ function resetMapHighlight() {
 
 d3.json("../data/safety/us-states.geojson")
     .then((geojson) => {
-        //console.log("GeoJSON successfully loaded", geojson);
+        ////console.log("GeoJSON successfully loaded", geojson);
         drawMapChart(geojson);
     })
     .catch((error) => {

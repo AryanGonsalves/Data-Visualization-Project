@@ -771,7 +771,7 @@ function education_drawMapChart(){
         .style("pointer-events", "none")
 
 
-    console.log("piedata", pieData);
+    // console.log("piedata", pieData);
 
     pieData.forEach(d => {
         d.data.group = d.data.group.replace("_Total", "").replace("Population", "");

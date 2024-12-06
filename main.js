@@ -33,7 +33,6 @@ try {
 } catch (error) {
     console.error("Error in drawEconomy:", error);
 }
-import { drawEconomy } from "./subsections/economy.js";
 
 try {
     // drawQualityOfLife();
@@ -130,7 +129,7 @@ window.addEventListener('scroll', () => {
                 } else {
                     s.classList.remove('faded');
                     if (index === 6) {
-                        console.log("going to animate");
+                        // console.log("going to animate");
                         outro_animatePoints();
                     }
                 }
