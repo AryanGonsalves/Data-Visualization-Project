@@ -167,6 +167,36 @@
                 </div>
             </div>                      
             <div class="step economy" data-step="4">
+                <h2>Economy Overview</h2>
+    <div class="controls">
+        <label for="yearDropdown">Year:</label>
+        <select id="yearDropdown">
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022" selected>2022</option>
+        </select>
+
+        <label for="attributeDropdown">Attribute:</label>
+        <select id="attributeDropdown">
+            <option value="unemployment_rate">Unemployment Rate</option>
+            <option value="mortality_rate">Mortality Rate</option>
+            <option value="salary_avg">Average Salary</option>
+            <option value="cost_per_sq_ft">Cost per Square Foot</option>
+        </select>
+    </div>
+    <div id="visualizations" class="flex-container">
+        <div id="map-container">
+            <svg id="us-map" width="500" height="300"></svg>
+        </div>
+        <div id="barplot-container">
+            <svg id="barplot" width="500" height="300"></svg>
+        </div>
+    </div>
+    <div id="tooltip" style="position: absolute; visibility: hidden; background: white; padding: 5px; border: 1px solid #ccc;"></div>
                 <!-- <h2>Economy</h2>
                 <img src="images/interviewer_economy.png" id="health-image" width="533" height="400" class="image" />
                 <img src="images/pres_economy.PNG" id="health-image" width="533" height="400" class="image" />

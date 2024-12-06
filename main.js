@@ -33,6 +33,7 @@ try {
 } catch (error) {
     console.error("Error in drawEconomy:", error);
 }
+import { drawEconomy } from "./subsections/economy.js";
 
 try {
     // drawQualityOfLife();

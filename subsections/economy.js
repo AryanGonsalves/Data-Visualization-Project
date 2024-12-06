@@ -1,176 +1,151 @@
-function drawEconomy(){
-    const width = 960;
-    const height = 600;
+// Economy.js
 
-    // Create SVG
-    const svg = d3.select("#visualization-economy")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+export function drawEconomy() {
+    const economyDataPath = "data/Economy/"; // Path to economy data folder
+    const years = ["2016", "2017", "2018", "2019", "2020", "2021", "2022"];
+    const attributes = ["unemployment_rate", "mortality_rate", "salary_avg", "cost_per_sq_ft"];
 
-    const tooltip = d3.select("#tooltip");
+    let selectedYear = "2022"; // Default year
+    let selectedAttribute = "unemployment_rate"; // Default attribute
+    let dataByYear = {};
 
-    // Projection and Path
-    const projection = d3.geoAlbersUsa()
-        .translate([width / 2, height / 2])
-        .scale(1000);
-
-    const path = d3.geoPath().projection(projection);
-
-    // Color Scale
-    const colorScale = d3.scaleQuantize()
-        .range(d3.schemeBlues[9]);
-
-    // Load Data
-    Promise.all([
-        //d3.json("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"), // GeoJSON for US states
-        d3.csv("data/Economy/unemployment_data_filtered.csv"), // Unemployment Data
-        d3.csv("data/Economy/inflation.csv"), // Inflation Data
-        d3.csv("data/Economy/job_placement.csv"), // Job Placement Data
-        d3.csv("data/Economy/usa_gdp_per_capita.csv") // GDP Data
-    ]).then(function (values) {
-        unemploymentData = values[0];
-        //inflationData = values[1];
-        unemploymentData.forEach(function(d) {
-            d.fips = parseFIPS(d.FIPS);
-            State.forEach(function(state) {
-                d[state] = +d[state];
-            }); 
-            d.year = parseYear(d.year);
-            d.Month = parseMonth(d.Month);
-            d.Non_institutional_Population = parseNon_Institutional_Population(d.Non_Institutional_Population);
-            d.LaborForce = parseLaborForce(d.LaborForce);
-            d.Area_Population= parseArea_Population(d.Area_Population);
-            d.TotalEmployment= parseTotalEmployment(d.TotalEmployment);
-            d.LaborForce_percent = parseLaborForce_percent(d.LaborForce_percent);
-            d.TotalUnemployment = parseTotalUnemployment(d.TotalUnemployment);
-            d.Unemployment_rate = parseUnemployment_rate(d.Unemployment_rate);
+    // Load data for all years
+    Promise.all(
+        years.map(year => d3.csv(`${economyDataPath}${year}_us_states_data.csv`))
+    ).then(files => {
+        years.forEach((year, index) => {
+            dataByYear[year] = files[index].map(d => ({
+                state: d.RegionName,
+                unemployment_rate: +d.Unemployment_rate,
+                mortality_rate: +d.Mortality_rate,
+                salary_avg: +d.salary_avg,
+                cost_per_sq_ft: +d.cost_per_sq_ft
+            }));
         });
 
+        // Draw initial visualization
+        drawMap(dataByYear[selectedYear], selectedAttribute);
+        drawBarChart(dataByYear[selectedYear], selectedAttribute);
 
-
-        // Process data
-        //const unemploymentData = {};
-        //unemployment.forEach(d => {
-            //  unemploymentData[d["State/Area"]] = +d["Unemployment_rate"];
-        //});
-
-        inflationData = values[1];
-        //inflation.forEach(d => {
-            //  inflationData[d["id"]] = +d["inflation_rate"];
-        //});
-        inflationData.forEach(function(d) {
-            d.id = parseId(d.id);
-            d.rate = parserate(d.rate);
+        // Event listeners for year and attribute selection
+        d3.select("#yearDropdown").on("change", function () {
+            selectedYear = this.value;
+            updateVisualizations(dataByYear[selectedYear], selectedAttribute);
         });
 
-
-        gdpData = values[2];
-        //gdp.forEach(d => {
-            //  gdpData[d["year"]] = +d["gdp per capita"];
-        //});
-        gdpData.forEach(function(d) {
-            d.year = parseyear(d.year);
-            d.gdp_per_capita = parsegdp_per_capita(d.gdp_per_capita);
-
+        d3.select("#attributeDropdown").on("change", function () {
+            selectedAttribute = this.value;
+            updateVisualizations(dataByYear[selectedYear], selectedAttribute);
         });
+    });
 
-        jobPlacementData = values[3];
-        //jobPlacement.forEach(d => {
-            //  jobPlacementData[d["college_name"]] = {
-            //    placement_rate: d["placement_status"] === "Placed" ? 1 : 0,
-                //  salary: +d["salary"]
-            //};
-        //});
-        jobPlacementData.forEach(function(d) {
-            d.id = parseid(d.id);
-            Name.forEach(function(d) {
-                d[Name] = +d[Name];
+    // Function to draw the map visualization
+    function drawMap(data, attribute) {
+        const svg = d3.select("#us-map");
+        svg.selectAll("*").remove();
 
+        const width = 500;
+        const height = 300;
 
-            }); 
-            gender.forEach(function(d) {
-                d[gender] = +d[gender];
-            });
-            degree.forEach(function(d) {
-                d[degree] = +d[degree];
-            });
-            stream.forEach(function(d) {
-                d[stream] = +d[stream];
-            }) 
-            college_name.forEach(function(d) {
-                d[college_name] = +d[college_name]
-            }) 
-            placement_status.forEach(function(d) {
-                d[placement_status] = +d[placement_status];
-            }) 
-            d.salary = parsesalary(d.salary);
-            d.gpa = parsegpa(d.gpa);
-            d.years_of_experience = parseyears_of_experience(d.years_of_experience);
+        // Create projection and path generator
+        const projection = d3.geoAlbersUsa().translate([width / 2, height / 2]).scale(700);
+        const path = d3.geoPath().projection(projection);
+
+        // Load GeoJSON and bind data
+        d3.json("us-state-centroid.json").then(us => {
+            const states = topojson.feature(us, us.objects.states).features;
+
+            const colorScale = d3.scaleSequential(d3.interpolateBlues)
+                .domain(d3.extent(data, d => d[attribute]));
+
+            svg.selectAll(".state")
+                .data(states)
+                .join("path")
+                .attr("d", path)
+                .attr("class", "state")
+                .attr("fill", d => {
+                    const stateData = data.find(state => state.state === d.properties.name);
+                    return stateData ? colorScale(stateData[attribute]) : "#ccc";
+                })
+                .attr("stroke", "#fff")
+                .on("mouseover", (event, d) => {
+                    const stateData = data.find(state => state.state === d.properties.name);
+                    if (stateData) {
+                        d3.select("#tooltip")
+                            .style("visibility", "visible")
+                            .text(`${d.properties.name}: ${stateData[attribute]}`);
+                    }
+                })
+                .on("mousemove", event => {
+                    d3.select("#tooltip")
+                        .style("left", event.pageX + 10 + "px")
+                        .style("top", event.pageY + 10 + "px");
+                })
+                .on("mouseout", () => {
+                    d3.select("#tooltip").style("visibility", "hidden");
+                });
         });
-         console.log(unemploymentData);
-        console.log(inflationData);
-        console.log(jobPlacementData);
-        console.log(gdpData);
+    }
 
-        // Merge GeoJSON with Data
-        const states = topojson.feature(us, us.objects.states).features;
+    // Function to draw the bar chart visualization
+    function drawBarChart(data, attribute) {
+        const svg = d3.select("#barplot");
+        svg.selectAll("*").remove();
 
-        states.forEach(state => {
-            const stateName = state.properties.name;
-            state.properties.unemployment_rate = unemploymentData[stateName] || 0;
-            state.properties.inflation_rate = inflationData[stateName] || 0;
-        });
+        const width = 500;
+        const height = 300;
+        const margin = { top: 20, right: 30, bottom: 50, left: 70 };
 
-        // Draw States
-        svg.selectAll(".state")
-            .data(states)
-            .enter()
-            .append("path")
-            .attr("class", "state")
-            .attr("d", path)
-            .style("fill", d => {
-                const rate = d.properties.unemployment_rate;
-                return rate ? colorScale(rate) : "#ccc";
-            })
+        const xScale = d3.scaleBand()
+            .domain(data.map(d => d.state))
+            .range([margin.left, width - margin.right])
+            .padding(0.1);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d[attribute])])
+            .range([height - margin.bottom, margin.top]);
+
+        const colorScale = d3.scaleSequential(d3.interpolateBlues)
+            .domain(d3.extent(data, d => d[attribute]));
+
+        svg.append("g")
+            .selectAll("rect")
+            .data(data)
+            .join("rect")
+            .attr("x", d => xScale(d.state))
+            .attr("y", d => yScale(d[attribute]))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => yScale(0) - yScale(d[attribute]))
+            .attr("fill", d => colorScale(d[attribute]))
             .on("mouseover", (event, d) => {
-                tooltip.transition().duration(200).style("opacity", 1);
-                tooltip.html(`
-                    <strong>${d.properties.name}</strong><br>
-                    Unemployment Rate: ${d.properties.unemployment_rate || "N/A"}%<br>
-                    Inflation Rate: ${d.properties.inflation_rate || "N/A"}%<br>
-                `)
-                .style("left", (event.pageX + 10) + "px")
-                .style("top", (event.pageY + 10) + "px");
+                d3.select("#tooltip")
+                    .style("visibility", "visible")
+                    .text(`${d.state}: ${d[attribute]}`);
+            })
+            .on("mousemove", event => {
+                d3.select("#tooltip")
+                    .style("left", event.pageX + 10 + "px")
+                    .style("top", event.pageY + 10 + "px");
             })
             .on("mouseout", () => {
-                tooltip.transition().duration(200).style("opacity", 0);
+                d3.select("#tooltip").style("visibility", "hidden");
             });
 
-        // Add Legend
-        const legend = svg.append("g")
-            .attr("transform", `translate(${width - 200}, ${height - 300})`);
+        svg.append("g")
+            .attr("transform", `translate(0,${height - margin.bottom})`)
+            .call(d3.axisBottom(xScale).tickSizeOuter(0))
+            .selectAll("text")
+            .attr("transform", "rotate(-45)")
+            .attr("text-anchor", "end");
 
-        const legendScale = d3.scaleLinear()
-            .domain(d3.extent(Object.values(unemploymentData)))
-            .range([0, 200]);
+        svg.append("g")
+            .attr("transform", `translate(${margin.left},0)`)
+            .call(d3.axisLeft(yScale).ticks(5));
+    }
 
-        legend.selectAll("rect")
-            .data(colorScale.range().map(d => colorScale.invertExtent(d)))
-            .enter()
-            .append("rect")
-            .attr("x", d => legendScale(d[0]))
-            .attr("width", d => legendScale(d[1]) - legendScale(d[0]))
-            .attr("height", 10)
-            .style("fill", d => colorScale(d[0]));
-
-        legend.append("text")
-            .attr("x", 0)
-            .attr("y", -10)
-            .text("Unemployment Rate");
-    }).catch(error => {
-        console.error("Error loading data: ", error);
-    });
-    // put all your data loading and drawing here
+    // Function to update both visualizations
+    function updateVisualizations(data, attribute) {
+        drawMap(data, attribute);
+        drawBarChart(data, attribute);
+    }
 }
-
