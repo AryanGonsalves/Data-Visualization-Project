@@ -142,12 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function education_updateYearLabel(year) {
     education_selectedYear = parseInt(year);
     document.getElementById('yearLabel').textContent = year;
-    if (education_isMapChart){
-        education_drawMapChart();
-    }
-    else {
-        education_drawBarChart();
-    }
+    education_drawMapChart();
 }
 // Button update to toggle mode - selected mode
 function education_toggleSelected(group) {
