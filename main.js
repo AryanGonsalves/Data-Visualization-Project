@@ -129,7 +129,7 @@ window.addEventListener('scroll', () => {
                 } else {
                     s.classList.remove('faded');
                     if (index === 6) {
-                        console.log("going to animate");
+                        // console.log("going to animate");
                         outro_animatePoints();
                     }
                 }

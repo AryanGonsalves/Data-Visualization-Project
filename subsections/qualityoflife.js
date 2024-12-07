@@ -205,7 +205,7 @@ d3.csv("data/homeless/homeless_data_corrected_abbreviated.csv").then(data => {
         .attr("fill", d => d.color)
         .on("click", (event, d) => {
             selectedYear = d.year;
-            console.log(`Year selected: ${selectedYear}`);
+            // console.log(`Year selected: ${selectedYear}`);
             updateVisualization();
             handle.transition()
                 .duration(300)
@@ -255,7 +255,7 @@ function updateVisualization() {
 
     darkestColor = colorScale(Math.log(maxValue + 1));
 
-    console.log(`Darkest color for year ${selectedYear}: ${darkestColor}`);
+    // console.log(`Darkest color for year ${selectedYear}: ${darkestColor}`);
 
     updateToggleButtonColor(darkestColor);
 
@@ -296,7 +296,7 @@ function updateVisualization() {
         .on("click", function(event, d) {
             const state = d.state;
             selectedState = state;
-            console.log(`State selected: ${selectedState}`);
+            // console.log(`State selected: ${selectedState}`);
             updateBarChart(state);
         })
         .attr("fill", d => {
@@ -408,7 +408,7 @@ function addToggleButtons(darkestColor) {
             .on("click", function() {
                 if (selectedDataType !== btn.type) {
                     selectedDataType = btn.type;
-                    console.log(`Data type selected: ${selectedDataType}`);
+                    // console.log(`Data type selected: ${selectedDataType}`);
                     updateBarChart(selectedState);
                 }
             })
@@ -453,13 +453,13 @@ function updateBarChart(state) {
     const yearData = homelessData[selectedYear];
     if (!yearData) {
         console.error(`No data available for the year ${selectedYear}.`);
-        console.log("Available Years:", Object.keys(homelessData).sort());
+        // console.log("Available Years:", Object.keys(homelessData).sort());
         return;
     }
     const data = yearData[state];
     if (!data) {
         console.error(`No data available for state ${state} in year ${selectedYear}.`);
-        console.log(`Available States for ${selectedYear}:`, Object.keys(yearData));
+        // console.log(`Available States for ${selectedYear}:`, Object.keys(yearData));
         return;
     }
 
@@ -485,7 +485,7 @@ function updateBarChart(state) {
         ];
     }
 
-    console.log(`Categories for ${selectedDataType}:`, categories);
+    // console.log(`Categories for ${selectedDataType}:`, categories);
 
     categories.forEach(cat => {
         cat.value = isNaN(cat.value) ? 0 : cat.value;

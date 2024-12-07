@@ -8,6 +8,10 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://d3js.org/topojson.v1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.9.0/d3-legend.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
@@ -167,7 +171,197 @@
                 </div>
             </div>                      
             <div class="step economy" data-step="4">
-                <!-- <h2>Economy</h2>
+                <h2>
+                    US Economy Analysis
+                </h2>
+                
+            <div class = "row">
+                <div class="col-sm-12 center-align form-group">
+                    <label for="dataset" style="font-size: 20px">Select the factor to visualize</label>
+                    <select class="form-control" id="dataset" onchange="updateMap(value)" style="width: 25%;margin: auto">
+                        <option selected value="unemployement">UNEMPLOYEMENT_RATE</option>
+                        <option value="population">POPULATION</option>
+                        <option value="salary">AVERAGE_SALARY/MON</option>
+                        <option value="price">RENTAL COST [PRICE/SQ. FT.]</option>
+                        <option value="mortality">MORTALITY_RATE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div  class="col-sm-7 pull-left" id="map-view">
+                </div>
+                <div id="bar-chart" class="col-sm-5 pull-left">
+                    <div id="average"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="table">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="nationalAvgLegend">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" id="legend">
+            </div>
+        </div>
+        
+        <hr>
+        <h2 style="text-align: center">Your Personal State Recommender</h2>
+        <hr style="width: 40%;margin: auto">
+        
+        
+        <div class="row">
+            <h3 style="text-align: center">Rank the below factors from 0 to 5 as per your priority</h3>
+            <h5 style="text-align: center">[0:Not Important 5:Most Important]</h5>
+            <div class="col" id="userInputTable" >
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="unemployement">Unemployment Rate</label>
+                        <input value='' type="text" class="form-control" id="unemployement">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="population">Population</label>
+                        <input value='' type="text" class="form-control" id="population">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="salary">Average Salary</label>
+                        <input value = '' type="text" class="form-control" id="salary">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="rental">Rental Cost</label>
+                        <input value='' type="text" class="form-control" id="rental">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="mortality">Average Mortality Rate</label>
+                        <input value='' type="text" class="form-control" id="mortality">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="button" id="ShowButton" class="btn" style="margin-top:15px;background-color: #8b221b;color: #ffffff" onclick="getTopStates()">Give my top states</button>
+                    </div>
+        
+                    <br><br>
+                    <br><br>
+        
+                    <hr width="60%" size="5px" style="border-top: 3px solid #ff7b7b; ">
+        
+                </div>
+            </div>
+        </div>
+        
+        <div class="row" style="margin: 0px">
+            <div class="col-sm-6" id="infoPanel" style="display:none;">
+                <h4 style="text-align: center">Top 3 recommended states</h4>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="row" style="margin: 0px">
+                            <div class="row" style="margin: 0px">
+                                <div class="col-sm-3">
+                                    <h5 id="state1"></h5>
+                                </div>
+                                <div class="col-sm-9">
+                                    <svg id="weight1" height="20px" width="700"></svg>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 0px">
+                                <div class="col-sm-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px">
+                            <div class="row" style="margin: 0px">
+                                <div class="col-sm-3">
+                                    <h5 id="state2"></h5>
+                                </div>
+                                <div class="col-sm-9">
+                                    <svg id="weight2" height="20px" width="600"></svg>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 0px">
+                                <div class="col-sm-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 0px">
+                            <div class="row" style="margin: 0px">
+                                <div class="col-sm-3">
+                                    <h5 id="state3"></h5>
+                                </div>
+                                <div class="col-sm-9" >
+                                    <svg id="weight3" height="20px" width="600"></svg>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="row"><svg id="bar-legends-all"></svg></div>
+        
+                    </div>
+                </div>
+        
+                <div id="focus-panel" class="row" style="margin: 0px">
+                    <h4 style="padding-left: 20px;text-decoration: underline">Select the factor to analyse its trend in these states over the past 7 years</h4>
+                    <div class="col-sm-12" >
+        
+                        <button type="button" class="btn btn-primary btn-color" onclick="plotLineChart('unemployement')">Unemployement Rate</button>
+                        <button type="button" class="btn btn-primary btn-color" onclick="plotLineChart('population')">Population</button>
+                        <button type="button" class="btn btn-primary btn-color" onclick="plotLineChart('salary')">Average Salary</button>
+                        <button type="button" class="btn btn-primary btn-color" onclick="plotLineChart('rental')">Rental Cost</button>
+                        <button type="button" class="btn btn-primary btn-color" onclick="plotLineChart('mortality')">Mortality</button>
+        
+                    </div>
+                </div>
+                <br><br>
+                <div id="brush-section" style="display:none">
+                    <h4 style="padding-left: 20px; text-decoration: underline"> Select the years range to analyse using brush</h4>
+                    <h6 style="padding-left: 20px;">Brush appear after you select any factor from above</h6>
+                    <br>
+                    <div class="row" style="margin: 0px;padding-left: 50px" id="year-brush" ><svg width="400px"></svg></div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row" id="line-chart" style="margin: 0px">
+                </div>
+                <div class="row" id="legend-line-chart" style="margin: 0px">
+                </div>
+            </div>
+        </div>
+        
+
+                <!-- <h2>Economy Overview</h2>
+    <div class="controls">
+        <label for="yearDropdown">Year:</label>
+        <select id="yearDropdown">
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022" selected>2022</option>
+        </select>
+
+        <label for="attributeDropdown">Attribute:</label>
+        <select id="attributeDropdown">
+            <option value="unemployment_rate">Unemployment Rate</option>
+            <option value="mortality_rate">Mortality Rate</option>
+            <option value="salary_avg">Average Salary</option>
+            <option value="cost_per_sq_ft">Cost per Square Foot</option>
+        </select>
+    </div>
+    <div id="visualizations" class="flex-container">
+        <div id="map-container">
+            <svg id="us-map" width="500" height="300"></svg>
+        </div>
+        <div id="barplot-container">
+            <svg id="barplot" width="500" height="300"></svg>
+        </div>
+    </div>
+    <div id="tooltip" style="position: absolute; visibility: hidden; background: white; padding: 5px; border: 1px solid #ccc;"></div>
+                 <h2>Economy</h2>
                 <img src="images/interviewer_economy.png" id="health-image" width="533" height="400" class="image" />
                 <img src="images/pres_economy.PNG" id="health-image" width="533" height="400" class="image" />
                 <svg id="visualization-economy" width="800" height="400" style="display: none;"></svg> -->
