@@ -10,7 +10,6 @@ function drawHealth() {
     const verticalOffset = 140;
     const horizontalSpacing = 280;
 
-    // Updated Background Gradient
     svg.append("defs").append("linearGradient")
         .attr("id", "bg-gradient")
         .attr("x1", "0%").attr("y1", "0%")
@@ -32,7 +31,6 @@ function drawHealth() {
     const chart2013 = svg.append("g")
         .attr("transform", `translate(${chartWidth + margin.left + horizontalSpacing},${margin.top + verticalOffset})`);
 
-    // Enhanced Chart Titles
     svg.append("text")
         .attr("x", margin.left + chartWidth / 2 * 1.25)
         .attr("y", margin.top + 30)
@@ -53,7 +51,6 @@ function drawHealth() {
         .attr("font-weight", "bold")
         .attr("fill", "#D22B2B");
 
-    // Enhanced Tooltip
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("position", "absolute")
@@ -94,10 +91,8 @@ function drawHealth() {
     function renderLollipopChart(chart, selectedData, chartWidth, chartHeight, chartPosition) {
         const keys = ["Male", "Female"];
         const values = [selectedData["Uninsured % - Male"], selectedData["Uninsured % - Female"]];
-        const x = d3.scaleBand().domain(keys).range([0, chartWidth]).padding(0.6); // Increased padding for more space
+        const x = d3.scaleBand().domain(keys).range([0, chartWidth]).padding(0.6); 
         const y = d3.scaleLinear().domain([0, d3.max(values)]).nice().range([chartHeight, 0]);
-        
-        // Apply blue color scale for left chart (2012) and red color scale for right chart (2013)
         const color = d3.scaleOrdinal()
             .domain(keys)
             .range(chartPosition == 'left' ? ["#007BFF", "#0056b3"] : ["#D2042D", "#880808"]);
@@ -106,11 +101,10 @@ function drawHealth() {
     
         chart.append("g").attr("transform", `translate(0,${chartHeight})`).call(d3.axisBottom(x))
             .selectAll("text").attr("transform", "translate(0,10)");
-    
-        // Adding axis labels (Legends)
+
         chart.append("text")
             .attr("x", chartWidth / 2)
-            .attr("y", chartHeight + 40) // Positioning below the X-axis
+            .attr("y", chartHeight + 40) 
             .attr("text-anchor", "middle")
             .attr("font-size", "16px")
             .attr("font-family", "Arial, sans-serif")
@@ -119,7 +113,7 @@ function drawHealth() {
         chart.append("text")
             .attr("transform", "rotate(-90)")
             .attr("x", -chartHeight / 2)
-            .attr("y", -60) // Positioning to the left of the Y-axis
+            .attr("y", -60) 
             .attr("text-anchor", "middle")
             .attr("font-size", "16px")
             .attr("font-family", "Arial, sans-serif")
@@ -133,14 +127,14 @@ function drawHealth() {
             .attr("x2", d => x(d) + x.bandwidth() / 2)
             .attr("y2", chartHeight)
             .attr("stroke", d => color(d))
-            .attr("stroke-width", 4) // Increased line thickness
+            .attr("stroke-width", 4) 
             .transition().duration(800)
             .attr("y2", (d, i) => y(values[i]));
     
         lollipops.append("circle")
             .attr("cx", d => x(d) + x.bandwidth() / 2)
             .attr("cy", chartHeight)
-            .attr("r", 10) // Increased radius for better visibility
+            .attr("r", 10) 
             .attr("fill", d => color(d))
             .on("mouseover", (event, d) => {
                 const value = values[keys.indexOf(d)];
@@ -159,18 +153,16 @@ function drawHealth() {
     }
     
     function renderDonutChart(chart, selectedData, chartWidth, chartHeight, chartPosition) {
-        const radius = Math.min(chartWidth, chartHeight - 20) / 2 * 1.75; // Increased size of the donut chart
-        const innerRadius = radius * 0.4; // Thinner inner radius for a more pronounced donut effect
+        const radius = Math.min(chartWidth, chartHeight - 20) / 2 * 1.75; 
+        const innerRadius = radius * 0.4;
         const keys = ["Under 18", "18 to 64", "65+"];
         const values = [selectedData["Under 18 - Uninsured %"], selectedData["Uninsured % - 18 to 64"], selectedData["Uninsured % - 65+"]];
     
         const total = d3.sum(values);
-    
-        // Apply blue and red color scales based on chart position
         const color = d3.scaleOrdinal()
             .domain(keys)
             .range(chartPosition === 'left' ? ["#80deea", "#4dd0e1", "#0288d1"] : ["#ff7961", "#d32f2f", "#c62828"]);
-        // Create gradients for each donut section
+        
         const defs = chart.append("defs");
         defs.append("linearGradient")
             .attr("id", "gradient1")
@@ -209,12 +201,11 @@ function drawHealth() {
             .attr("stop-color", d => d.color);
     
         const pie = d3.pie().value(d => d)(values);
-        const arc = d3.arc().innerRadius(innerRadius).outerRadius(radius); // Create a donut shape
-        const labelArc = d3.arc().innerRadius(radius * 0.7).outerRadius(radius * 1.05); // Label placement
+        const arc = d3.arc().innerRadius(innerRadius).outerRadius(radius);
+        const labelArc = d3.arc().innerRadius(radius * 0.7).outerRadius(radius * 1.05);
     
         const g = chart.append("g").attr("transform", `translate(${chartWidth / 2},${chartHeight / 2})`);
-    
-        // Draw donut sections
+        
         g.selectAll("path")
             .data(pie)
             .enter().append("path")
@@ -244,8 +235,7 @@ function drawHealth() {
                     return arc(interpolate(t));
                 };
             });
-    
-        // Add percentage labels inside the donut
+        
         g.selectAll("text")
             .data(pie)
             .enter().append("text")
