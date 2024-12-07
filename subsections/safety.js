@@ -164,47 +164,42 @@ function populateDropdowns() {
     xAxisSelect.addEventListener("change", updateVisualization);
 }
 
-let isPieChart = false; // Track the current visualization state
+let isPieChart = false; 
 
-// Attach event listener to the toggle button
 document.getElementById("toggle-visualization").addEventListener("click", function () {
     isPieChart = !isPieChart;
     this.textContent = isPieChart ? "Switch to Bar Chart" : "Switch to Pie Chart";
-    updateVisualization(); // Update the visualization based on the current state
+    updateVisualization(); 
 });
 
-// Ensure the chart updates dynamically when the dataset or attributes change
 datasetSelect.addEventListener("change", updateVisualization);
 xAxisSelect.addEventListener("change", updateVisualization);
 yAttributeSelect.addEventListener("change", updateVisualization);
 
-// Clear the chart before rendering
 function clearChart() {
     chart.selectAll("*").remove();
 }
 
-let currentVisualization = "bar"; // Track the active visualization type
+let currentVisualization = "bar"; 
 
 function updateVisualization() {
     if (isPieChart) {
-        // Clear chart-specific elements and hide axes
-        chart.selectAll("rect").remove(); // Remove bars
-        xAxisGroup.style("display", "none"); // Hide X-Axis
-        yAxisGroup.style("display", "none"); // Hide Y-Axis
+        
+        chart.selectAll("rect").remove(); 
+        xAxisGroup.style("display", "none"); 
+        yAxisGroup.style("display", "none"); 
 
-        // Reset the transform for the pie chart (centered)
         chart.attr("transform", `translate(${width / 2}, ${height / 2})`);
-        drawPieChart(); // Render pie chart
+        drawPieChart(); 
     } else {
         //exitPieChart();
-        // Clear pie chart-specific elements and show axes
-        chart.selectAll("path").remove(); // Remove pie slices
-        xAxisGroup.style("display", null); // Show X-Axis
-        yAxisGroup.style("display", null); // Show Y-Axis
+        
+        chart.selectAll("path").remove(); 
+        xAxisGroup.style("display", null); 
+        yAxisGroup.style("display", null); 
 
-        // Reset the transform for the bar chart (with margins)
         chart.attr("transform", `translate(${margin.left},${margin.top})`);
-        drawBarGraph(); // Render bar chart
+        drawBarGraph(); 
     }
 }
 
@@ -213,8 +208,8 @@ function updateVisualization() {
 function drawBarGraph() {
 
     if (currentVisualization !== "bar") {
-        chart.selectAll("*").remove(); // Clear chart area
-        currentVisualization = "bar"; // Set the current visualization type to "bar"
+        chart.selectAll("*").remove(); 
+        currentVisualization = "bar"; 
     }
 
     chart.attr("transform", `translate(${margin.left},${margin.top})`);
@@ -425,7 +420,6 @@ function drawPieChart() {
         return;
     }
 
-    // Group and aggregate data
     const groupedData = d3.group(data, (d) => d[xAttr]);
     const aggregatedData = Array.from(groupedData, ([key, values]) => ({
         key,
@@ -448,9 +442,9 @@ function drawPieChart() {
                 const stateB = b.state || "";
                 return stateA.localeCompare(stateB); 
             } else if (sortAttr === "year") {
-                return a.year - b.year; // Numerical sorting
+                return a.year - b.year; 
             } else {
-                return 0; // No sorting
+                return 0; 
             }
         });
     const arcs = pie(aggregatedData);
@@ -466,10 +460,8 @@ function drawPieChart() {
         .domain(aggregatedData.map((d) => d.key))
         .range(alternatingColors);
 
-    // Bind data to paths
     const paths = chart.selectAll("path").data(arcs, (d) => d.data.key);
 
-    // Exit selection: Remove unneeded slices
     paths
         .exit()
         .transition()
@@ -482,7 +474,6 @@ function drawPieChart() {
         })
         .remove();
 
-    // Update selection: Update existing slices
     paths
         .transition()
         .duration(500)
@@ -495,13 +486,12 @@ function drawPieChart() {
         })
         .attr("fill", (d) => colorScale(d.data.key));
 
-    // Enter selection: Add new slices
     const pieGroup = paths
         .enter()
         .append("path")
         .attr("fill", (d) => colorScale(d.data.key))
         .each(function (d) {
-            this._current = d; // Store the current position for later transitions
+            this._current = d; 
         })
         .transition()
         .duration(500)
@@ -512,7 +502,6 @@ function drawPieChart() {
             };
         });
 
-    // Tooltip and interactivity
     chart.selectAll("path")
     .on("mouseenter", function (event, d) {
         d3.select(this).attr("stroke", "black").attr("stroke-width", 2);
@@ -530,18 +519,18 @@ function drawPieChart() {
             .style("opacity", 1);
 
         if (xAttr === "Year") {
-            const selectedYear = d.data.key; // Extract the year
-            const rulingParty = rulingParties[selectedYear]; // Get the ruling party
+            const selectedYear = d.data.key; 
+            const rulingParty = rulingParties[selectedYear]; 
 
             if (rulingParty === "Democrat") {
-                mapSvg.selectAll("path").attr("fill", "blue"); // Color the map blue
+                mapSvg.selectAll("path").attr("fill", "blue"); 
             } else if (rulingParty === "Republican") {
-                mapSvg.selectAll("path").attr("fill", "red"); // Color the map red
+                mapSvg.selectAll("path").attr("fill", "red"); 
             } else {
-                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Default color
+                mapSvg.selectAll("path").attr("fill", "#e0e0e0"); 
             }
         } else {
-            highlightMapFromBar(d.data.key); // Highlight the corresponding map state
+            highlightMapFromBar(d.data.key); 
         }
     })
     .on("mousemove", function (event) {
@@ -558,9 +547,9 @@ function drawPieChart() {
             .style("opacity", 0);
 
         if (xAttr === "Year") {
-            mapSvg.selectAll("path").attr("fill", "#e0e0e0"); // Reset map to default
+            mapSvg.selectAll("path").attr("fill", "#e0e0e0"); 
         } else {
-            resetMapHighlight(); // Reset map highlighting
+            resetMapHighlight(); 
         }
     });
 
@@ -584,7 +573,7 @@ function drawMapChart(geojson) {
         .attr("stroke", "#888")
         .attr("stroke-width", 0.5)
         .on("mouseenter", function (event, d) {
-            const stateName = d.properties.name.trim(); // Ensure consistency in naming
+            const stateName = d.properties.name.trim(); 
 
             if (currentVisualization === "bar") {
                 d3.select(this).attr("fill", "orange");
@@ -593,12 +582,11 @@ function drawMapChart(geojson) {
                     .attr("fill", "orange");
             } else if (currentVisualization === "pie") {
                 chart.selectAll("path")
-                    .filter((pieData) => pieData.data && pieData.data.key === stateName) // Match state name to pie slice
+                    .filter((pieData) => pieData.data && pieData.data.key === stateName) 
                     .attr("stroke", "orange")
                     .attr("stroke-width", 2);
             }
 
-            // Tooltip
             d3.select(".safety-tooltip")
                 .html(`<strong>State:</strong> ${stateName}`)
                 .style("left", `${event.pageX + 10}px`)
@@ -624,10 +612,9 @@ function drawMapChart(geojson) {
                 chart.selectAll("path")
                     .filter((pieData) => pieData.data && pieData.data.key === stateName)
                     .attr("stroke", "none")
-                    .attr("stroke-width", 1); // Reset to original stroke width
+                    .attr("stroke-width", 1); 
             }
 
-            // Hide tooltip
             d3.select(".safety-tooltip")
                 .transition()
                 .duration(200)
@@ -635,22 +622,21 @@ function drawMapChart(geojson) {
         });
 }
 
-// Highlight corresponding pie slice based on map hover
 function highlightPieFromMap(stateName) {
     //console.log(`Highlighting pie slice for state: ${stateName}`);
     chart.selectAll("path")
         .filter((d) => {
-            const pieKey = d.data?.key.trim().toLowerCase(); // Trim and lowercase pie key
-            const mapKey = stateName.trim().toLowerCase(); // Trim and lowercase map key
-            //console.log(`Comparing mapKey: "${mapKey}" with pieKey: "${pieKey}"`); // Debug log
-            return pieKey === mapKey; // Match keys
+            const pieKey = d.data?.key.trim().toLowerCase(); 
+            const mapKey = stateName.trim().toLowerCase(); 
+            //console.log(`Comparing mapKey: "${mapKey}" with pieKey: "${pieKey}"`); 
+            return pieKey === mapKey; 
         })
-        .attr("stroke", "orange") // Highlight the slice
+        .attr("stroke", "orange") 
         .attr("stroke-width", 2);
 }
 
 /*
-// Reset all pie slice highlights
+
 function resetPieHighlight() {
     //console.log("Resetting pie slice highlights");
     chart.selectAll("path")
@@ -659,7 +645,7 @@ function resetPieHighlight() {
 }
 
 function exitPieChart() {
-    // Force the chart group to stay centered during exit
+    
     chart.attr("transform", `translate(${width / 2}, ${(height + 100) / 2})`);
 
     const radius = Math.min(width, height) / 2;
@@ -672,10 +658,9 @@ function exitPieChart() {
         .transition()
         .duration(500)
         .attrTween("d", function (d) {
-            // Log current position and check for inconsistencies
+            
             //console.log("Exiting Slice Current State:", d);
 
-            // Use the current `d` object as the starting position
             const current = { startAngle: d.startAngle, endAngle: d.endAngle };
             const interpolate = d3.interpolate(current, {
                 startAngle: d.startAngle,
@@ -683,7 +668,6 @@ function exitPieChart() {
             });
 
             return function (t) {
-                // Log the interpolated values for debugging
                 const interpolated = interpolate(t);
                 //console.log("Interpolated Slice State:", interpolated);
                 return arc(interpolated);
