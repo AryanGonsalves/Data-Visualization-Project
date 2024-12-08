@@ -540,3 +540,25 @@ svg {
     height: 600px;
 }
 
+#economy-map-container {
+    width: 100%;
+    height: auto;
+}
+
+#visualization-economy-map {
+    width: 100%;
+    height: 100%;
+}
+
+.tooltip-bar {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease;
+}
